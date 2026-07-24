@@ -1,0 +1,64 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import CatalogDetail from "../../../components/CatalogDetail.astro";
+import { products } from "../../../data/catalog";
+import { site } from "../../../config/site";
+import legacyPages from "../../../data/legacy-pages.json";
+export function getStaticPaths() {
+  return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
+}
+const { product } = Astro.props;
+const categoryPath = `/products/${product.slug}/`;
+const relatedItems = legacyPages.filter((page) =>
+  page.type === "product" &&
+  page.path.startsWith(categoryPath) &&
+  page.path !== categoryPath
+);
+---
+<BaseLayout title={`${product.pageTitle} | SBCC Engineering`} description={`${product.sourceIntro} สอบถามราคาและสเปกกับทีม SBCC`}>
+  <section class="section">
+    <div class="shell detail">
+      <div>
+        <p class="eyebrow">ENGINEERING SUPPLY</p>
+        <h1 class="display">{product.pageTitle}</h1>
+        <p class="lead">{product.sourceIntro}</p>
+        <div class="cluster"><a class="button" href="/quote/">ขอใบเสนอราคา</a><a class="button secondary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a></div>
+      </div>
+      <img src={product.image} alt={product.title} width="720" height="600" />
+    </div>
+  </section>
+  <CatalogDetail detail={product.detail} eyebrow="PRODUCT DETAILS" />
+  {relatedItems.length > 0 && (
+    <section class="section catalog">
+      <div class="shell catalog-head">
+        <div><p class="eyebrow">PRODUCT RANGE</p><h2 class="section-title">เลือกรุ่นและประเภทที่ตรงกับงาน</h2></div>
+      </div>
+      <div class="shell product-list">
+        {relatedItems.map((item, index) => (
+          <a class="product-row" href={item.path}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div><h3>{item.heading}</h3><p>{item.description || item.blocks.find((block) => block.tag === "p")?.text}</p></div>
+            {item.images[0] && <img src={item.images[0].src} alt={item.images[0].alt || item.heading} loading="lazy" />}
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+  <section class="section dark">
+    <div class="shell buying-grid">
+      <h2 class="section-title">ข้อมูลที่ช่วยให้เสนอราคาได้แม่นขึ้น</h2>
+      <div class="buying-details">
+        <details open><summary>รุ่นและขนาด</summary><p>แจ้งชื่อรุ่น เส้นผ่านศูนย์กลาง ความยาว หรือมาตรฐานที่ระบุในแบบ</p></details>
+        <details><summary>จำนวนและพื้นที่จัดส่ง</summary><p>แจ้งจำนวนที่ต้องการและจังหวัดปลายทาง เพื่อประเมินสต็อกและการจัดส่ง</p></details>
+        <details><summary>กรณียังไม่ทราบรุ่น</summary><p>ส่งรูป แบบ หรือลักษณะการใช้งานให้ทีมงานช่วยตรวจสอบเบื้องต้น</p></details>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail img{width:100%;aspect-ratio:6/5;object-fit:cover}
+  .catalog{background:#e7e4dc}.catalog-head{margin-bottom:3rem}.product-list{overflow:hidden;border:1px solid #c8cbc5;border-radius:var(--radius)}.product-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.5rem;border-bottom:1px solid #c8cbc5;padding:1rem;background:var(--surface);text-decoration:none}.product-row:last-child{border-bottom:0}.product-row>span{color:var(--brand-dark);font-weight:700}.product-row h3{font-size:1.4rem}.product-row p{margin-top:.35rem;color:var(--muted)}.product-row img{width:130px;height:100px;object-fit:cover;transition:transform .7s ease}.product-row:hover img{transform:scale(1.05)}
+  .buying-grid{display:grid;gap:4rem}.buying-details{border-top:1px solid #38413d}details{border-bottom:1px solid #38413d;padding:1.2rem 0}summary{cursor:pointer;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.25rem;font-weight:700}details p{padding-top:1rem;color:#bdc4bf}
+  @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.buying-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:700px){.product-row{grid-template-columns:auto 1fr}.product-row img{grid-column:2;width:100%;height:190px}}
+</style>

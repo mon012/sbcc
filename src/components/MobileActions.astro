@@ -1,0 +1,17 @@
+---
+import { site } from "../config/site";
+---
+<div class="mobile-actions" aria-label="ช่องทางติดต่อด่วน">
+  <a href={site.hotlineHref}>โทรด่วน</a>
+  <a href={site.lineHref} target="_blank" rel="noopener noreferrer">LINE</a>
+  <a href="/quote/">ขอราคา</a>
+</div>
+<style>
+  .mobile-actions { display: none; }
+  @media (max-width:759px) {
+    .mobile-actions { position: fixed; z-index: 30; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid #363d39; background: #101513; }
+    .mobile-actions a { display: grid; min-height: 62px; place-items: center; color: white; font-family: "Noto Sans Thai",Arial,sans-serif; font-weight: 700; text-decoration: none; }
+    .mobile-actions a + a { border-left: 1px solid #363d39; }
+    .mobile-actions a:last-child { background: #d74a2a; }
+  }
+</style>

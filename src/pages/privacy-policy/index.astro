@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../config/site";
+---
+<BaseLayout title="นโยบายความเป็นส่วนตัว | SBCC Engineering" description="นโยบายการเก็บและใช้ข้อมูลส่วนบุคคลของเว็บไซต์ SBCC Engineering">
+  <article class="section shell policy">
+    <h1 class="display">นโยบายความเป็นส่วนตัว</h1>
+    <p>เว็บไซต์เก็บข้อมูลที่ผู้ใช้ส่งผ่านแบบฟอร์ม เช่น ชื่อ เบอร์ติดต่อ อีเมล และรายละเอียดสินค้า/บริการ เพื่อใช้ตอบคำถาม ประเมินงาน และจัดทำใบเสนอราคา</p>
+    <h2>การใช้บริการภายนอก</h2>
+    <p>แบบฟอร์มขอใบเสนอราคาให้บริการผ่าน Deftform และอาจมีการใช้เครื่องมือวิเคราะห์เพื่อวัดผลการติดต่อและประสิทธิภาพของโฆษณา</p>
+    <h2>การติดต่อเกี่ยวกับข้อมูล</h2>
+    <p>สอบถามหรือขอแก้ไขข้อมูลได้ที่ <a href={`mailto:${site.email}`}>{site.email}</a></p>
+  </article>
+</BaseLayout>
+<style>.policy{max-width:900px}.policy p{margin:1.5rem 0;color:#4f5752}.policy h2{margin-top:3rem;font-size:1.7rem}</style>

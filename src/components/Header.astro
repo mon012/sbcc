@@ -1,0 +1,47 @@
+<header class="site-header">
+  <div class="shell nav">
+    <a class="brand" href="/" aria-label="SBCC Engineering หน้าแรก">
+      <img src="/images/sbcc-logo.png" alt="โลโก้บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด" width="862" height="311" />
+      <span class="sr-only">SBCC Engineering & Supply</span>
+    </a>
+    <nav aria-label="เมนูหลัก">
+      <a href="/products/">สินค้า</a>
+      <a href="/services/">บริการ</a>
+    </nav>
+    <a class="button quote" href="/quote/">ขอใบเสนอราคา</a>
+    <details class="mobile-menu">
+      <summary aria-label="เปิดเมนูหลัก"><span>เมนู</span><i></i></summary>
+      <div class="mobile-panel">
+        <a href="/products/">สินค้า</a>
+        <a href="/services/">บริการ</a>
+        <a class="mobile-line" href="https://lin.ee/5CHMocW" target="_blank" rel="noopener noreferrer">LINE @sbcceng</a>
+      </div>
+    </details>
+  </div>
+</header>
+<style>
+  .site-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid rgba(16,21,19,.12); background: rgba(244,242,236,.9); backdrop-filter: blur(18px); }
+  .nav { display: flex; min-height: 76px; align-items: center; gap: 1.4rem; }
+  .brand { display: flex; align-items: center; margin-right: auto; text-decoration: none; }
+  .brand img { width: 112px; height: auto; }
+  nav { display: flex; gap: 1.45rem; }
+  nav a { font-family: "Noto Sans Thai",Arial,sans-serif; font-size: .93rem; font-weight: 600; text-decoration: none; }
+  nav a:hover { color: #9e2f18; }
+  .quote { min-height: 44px; padding: .55rem 1.05rem; }
+  .mobile-menu { display: none; }
+  @media (max-width: 900px) {
+    nav { display: none; }
+    .quote { display: none; }
+    .mobile-menu { display: block; }
+    summary { display: flex; min-width: 70px; min-height: 44px; align-items: center; justify-content: center; gap: .55rem; border: 1px solid #aeb2ad; border-radius: 999px; cursor: pointer; font-family: "Noto Sans Thai",Arial,sans-serif; font-weight: 700; list-style: none; }
+    summary::-webkit-details-marker { display: none; }
+    summary i, summary i::before { display: block; width: 14px; height: 1px; background: currentColor; content: ""; transition: transform .2s ease; }
+    summary i::before { transform: translateY(5px); }
+    details[open] summary i { transform: rotate(45deg); }
+    details[open] summary i::before { transform: rotate(90deg); }
+    .mobile-panel { position: fixed; top: 77px; right: 0; left: 0; display: grid; border-top: 1px solid #d0d1cb; background: #f4f2ec; box-shadow: 0 24px 40px rgba(16,21,19,.14); }
+    .mobile-panel a { border-bottom: 1px solid #d0d1cb; padding: 1rem 20px; font-family: "Noto Sans Thai",Arial,sans-serif; font-size: 1.2rem; font-weight: 700; text-decoration: none; }
+    .mobile-panel .mobile-line { background: #193b31; color: white; }
+    .brand img { width: 96px; }
+  }
+</style>

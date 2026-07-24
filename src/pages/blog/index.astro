@@ -1,0 +1,20 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const articles = [
+  { href: "/ตารางพุกเคมี/", title: "ตารางขนาดพุกเคมี", text: "ข้อมูลขนาดสำหรับการเลือกใช้งานพุกเคมีและอุปกรณ์ที่เกี่ยวข้อง" },
+  { href: "/การใช้งานพุกเคมี/", title: "การใช้งานพุกเคมี", text: "หลักการเลือกและขั้นตอนสำคัญในการใช้งานพุกเคมี" },
+  { href: "/พุกตะกั่ว/", title: "พุกตะกั่วกับความเหมาะสมในการใช้งาน", text: "แนวทางประเมินความเหมาะสมก่อนเลือกใช้พุกตะกั่ว" },
+];
+---
+<BaseLayout title="บทความและความรู้เกี่ยวกับงานก่อสร้าง | SBCC" description="บทความเกี่ยวกับพุกเคมี พุกตะกั่ว และการเลือกใช้อุปกรณ์งานก่อสร้าง">
+  <section class="section">
+    <div class="shell"><p class="eyebrow">ENGINEERING NOTES</p><h1 class="display">ข้อมูลที่ช่วยให้<br />เลือกและใช้งานได้ถูกต้อง</h1></div>
+  </section>
+  <section class="shell article-list">
+    {articles.map((article) => <a href={article.href}><h2>{article.title}</h2><p>{article.text}</p><span>อ่านบทความ →</span></a>)}
+  </section>
+  <div class="section"></div>
+</BaseLayout>
+<style>
+  .article-list{border-top:1px solid #c8cbc5}.article-list a{display:grid;gap:.7rem;border-bottom:1px solid #c8cbc5;padding:2rem 0;text-decoration:none}.article-list h2{font-size:clamp(1.5rem,3vw,2.4rem)}.article-list p{color:#626963}.article-list span{font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}@media(min-width:760px){.article-list a{grid-template-columns:1.2fr 1fr auto;align-items:center;gap:2rem}}
+</style>

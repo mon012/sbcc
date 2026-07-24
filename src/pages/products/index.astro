@@ -1,0 +1,23 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { products } from "../../data/catalog";
+---
+<BaseLayout title="สินค้าวิศวกรรม พุกเคมี Bolt Nut และอุปกรณ์งานระบบ | SBCC" description="รวมสินค้าสำหรับงานวิศวกรรมและงานก่อสร้าง พร้อมคำแนะนำและจัดส่งทั่วประเทศ">
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">ENGINEERING SUPPLY</p>
+      <h1 class="display">สินค้าสำหรับงานจริง<br />เลือกได้ตรงสเปก</h1>
+      <p class="lead">สอบถามรุ่น ขนาด ปริมาณ และเงื่อนไขใช้งาน ทีมงานช่วยตรวจรายการก่อนเสนอราคา</p>
+    </div>
+  </section>
+  <section class="shell grid two listing">
+    {products.map((item) => (
+      <a class="card" href={`/products/${item.slug}/`}>
+        <img src={item.image} alt={item.title} width="720" height="500" />
+        <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
+      </a>
+    ))}
+  </section>
+  <div class="section"></div>
+</BaseLayout>
+<style>.section .display{font-size:clamp(3rem,5.263vw,4.46375rem)}.section .lead{margin-top:1.5rem}.listing .card{min-height:480px}.listing img{height:330px}.listing h2{font-size:1.8rem}</style>

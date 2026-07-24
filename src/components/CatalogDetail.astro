@@ -1,0 +1,57 @@
+---
+interface DetailLink {
+  label: string;
+  href: string;
+}
+
+interface DetailContent {
+  title: string;
+  paragraphs: readonly string[];
+  bullets: readonly string[];
+  links: readonly DetailLink[];
+}
+
+interface Props {
+  detail: DetailContent;
+  eyebrow: string;
+}
+
+const { detail, eyebrow } = Astro.props;
+---
+<section class="section catalog-detail">
+  <div class="shell catalog-detail-grid">
+    <div class="catalog-detail-heading">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 class="section-title">{detail.title}</h2>
+    </div>
+    <div class="catalog-detail-copy">
+      {detail.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      {detail.bullets.length > 0 && (
+        <ul>
+          {detail.bullets.map((item) => <li>{item}</li>)}
+        </ul>
+      )}
+      {detail.links.length > 0 && (
+        <div class="detail-links">
+          {detail.links.map((link) => <a href={link.href}>{link.label} →</a>)}
+        </div>
+      )}
+    </div>
+  </div>
+</section>
+<style>
+  .catalog-detail { border-block: 1px solid var(--line); background: #e7e4dc; }
+  .catalog-detail-grid { display: grid; gap: clamp(3rem,7vw,7rem); }
+  .catalog-detail-heading { align-self: start; }
+  .catalog-detail-copy { max-width: 780px; }
+  .catalog-detail-copy > p { margin-bottom: 1.35rem; color: #444c47; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.85; }
+  ul { display: grid; gap: 0; margin: 2.2rem 0 0; padding: 0; border-top: 1px solid #c3c7c1; list-style: none; }
+  li { position: relative; border-bottom: 1px solid #c3c7c1; padding: 1rem 0 1rem 1.6rem; color: #252b28; }
+  li::before { position: absolute; left: 0; color: var(--brand); content: "—"; }
+  .detail-links { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2rem; }
+  .detail-links a { font-family: "Noto Sans Thai",Arial,sans-serif; font-weight: 700; text-decoration: none; }
+  @media(min-width:850px) {
+    .catalog-detail-grid { grid-template-columns: minmax(280px,.8fr) minmax(0,1.2fr); }
+    .catalog-detail-heading { position: sticky; top: 110px; }
+  }
+</style>

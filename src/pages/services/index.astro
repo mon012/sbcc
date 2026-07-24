@@ -1,0 +1,76 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { services } from "../../data/catalog";
+---
+<BaseLayout title="บริการวิศวกรรม เจาะคอริ่งและติดตั้งพุกเคมี | SBCC" description="บริการเจาะติดตั้งพุกเคมี เจาะคอริ่ง ซ่อมพื้น และติดตั้งระบบ Hilti พร้อมประเมินหน้างาน">
+  <section class="section dark service-hero">
+    <div class="shell">
+      <p class="eyebrow">FIELD SERVICE</p>
+      <h1 class="display">ประเมินให้ชัด<br />ก่อนทีมงานลงมือ</h1>
+      <p class="lead">ตรวจหน้างาน วางแผน เตรียมอุปกรณ์ จนถึงส่งมอบ</p>
+    </div>
+  </section>
+  <section class="section">
+    <div class="shell grid two listing">
+      {services.map((item) => (
+        <a class="card" href={`/services/${item.slug}/`}>
+          <img src={item.image} alt={item.title} width="720" height="500" />
+          <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .service-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    min-height: min(760px, calc(100svh - 72px));
+    align-items: center;
+    overflow: hidden;
+    background: #0d1512;
+  }
+  .service-hero::before,
+  .service-hero::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    content: "";
+  }
+  .service-hero::before {
+    background-image: url("/images/services-hero-construction.webp");
+    background-position: 58% 52%;
+    background-size: cover;
+    filter: saturate(.72) contrast(1.08);
+    transform: scale(1.015);
+  }
+  .service-hero::after {
+    background:
+      linear-gradient(90deg, rgba(7, 16, 13, .96) 0%, rgba(7, 16, 13, .86) 35%, rgba(7, 16, 13, .3) 72%, rgba(7, 16, 13, .18) 100%),
+      linear-gradient(180deg, rgba(8, 17, 14, .22) 0%, rgba(8, 17, 14, .08) 48%, rgba(8, 17, 14, .72) 100%),
+      radial-gradient(circle at 72% 38%, rgba(27, 93, 72, .2), transparent 38%);
+  }
+  .service-hero::before,
+  .service-hero::after {
+    z-index: 0;
+  }
+  .service-hero .shell {
+    position: relative;
+    z-index: 1;
+  }
+  .service-hero .display { max-width: 780px; text-wrap: balance; text-shadow: 0 3px 24px rgba(0, 0, 0, .28); }
+  .service-hero .lead { max-width: 620px; margin-top: 1.5rem; color: rgba(255, 255, 255, .78); }
+  .listing .card { min-height: 480px; }
+  .listing img { height: 330px; }
+  .listing h2 { font-size: 1.8rem; }
+  @media (max-width: 700px) {
+    .service-hero { min-height: 640px; }
+    .service-hero::before { background-position: 63% center; }
+    .service-hero::after {
+      background:
+        linear-gradient(90deg, rgba(7, 16, 13, .92), rgba(7, 16, 13, .48)),
+        linear-gradient(180deg, rgba(7, 16, 13, .18), rgba(7, 16, 13, .85));
+    }
+  }
+</style>

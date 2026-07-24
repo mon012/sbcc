@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../config/site";
+---
+<BaseLayout title="ติดต่อ SBCC Engineering" description="ติดต่อฝ่ายขายและทีมบริการ SBCC ทางโทรศัพท์ LINE อีเมล หรือส่งแบบฟอร์มขอใบเสนอราคา">
+  <section class="section">
+    <div class="shell">
+      <p class="eyebrow">CONTACT SBCC</p>
+      <h1 class="display">ติดต่อทีมงาน</h1>
+      <p class="lead">สอบถามสินค้า นัดประเมินหน้างาน หรือติดตามใบเสนอราคาได้ตามช่องทางด้านล่าง</p>
+      <div class="contact-grid">
+        <a href={site.officeHref}><small>Office</small><strong>{site.officeDisplay}</strong></a>
+        <a href={site.hotlineHref}><small>Hotline</small><strong>{site.hotlineDisplay}</strong></a>
+        <a href={site.hotlineSecondaryHref}><small>Hotline</small><strong>{site.hotlineSecondaryDisplay}</strong></a>
+        <a href={site.lineHref} target="_blank" rel="noopener noreferrer"><small>LINE</small><strong>{site.lineDisplay}</strong></a>
+        <a href={`mailto:${site.email}`}><small>Email</small><strong>{site.email}</strong></a>
+      </div>
+      <a class="button" href="/quote/">ไปหน้าแบบฟอร์มขอใบเสนอราคา</a>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .lead{margin:1.5rem 0 3rem}.contact-grid{display:grid;gap:1px;margin-bottom:3rem;border:1px solid #d9d9d0;border-radius:1.25rem;overflow:hidden;background:#d9d9d0}.contact-grid a{padding:2rem;background:#fffdf8;text-decoration:none}.contact-grid small{display:block;color:#626963}.contact-grid strong{display:block;margin-top:.3rem;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:clamp(1.1rem,2vw,1.55rem);overflow-wrap:anywhere}@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr}}
+</style>

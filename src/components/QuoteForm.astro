@@ -1,0 +1,19 @@
+---
+import { site } from "../config/site";
+---
+<div class="form-shell">
+  <div
+    class="deftform"
+    data-form-id={site.quoteFormId}
+    data-form-width="100%"
+    data-form-align="center"
+    data-form-auto-height="1"
+  ></div>
+  <script is:inline src="https://cdn.deftform.com/embed.js"></script>
+  <noscript>
+    <p>กรุณาเปิด JavaScript เพื่อใช้แบบฟอร์ม หรือส่งรายละเอียดทาง LINE และโทรศัพท์</p>
+  </noscript>
+</div>
+<style>
+  .form-shell { min-height: 520px; border: 1px solid #d9d9d0; border-radius: 1.25rem; padding: clamp(1rem,3vw,2rem); background: #fffdf8; box-shadow: 0 20px 60px rgba(16,21,19,.08); }
+</style>

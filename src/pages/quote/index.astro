@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import QuoteForm from "../../components/QuoteForm.astro";
+import { site } from "../../config/site";
+---
+<BaseLayout title="ขอใบเสนอราคา | SBCC Engineering" description="ส่งรายละเอียดสินค้าและบริการเพื่อให้ทีม SBCC ติดต่อกลับและจัดทำใบเสนอราคา">
+  <section class="section">
+    <div class="shell quote-grid">
+      <div>
+        <p class="eyebrow">REQUEST A QUOTE</p>
+        <h1 class="display">ขอใบเสนอราคา</h1>
+        <p class="lead">ระบุสินค้าหรือบริการ พร้อมรายละเอียด ทีมงานจะรีบติดต่อกลับ</p>
+        <div class="direct">
+          <a href={site.hotlineHref}><small>Hotline</small>{site.hotlineDisplay}</a>
+          <a href={site.hotlineSecondaryHref}><small>Hotline</small>{site.hotlineSecondaryDisplay}</a>
+          <a href={site.lineHref} target="_blank" rel="noopener noreferrer"><small>LINE</small>{site.lineDisplay}</a>
+          <a href={`mailto:${site.email}`}><small>Email</small>{site.email}</a>
+        </div>
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .quote-grid{display:grid;gap:4rem;align-items:start}.quote-grid .display{font-size:clamp(3rem,5.263vw,4.46375rem)}.quote-grid .lead{margin:1.5rem 0 2.5rem;font-size:clamp(1rem,1.31vw,1.1125rem)}.direct{display:flex;flex-direction:column;align-items:flex-start;gap:1rem}.direct a{text-decoration:none;font-weight:700}.direct small{display:block;color:#626963;font-weight:400}
+  @media(min-width:900px){.quote-grid{grid-template-columns:.85fr 1.15fr}}
+</style>
