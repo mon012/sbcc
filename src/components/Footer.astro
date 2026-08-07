@@ -3,44 +3,42 @@ import { Image } from "astro:assets";
 import lineQrImage from "../assets/images/line-sbcc-qr.png";
 import { site } from "../config/site";
 import LineAppIcon from "./LineAppIcon.astro";
+import ContactIcon from "./ContactIcon.astro";
 const currentYear = new Date().getFullYear();
 ---
-<footer class="footer dark">
-  <div class="shell footer-grid">
-    <div>
-      <h2>คุยกับทีม SBCC<br />เพื่อประเมินงานของคุณ</h2>
-      <p>ส่งรายละเอียดหรือรูปหน้างาน ทีมงานจะติดต่อกลับเพื่อแนะนำสินค้าและบริการที่เหมาะสม</p>
-      <div class="cluster">
-        <a class="button" href={site.lineHref} target="_blank" rel="noopener noreferrer"><LineAppIcon />คุยทาง LINE</a>
-        <a class="button ghost" href={site.hotlineHref}>โทร {site.hotlineDisplay}</a>
+<footer class="footer">
+  <div class="shell footer-top">
+    <div class="footer-pitch">
+      <h2>คุยกับทีมเรา เพื่อประเมินหน้างานของคุณ</h2>
+      <p class="footer-summary">ส่งรายละเอียดหรือรูปหน้างาน ทีมงานจะติดต่อกลับเพื่อแนะนำสินค้าและบริการที่เหมาะสม</p>
+      <div class="footer-actions cluster">
+        <a class="button" href={site.lineHref} target="_blank" rel="noopener noreferrer"><LineAppIcon />สอบถามข้อมูลเพิ่มเติมทาง LINE</a>
+        <a class="button secondary footer-quote" href="/quote/">ขอใบเสนอราคา</a>
       </div>
     </div>
-    <div class="contact">
-      <h3>ติดต่อ</h3>
-      <a href={site.officeHref}>Office: {site.officeDisplay}</a>
-      <a href={site.hotlineHref}>Hotline: {site.hotlineDisplay}</a>
-      <a href={site.hotlineSecondaryHref}>Hotline: {site.hotlineSecondaryDisplay}</a>
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-      <div class="line-contact">
-        <a href={site.lineHref} target="_blank" rel="noopener noreferrer">LINE: {site.lineDisplay}</a>
-        <a class="line-qr" href={site.lineHref} target="_blank" rel="noopener noreferrer" aria-label={`เพิ่มเพื่อน LINE ${site.lineDisplay}`}>
-          <Image
-            src={lineQrImage}
-            alt={`QR Code สำหรับเพิ่มเพื่อน LINE ${site.lineDisplay}`}
-            width={118}
-            height={118}
-            loading="lazy"
-            format="webp"
-          />
-        </a>
+
+    <div class="footer-links">
+      <div>
+        <h3 class="contact-title">ติดต่อเรา</h3>
+        <a class="contact-link" href={site.officeHref}><ContactIcon kind="phone" /><span>{site.officeDisplay}</span></a>
+        <a class="contact-link" href={site.hotlineHref}><ContactIcon kind="mobile" /><span>{site.hotlineDisplay}</span></a>
+        <a class="contact-link" href={site.hotlineSecondaryHref}><ContactIcon kind="mobile" /><span>{site.hotlineSecondaryDisplay}</span></a>
+        <a class="contact-link" href={`mailto:${site.email}`}><ContactIcon kind="email" /><span>{site.email}</span></a>
       </div>
+      <a class="qr" href={site.lineHref} target="_blank" rel="noopener noreferrer" aria-label={`เพิ่มเพื่อน LINE ${site.lineDisplay}`}>
+        <Image src={lineQrImage} alt={`QR Code LINE ${site.lineDisplay}`} width={144} height={144} loading="lazy" format="webp" />
+        <span>{site.lineDisplay}</span>
+      </a>
     </div>
   </div>
+
   <div class="shell legal">
     <span>© <span data-current-year>{currentYear}</span> {site.legalName}</span>
-    <nav class="footer-links" aria-label="ลิงก์เพิ่มเติม">
-      <a href="/blog/">บทความ</a>
+    <nav aria-label="ลิงก์ท้ายเว็บไซต์">
+      <a href="https://sbcc-2ng.pages.dev/blog/" target="_blank" rel="noopener noreferrer">บทความ</a>
+      <span aria-hidden="true">&nbsp;/&nbsp;</span>
       <a href="/contact/">ติดต่อเรา</a>
+      <span aria-hidden="true">&nbsp;/&nbsp;</span>
       <a href="/privacy-policy/">นโยบายความเป็นส่วนตัว</a>
     </nav>
   </div>
@@ -51,22 +49,34 @@ const currentYear = new Date().getFullYear();
   });
 </script>
 <style>
-  .footer { padding: clamp(5rem,10vw,8rem) 0 2rem; }
-  .footer-grid { display: grid; gap: 4rem; }
-  h2 { max-width: 780px; font-size: clamp(2.4rem,5vw,4.8rem); }
-  p { max-width: 650px; margin: 1.5rem 0 2rem; color: #bdc4bf; font-size: 1.1rem; }
-  .ghost { border-color: #758079; background: transparent; }
-  .contact { display: flex; flex-direction: column; align-items: flex-start; gap: .8rem; }
-  .contact a, .legal a { color: #dce1dd; text-decoration: none; }
-  .line-contact { display: grid; gap: .8rem; margin-top: .2rem; }
-  .line-qr { display: block; overflow: hidden; width: 118px; border-radius: .75rem; background: white; }
-  .line-qr img { display: block; width: 100%; height: auto; }
-  .footer-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: .4rem; }
-  .footer-links a + a::before { margin-right: .4rem; color: #89918c; content: "/"; }
-  .legal { display: flex; justify-content: space-between; gap: 1rem; margin-top: 5rem; border-top: 1px solid #36413d; padding-top: 1.5rem; color: #89918c; font-size: .85rem; }
-  @media (min-width: 860px) { .footer-grid { grid-template-columns: 2.5fr 1fr; } }
-  @media (max-width: 600px) {
-    .legal { flex-direction: column; }
-    .footer-links { justify-content: flex-start; }
+  .footer { padding:clamp(5rem,9vw,8rem) 0 2rem; background:var(--navy-deep); color:white; }
+  .footer-top { display:grid; gap:5rem; }
+  .footer-pitch h2 { max-width:760px; font-size:clamp(2.6rem,4.63vw,4rem); }
+  .footer-pitch > .footer-summary { max-width:590px; margin:1.5rem 0 2rem; color:#c5d8df; font-size:.9875rem; }
+  .footer-actions { align-items:center; }
+  .footer-actions .footer-quote { border-color:rgba(255,255,255,.42); color:white; }
+  .footer-actions .footer-quote:hover { border-color:white; background:white; color:var(--navy-deep); }
+  .footer-links { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:2.5rem; align-items:start; }
+  .footer-links > div { display:flex; flex-direction:column; align-items:flex-start; gap:.7rem; }
+  .footer-links .contact-title { margin-bottom:.6rem; color:var(--blue); font-size:1.15rem; letter-spacing:0; }
+  .footer-links a { color:#dce8ec; text-decoration:none; }
+  .footer-links a:hover { color:white; }
+  .footer-links .contact-link { display:grid; grid-template-columns:18px minmax(0,1fr); align-items:center; gap:.65rem; overflow-wrap:anywhere; }
+  .qr { display:flex; flex-direction:column; align-items:center; gap:.5rem; justify-self:start; font-family:"Noto Sans Thai",Arial,sans-serif; font-weight:700; }
+  .qr :global(img) { width:144px; height:auto; border-radius:.6rem; }
+  .legal { display:flex; justify-content:space-between; gap:1rem; margin-top:5rem; border-top:1px solid rgba(255,255,255,.18); padding-top:1.5rem; color:#8fa9b5; font-size:.78rem; }
+  .legal a { color:inherit; text-decoration:none; }
+  .legal nav { display:flex; flex-wrap:nowrap; justify-content:flex-end; white-space:nowrap; }
+  .legal nav > span { color:#5f7f8d; }
+  .legal a:hover { color:white; }
+  @media(min-width:900px) {
+    .footer-top { grid-template-columns:1.35fr 1fr; }
+    .footer-links { grid-template-columns:minmax(0,1fr) auto; }
+  }
+  @media(max-width:600px) {
+    .footer-links { grid-template-columns:1fr; }
+    .qr { justify-self:center; }
+    .legal { flex-direction:column; }
+    .legal nav { justify-content:flex-start; }
   }
 </style>

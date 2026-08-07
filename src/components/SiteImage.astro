@@ -1,0 +1,31 @@
+---
+import { Image } from "astro:assets";
+import { getSiteImage } from "../utils/siteImages";
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+  decoding?: "sync" | "async" | "auto";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+  src,
+  alt,
+  class: className,
+  loading = "lazy",
+  decoding = "async",
+  fetchpriority,
+} = Astro.props;
+---
+
+<Image
+  src={getSiteImage(src)}
+  alt={alt}
+  class={className}
+  loading={loading}
+  decoding={decoding}
+  fetchpriority={fetchpriority}
+/>

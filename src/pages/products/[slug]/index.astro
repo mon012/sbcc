@@ -3,17 +3,11 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CatalogDetail from "../../../components/CatalogDetail.astro";
 import { products } from "../../../data/catalog";
 import { site } from "../../../config/site";
-import legacyPages from "../../../data/legacy-pages.json";
+import SiteImage from "../../../components/SiteImage.astro";
 export function getStaticPaths() {
   return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
 }
 const { product } = Astro.props;
-const categoryPath = `/products/${product.slug}/`;
-const relatedItems = legacyPages.filter((page) =>
-  page.type === "product" &&
-  page.path.startsWith(categoryPath) &&
-  page.path !== categoryPath
-);
 ---
 <BaseLayout title={`${product.pageTitle} | SBCC Engineering`} description={`${product.sourceIntro} สอบถามราคาและสเปกกับทีม SBCC`}>
   <section class="section">
@@ -24,23 +18,26 @@ const relatedItems = legacyPages.filter((page) =>
         <p class="lead">{product.sourceIntro}</p>
         <div class="cluster"><a class="button" href="/quote/">ขอใบเสนอราคา</a><a class="button secondary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a></div>
       </div>
-      <img src={product.image} alt={product.title} width="720" height="600" />
+      {product.image
+        ? <SiteImage src={product.image} alt={"imageAlt" in product ? product.imageAlt : product.title} loading="eager" fetchpriority="high" />
+        : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
     </div>
   </section>
-  <CatalogDetail detail={product.detail} eyebrow="PRODUCT DETAILS" />
-  {relatedItems.length > 0 && (
-    <section class="section catalog">
-      <div class="shell catalog-head">
-        <div><p class="eyebrow">PRODUCT RANGE</p><h2 class="section-title">เลือกรุ่นและประเภทที่ตรงกับงาน</h2></div>
-      </div>
-      <div class="shell product-list">
-        {relatedItems.map((item, index) => (
-          <a class="product-row" href={item.path}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <div><h3>{item.heading}</h3><p>{item.description || item.blocks.find((block) => block.tag === "p")?.text}</p></div>
-            {item.images[0] && <img src={item.images[0].src} alt={item.images[0].alt || item.heading} loading="lazy" />}
-          </a>
-        ))}
+  {product.detail && <CatalogDetail detail={product.detail} eyebrow="PRODUCT DETAILS" />}
+  {"video" in product && product.video && (
+    <section class="section product-video">
+      <div class="shell video-layout">
+        <h2 class="section-title">วิดีโอแนะนำพุกเคมี HILTI</h2>
+        <div class="video-frame">
+          <iframe
+            src={product.video.embedUrl}
+            title={product.video.title}
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
       </div>
     </section>
   )}
@@ -56,9 +53,8 @@ const relatedItems = legacyPages.filter((page) =>
   </section>
 </BaseLayout>
 <style>
-  .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail img{width:100%;aspect-ratio:6/5;object-fit:cover}
-  .catalog{background:#e7e4dc}.catalog-head{margin-bottom:3rem}.product-list{overflow:hidden;border:1px solid #c8cbc5;border-radius:var(--radius)}.product-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1.5rem;border-bottom:1px solid #c8cbc5;padding:1rem;background:var(--surface);text-decoration:none}.product-row:last-child{border-bottom:0}.product-row>span{color:var(--brand-dark);font-weight:700}.product-row h3{font-size:1.4rem}.product-row p{margin-top:.35rem;color:var(--muted)}.product-row img{width:130px;height:100px;object-fit:cover;transition:transform .7s ease}.product-row:hover img{transform:scale(1.05)}
-  .buying-grid{display:grid;gap:4rem}.buying-details{border-top:1px solid #38413d}details{border-bottom:1px solid #38413d;padding:1.2rem 0}summary{cursor:pointer;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.25rem;font-weight:700}details p{padding-top:1rem;color:#bdc4bf}
-  @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.buying-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:700px){.product-row{grid-template-columns:auto 1fr}.product-row img{grid-column:2;width:100%;height:190px}}
+  .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail :global(img),.detail-placeholder{width:100%;height:auto;aspect-ratio:6/5}.detail :global(img){object-fit:cover}.detail-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}
+  .video-layout{display:grid;gap:clamp(2.5rem,6vw,5rem)}.video-frame{position:relative;overflow:hidden;aspect-ratio:16/9;background:var(--navy-deep)}.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .buying-grid{display:grid;gap:4rem}.buying-details{border-top:1px solid rgba(255,255,255,.24)}details{border-bottom:1px solid rgba(255,255,255,.24);padding:1.2rem 0}summary{cursor:pointer;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.25rem;font-weight:700}details p{padding-top:1rem;color:#c7dbe2}
+  @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.video-layout{grid-template-columns:minmax(260px,.65fr) minmax(0,1.35fr);align-items:start}.buying-grid{grid-template-columns:1fr 1fr}}
 </style>

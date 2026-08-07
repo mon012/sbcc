@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { services } from "../../data/catalog";
+import SiteImage from "../../components/SiteImage.astro";
 ---
-<BaseLayout title="บริการวิศวกรรม เจาะคอริ่งและติดตั้งพุกเคมี | SBCC" description="บริการเจาะติดตั้งพุกเคมี เจาะคอริ่ง ซ่อมพื้น และติดตั้งระบบ Hilti พร้อมประเมินหน้างาน">
+<BaseLayout title="บริการวิศวกรรม งานคอนกรีตและติดตั้งพุกเคมี | SBCC" description="บริการเจาะ ตัด สแกนคอนกรีต ติดตั้งพุกเคมี และซ่อมพื้น พร้อมประเมินหน้างาน">
   <section class="section dark service-hero">
     <div class="shell">
       <p class="eyebrow">FIELD SERVICE</p>
@@ -14,7 +15,9 @@ import { services } from "../../data/catalog";
     <div class="shell grid two listing">
       {services.map((item) => (
         <a class="card" href={`/services/${item.slug}/`}>
-          <img src={item.image} alt={item.title} width="720" height="500" />
+          {item.image
+            ? <SiteImage src={item.image} alt={"imageAlt" in item ? item.imageAlt : item.title} />
+            : <div class="service-placeholder" aria-label="กำลังเตรียมข้อมูลบริการ"><span>กำลังเตรียมข้อมูลบริการ</span></div>}
           <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
         </a>
       ))}
@@ -29,7 +32,7 @@ import { services } from "../../data/catalog";
     min-height: min(760px, calc(100svh - 72px));
     align-items: center;
     overflow: hidden;
-    background: #0d1512;
+    background: var(--navy-deep);
   }
   .service-hero::before,
   .service-hero::after {
@@ -47,9 +50,8 @@ import { services } from "../../data/catalog";
   }
   .service-hero::after {
     background:
-      linear-gradient(90deg, rgba(7, 16, 13, .96) 0%, rgba(7, 16, 13, .86) 35%, rgba(7, 16, 13, .3) 72%, rgba(7, 16, 13, .18) 100%),
-      linear-gradient(180deg, rgba(8, 17, 14, .22) 0%, rgba(8, 17, 14, .08) 48%, rgba(8, 17, 14, .72) 100%),
-      radial-gradient(circle at 72% 38%, rgba(27, 93, 72, .2), transparent 38%);
+      linear-gradient(90deg, rgba(3, 26, 49, .96) 0%, rgba(3, 40, 70, .82) 38%, rgba(3, 40, 70, .26) 74%, rgba(3, 40, 70, .14) 100%),
+      linear-gradient(180deg, rgba(3, 24, 44, .18) 0%, rgba(3, 24, 44, .08) 48%, rgba(3, 24, 44, .78) 100%);
   }
   .service-hero::before,
   .service-hero::after {
@@ -62,15 +64,24 @@ import { services } from "../../data/catalog";
   .service-hero .display { max-width: 780px; text-wrap: balance; text-shadow: 0 3px 24px rgba(0, 0, 0, .28); }
   .service-hero .lead { max-width: 620px; margin-top: 1.5rem; color: rgba(255, 255, 255, .78); }
   .listing .card { min-height: 480px; }
-  .listing img { height: 330px; }
+  .listing :global(img),
+  .service-placeholder { height: 330px; }
+  .service-placeholder {
+    display: grid;
+    place-items: center;
+    background: var(--blue-pale);
+    color: var(--navy);
+    font-family: "Noto Sans Thai", Arial, sans-serif;
+    font-weight: 700;
+  }
   .listing h2 { font-size: 1.8rem; }
   @media (max-width: 700px) {
     .service-hero { min-height: 640px; }
     .service-hero::before { background-position: 63% center; }
     .service-hero::after {
       background:
-        linear-gradient(90deg, rgba(7, 16, 13, .92), rgba(7, 16, 13, .48)),
-        linear-gradient(180deg, rgba(7, 16, 13, .18), rgba(7, 16, 13, .85));
+        linear-gradient(90deg, rgba(3, 26, 49, .94), rgba(3, 40, 70, .44)),
+        linear-gradient(180deg, rgba(3, 24, 44, .16), rgba(3, 24, 44, .86));
     }
   }
 </style>

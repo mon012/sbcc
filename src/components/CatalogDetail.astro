@@ -1,7 +1,23 @@
 ---
+import ArrowIcon from "./ArrowIcon.astro";
+import SiteImage from "./SiteImage.astro";
+
 interface DetailLink {
   label: string;
   href: string;
+}
+
+interface DetailGroup {
+  title: string;
+  items: readonly string[];
+}
+
+interface DetailProduct {
+  title: string;
+  image: string;
+  imageAlt: string;
+  description: string;
+  highlights: readonly string[];
 }
 
 interface DetailContent {
@@ -9,6 +25,8 @@ interface DetailContent {
   paragraphs: readonly string[];
   bullets: readonly string[];
   links: readonly DetailLink[];
+  groups?: readonly DetailGroup[];
+  products?: readonly DetailProduct[];
 }
 
 interface Props {
@@ -19,39 +37,92 @@ interface Props {
 const { detail, eyebrow } = Astro.props;
 ---
 <section class="section catalog-detail">
-  <div class="shell catalog-detail-grid">
-    <div class="catalog-detail-heading">
-      <p class="eyebrow">{eyebrow}</p>
-      <h2 class="section-title">{detail.title}</h2>
+  <div class="shell catalog-detail-shell">
+    <div class="catalog-detail-grid">
+      <div class="catalog-detail-heading">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 class="section-title">{detail.title}</h2>
+      </div>
+      <div class="catalog-detail-copy">
+        {detail.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        {detail.bullets.length > 0 && (
+          <ul>
+            {detail.bullets.map((item) => <li>{item}</li>)}
+          </ul>
+        )}
+        {detail.groups && detail.groups.length > 0 && (
+          <div class="detail-groups">
+            {detail.groups.map((group) => (
+              <section class="detail-group">
+                <h3>{group.title}</h3>
+                <ul>
+                  {group.items.map((item) => <li>{item}</li>)}
+                </ul>
+              </section>
+            ))}
+          </div>
+        )}
+        {detail.links.length > 0 && (
+          <div class="detail-links">
+            {detail.links.map((link) => <a href={link.href}>{link.label}<ArrowIcon /></a>)}
+          </div>
+        )}
+      </div>
     </div>
-    <div class="catalog-detail-copy">
-      {detail.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-      {detail.bullets.length > 0 && (
-        <ul>
-          {detail.bullets.map((item) => <li>{item}</li>)}
-        </ul>
-      )}
-      {detail.links.length > 0 && (
-        <div class="detail-links">
-          {detail.links.map((link) => <a href={link.href}>{link.label} →</a>)}
-        </div>
-      )}
-    </div>
+    {detail.products && detail.products.length > 0 && (
+      <div class="catalog-products">
+        {detail.products.map((product) => (
+          <article class="catalog-product-card">
+            <div class="catalog-product-image">
+              <SiteImage src={product.image} alt={product.imageAlt} />
+            </div>
+            <div class="catalog-product-content">
+              <h3>{product.title}</h3>
+              <p>{product.description}</p>
+              {product.highlights.length > 0 && (
+                <ul>
+                  {product.highlights.map((highlight) => <li>{highlight}</li>)}
+                </ul>
+              )}
+            </div>
+          </article>
+        ))}
+      </div>
+    )}
   </div>
 </section>
 <style>
-  .catalog-detail { border-block: 1px solid var(--line); background: #e7e4dc; }
+  .catalog-detail { border-block: 1px solid var(--line); background: var(--blue-pale); }
+  .catalog-detail-shell { display: grid; gap: clamp(3.5rem,7vw,6.5rem); }
   .catalog-detail-grid { display: grid; gap: clamp(3rem,7vw,7rem); }
   .catalog-detail-heading { align-self: start; }
   .catalog-detail-copy { max-width: 780px; }
-  .catalog-detail-copy > p { margin-bottom: 1.35rem; color: #444c47; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.85; }
-  ul { display: grid; gap: 0; margin: 2.2rem 0 0; padding: 0; border-top: 1px solid #c3c7c1; list-style: none; }
-  li { position: relative; border-bottom: 1px solid #c3c7c1; padding: 1rem 0 1rem 1.6rem; color: #252b28; }
+  .catalog-detail-copy > p { margin-bottom: 1.35rem; color: #334654; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.85; }
+  ul { display: grid; gap: 0; margin: 2.2rem 0 0; padding: 0; border-top: 1px solid #b8d1da; list-style: none; }
+  li { position: relative; border-bottom: 1px solid #b8d1da; padding: 1rem 0 1rem 1.6rem; color: var(--navy-deep); }
   li::before { position: absolute; left: 0; color: var(--brand); content: "—"; }
+  .detail-groups { display: grid; gap: 2rem; margin-top: 2.4rem; }
+  .detail-group h3 { font-size: clamp(1.2rem,2vw,1.5rem); }
+  .detail-group ul { margin-top: .8rem; }
   .detail-links { display: flex; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2rem; }
-  .detail-links a { font-family: "Noto Sans Thai",Arial,sans-serif; font-weight: 700; text-decoration: none; }
+  .detail-links a { display:inline-flex; align-items:center; gap:.45rem; font-family: "Noto Sans Thai",Arial,sans-serif; font-weight: 700; text-decoration: none; }
+  .catalog-products { display: grid; grid-template-columns: minmax(0,1fr); border-top: 1px solid #b8d1da; border-left: 1px solid #b8d1da; }
+  .catalog-product-card { display: grid; grid-template-rows: auto 1fr; min-width: 0; border-right: 1px solid #b8d1da; border-bottom: 1px solid #b8d1da; background: #fff; }
+  .catalog-product-image { display: grid; place-items: center; min-height: 260px; padding: clamp(1.5rem,4vw,3rem); border-bottom: 1px solid #d6e3e8; background: #fff; }
+  .catalog-product-image :global(img) { width: 100%; height: 240px; object-fit: contain; }
+  .catalog-product-content { padding: clamp(1.5rem,3vw,2.2rem); }
+  .catalog-product-content h3 { font-size: clamp(1.25rem,2vw,1.65rem); line-height: 1.35; }
+  .catalog-product-content > p { margin-top: .9rem; color: #405462; line-height: 1.75; }
+  .catalog-product-content ul { margin-top: 1.4rem; }
+  .catalog-product-content li { font-size: .96rem; line-height: 1.55; }
+  @media(min-width:700px) {
+    .catalog-products { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  }
   @media(min-width:850px) {
     .catalog-detail-grid { grid-template-columns: minmax(280px,.8fr) minmax(0,1.2fr); }
     .catalog-detail-heading { position: sticky; top: 110px; }
+  }
+  @media(min-width:1150px) {
+    .catalog-products { grid-template-columns: repeat(3,minmax(0,1fr)); }
   }
 </style>

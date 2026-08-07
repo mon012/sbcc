@@ -10,12 +10,14 @@ interface Props {
   description?: string;
   canonical?: string;
   image?: string;
+  overlayHeader?: boolean;
 }
 const {
   title,
   description = site.description,
   canonical = Astro.url.pathname,
   image = "/images/og-default.jpg",
+  overlayHeader = false,
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url);
 const imageUrl = new URL(image, site.url);
@@ -58,7 +60,15 @@ const organization = {
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
   </head>
   <body>
-    <Header />
+    <!--
+      THESIS: SBCC turns one site photo into a practical next step; reject the generic card-first contractor homepage.
+      OWN-WORLD: deep navy jobsite photography, oversized white Thai type, clean white fields, pale industrial blue, and one decisive orange action.
+      STORY: visitors recognize the work, send a photo through LINE, then understand products, services, process, and evidence.
+      FIRST VIEWPORT: full-bleed crane image, compact overlay navigation, dominant Thai headline at left, and the LINE action directly beneath it.
+      FORM: photo-led construction standard, user-approved comp .impeccable/mocks/sbcc-home-approved.png, seed 7ab34994.
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+    -->
+    <Header overlay={overlayHeader} />
     <main class="overflow">
       <slot />
     </main>

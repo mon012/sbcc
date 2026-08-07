@@ -1,8 +1,20 @@
 ---
+import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { products } from "../../data/catalog";
+import chemicalAnchorsImage from "../../assets/images/product-listing/chemical-anchors.jpg";
+import epoxyAdhesiveImage from "../../assets/images/product-listing/epoxy-adhesive.jpg";
+import hiltiChemicalAnchorsImage from "../../assets/images/product-listing/hilti-chemical-anchors.webp";
+import castInAnchorsImage from "../../assets/images/product-listing/cast-in-anchors.webp";
+
+const productImages = {
+  "chemical-anchors": chemicalAnchorsImage,
+  "epoxy-adhesive": epoxyAdhesiveImage,
+  "hilti-chemical-anchors": hiltiChemicalAnchorsImage,
+  "cast-in-anchors": castInAnchorsImage,
+} as const;
 ---
-<BaseLayout title="สินค้าวิศวกรรม พุกเคมี Bolt Nut และอุปกรณ์งานระบบ | SBCC" description="รวมสินค้าสำหรับงานวิศวกรรมและงานก่อสร้าง พร้อมคำแนะนำและจัดส่งทั่วประเทศ">
+<BaseLayout title="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต | SBCC" description="รวมพุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต พร้อมคำแนะนำและจัดส่งทั่วประเทศ">
   <section class="section">
     <div class="shell">
       <p class="eyebrow">ENGINEERING SUPPLY</p>
@@ -13,11 +25,13 @@ import { products } from "../../data/catalog";
   <section class="shell grid two listing">
     {products.map((item) => (
       <a class="card" href={`/products/${item.slug}/`}>
-        <img src={item.image} alt={item.title} width="720" height="500" />
+        {item.image
+          ? <Image src={productImages[item.slug]} alt={"imageAlt" in item ? item.imageAlt : item.title} loading="lazy" />
+          : <div class="product-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
         <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
       </a>
     ))}
   </section>
   <div class="section"></div>
 </BaseLayout>
-<style>.section .display{font-size:clamp(3rem,5.263vw,4.46375rem)}.section .lead{margin-top:1.5rem}.listing .card{min-height:480px}.listing img{height:330px}.listing h2{font-size:1.8rem}</style>
+<style>.section .display{font-size:clamp(3rem,5.263vw,4.46375rem)}.section .lead{margin-top:1.5rem}.listing .card{min-height:480px}.listing :global(img),.product-placeholder{height:330px}.product-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}.listing h2{font-size:1.8rem}</style>

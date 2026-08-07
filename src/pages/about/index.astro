@@ -1,8 +1,38 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../config/site";
+import LineAppIcon from "../../components/LineAppIcon.astro";
+import SiteImage from "../../components/SiteImage.astro";
 ---
 <BaseLayout title="เกี่ยวกับ SBCC Engineering & Supply" description="รู้จักบริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด ผู้จำหน่ายสินค้าและให้บริการด้านวิศวกรรม">
-  <section class="section"><div class="shell"><p class="eyebrow">SBCC ENGINEERING & SUPPLY</p><h1 class="display">จัดหาสินค้า<br />พร้อมความเข้าใจหน้างาน</h1><p class="lead">SBCC ให้บริการทั้งด้านการจัดหาอุปกรณ์วิศวกรรมและงานติดตั้ง เพื่อช่วยให้ลูกค้าเลือกวิธีและวัสดุที่เหมาะกับโจทย์จริง</p></div></section>
-  <section class="section dark"><div class="shell"><h2 class="section-title">จากรายการสินค้า<br />ไปจนถึงการลงมือทำ</h2><p class="lead">ทีมงานพร้อมรับข้อมูลจากแบบ รายการวัสดุ รูปหน้างาน หรือโจทย์เบื้องต้น เพื่อช่วยประเมินขั้นต่อไป</p></div></section>
+  <section class="about-hero section">
+    <div class="shell hero-layout">
+      <h1 class="display">จัดหาสินค้า<br />ด้วยความเข้าใจหน้างาน</h1>
+      <div>
+        <p class="lead">SBCC เชื่อมการเลือกอุปกรณ์วิศวกรรมเข้ากับการประเมินและปฏิบัติงานจริง เพื่อให้ลูกค้าเริ่มจากข้อมูลที่มีและเดินไปสู่ข้อเสนอที่ชัดขึ้น</p>
+        <a class="button" href={site.lineHref} target="_blank" rel="noopener noreferrer"><LineAppIcon />ส่งรูปหน้างานทาง LINE</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-image"><SiteImage src="/images/project-construction-site.webp" alt="โครงการก่อสร้างที่เกี่ยวข้องกับงานวิศวกรรมของ SBCC" loading="eager" /></section>
+
+  <section class="section approach">
+    <div class="shell approach-layout">
+      <h2 class="section-title">จากข้อมูลเบื้องต้น<br />ไปสู่ขั้นตอนที่ทำได้จริง</h2>
+      <div class="principles">
+        <article><h3>เริ่มจากโจทย์ของลูกค้า</h3><p>รับข้อมูลจากรูปหน้างาน แบบ รายการวัสดุ รุ่นสินค้า หรือคำอธิบายเบื้องต้น</p></article>
+        <article><h3>มองทั้งสินค้าและการติดตั้ง</h3><p>พิจารณาสเปก ปริมาณ เงื่อนไขหน้างาน และวิธีดำเนินงานร่วมกัน</p></article>
+        <article><h3>ใช้หลักฐานจริง</h3><p>นำเสนอผลิตภัณฑ์ บริการ และภาพผลงานที่มีอยู่จริง โดยไม่เติมข้อกล่าวอ้างที่ตรวจสอบไม่ได้</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section dark">
+    <div class="shell close-layout"><h2 class="section-title">ทีมเดียวช่วยตรวจสเปก<br />จัดหา และลงมือทำ</h2><div><p class="lead">ดูหมวดสินค้าและบริการ หรือส่งรายละเอียดให้ทีมงานช่วยแนะนำขั้นตอนถัดไป</p><div class="cluster"><a class="button" href="/products/">ดูสินค้า</a><a class="button secondary dark-secondary" href="/services/">ดูบริการ</a></div></div></div>
+  </section>
 </BaseLayout>
-<style>.lead{margin-top:1.5rem}</style>
+<style>
+  .hero-layout,.approach-layout,.close-layout{display:grid;gap:3rem;align-items:end}.hero-layout .lead{margin-bottom:2rem}.about-image{height:min(68vw,720px);overflow:hidden}.about-image :global(img){width:100%;height:100%;object-fit:cover;filter:saturate(.82) contrast(1.05)}.principles{border-top:1px solid var(--line)}.principles article{border-bottom:1px solid var(--line);padding:1.4rem 0}.principles h3{font-size:1.35rem}.principles p{max-width:620px;margin-top:.6rem;color:var(--muted)}.close-layout .lead{margin-bottom:2rem}.dark-secondary{border-color:rgba(255,255,255,.42);color:white}.dark-secondary:hover{background:white;color:var(--navy-deep)}
+  @media(min-width:850px){.hero-layout,.approach-layout,.close-layout{grid-template-columns:1fr 1fr}}
+</style>

@@ -1,17 +1,20 @@
 ---
 import { site } from "../config/site";
 ---
-<div class="mobile-actions" aria-label="ช่องทางติดต่อด่วน">
-  <a href={site.hotlineHref}>โทรด่วน</a>
-  <a href={site.lineHref} target="_blank" rel="noopener noreferrer">LINE</a>
-  <a href="/quote/">ขอราคา</a>
-</div>
+<nav class="mobile-actions" aria-label="ช่องทางติดต่อด่วน">
+  <a href={site.hotlineHref}><small>งานด่วน</small><span>โทรหาเรา</span></a>
+  <a class="line" href={site.lineHref} target="_blank" rel="noopener noreferrer"><small>มีรูปหน้างาน</small><span>ส่งทาง LINE</span></a>
+  <a href="/quote/"><small>มีแบบหรือ BOM</small><span>ขอใบเสนอราคา</span></a>
+</nav>
 <style>
-  .mobile-actions { display: none; }
-  @media (max-width:759px) {
-    .mobile-actions { position: fixed; z-index: 30; right: 0; bottom: 0; left: 0; display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid #363d39; background: #101513; }
-    .mobile-actions a { display: grid; min-height: 62px; place-items: center; color: white; font-family: "Noto Sans Thai",Arial,sans-serif; font-weight: 700; text-decoration: none; }
-    .mobile-actions a + a { border-left: 1px solid #363d39; }
-    .mobile-actions a:last-child { background: #d74a2a; }
+  .mobile-actions { display:none; }
+  @media(max-width:759px) {
+    .mobile-actions { position:fixed; z-index:60; right:0; bottom:0; left:0; display:grid; grid-template-columns:.8fr 1.15fr 1fr; border-top:1px solid rgba(255,255,255,.18); background:var(--navy-deep); color:white; }
+    .mobile-actions a { display:flex; min-height:62px; flex-direction:column; align-items:center; justify-content:center; border-right:1px solid rgba(255,255,255,.16); padding:.35rem .25rem; color:inherit; text-align:center; text-decoration:none; }
+    .mobile-actions a:last-child { border-right:0; }
+    .mobile-actions .line { background:var(--brand); }
+    .mobile-actions small { color:#b9ccd4; font-size:.59rem; line-height:1.1; }
+    .mobile-actions .line small { color:white; }
+    .mobile-actions span { margin-top:.16rem; font-family:"Noto Sans Thai",Arial,sans-serif; font-size:.76rem; font-weight:700; line-height:1.2; }
   }
 </style>

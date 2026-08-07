@@ -14,11 +14,12 @@ import { site } from "../../config/site";
         <a href={site.hotlineSecondaryHref}><small>Hotline</small><strong>{site.hotlineSecondaryDisplay}</strong></a>
         <a href={site.lineHref} target="_blank" rel="noopener noreferrer"><small>LINE</small><strong>{site.lineDisplay}</strong></a>
         <a href={`mailto:${site.email}`}><small>Email</small><strong>{site.email}</strong></a>
+        <a class="address" href={site.mapsHref} target="_blank" rel="noopener noreferrer"><small>Address</small><strong>{site.addressDisplay}</strong></a>
       </div>
-      <a class="button" href="/quote/">ไปหน้าแบบฟอร์มขอใบเสนอราคา</a>
+      <a class="button" href="/quote/">ขอใบเสนอราคา</a>
     </div>
   </section>
 </BaseLayout>
 <style>
-  .lead{margin:1.5rem 0 3rem}.contact-grid{display:grid;gap:1px;margin-bottom:3rem;border:1px solid #d9d9d0;border-radius:1.25rem;overflow:hidden;background:#d9d9d0}.contact-grid a{padding:2rem;background:#fffdf8;text-decoration:none}.contact-grid small{display:block;color:#626963}.contact-grid strong{display:block;margin-top:.3rem;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:clamp(1.1rem,2vw,1.55rem);overflow-wrap:anywhere}@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr}}
+  .lead{margin:1.5rem 0 3rem}.contact-grid{display:grid;gap:1px;margin-bottom:3rem;border-block:1px solid var(--line);overflow:hidden;background:var(--line)}.contact-grid a{padding:2rem;background:var(--surface);text-decoration:none;transition:background .3s ease,color .3s ease}.contact-grid a:hover{background:var(--navy);color:white}.contact-grid small{display:block;color:var(--muted)}.contact-grid a:hover small{color:var(--blue-pale)}.contact-grid strong{display:block;margin-top:.3rem;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:clamp(1.1rem,2vw,1.55rem);overflow-wrap:anywhere}.contact-grid .address strong{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.5}@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr}}
 </style>

@@ -13,5 +13,8 @@ export const site = {
   lineDisplay: "@sbcceng",
   lineHref: "https://lin.ee/5CHMocW",
   email: "sbccengineeringsupply@gmail.com",
+  addressDisplay:
+    "บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด 183/41 หมู่ 7 ซอยเลี่ยงเมืองปากเกร็ด37 ตำบลบางตลาด อำเภอปากเกร็ด จังหวัดนนทบุรี 11120",
+  mapsHref: "https://maps.app.goo.gl/mazukUTFNZZK1LjA9",
   quoteFormId: "f85f767f-083d-40e6-bbea-de9840271e78",
 } as const;

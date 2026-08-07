@@ -3,13 +3,11 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import CatalogDetail from "../../../components/CatalogDetail.astro";
 import { services } from "../../../data/catalog";
 import { site } from "../../../config/site";
-import legacyPages from "../../../data/legacy-pages.json";
+import SiteImage from "../../../components/SiteImage.astro";
 export function getStaticPaths() {
   return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
 const { service } = Astro.props;
-const servicePath = `/services/${service.slug}/`;
-const childServices = legacyPages.filter((page) => page.type === "service" && page.path.startsWith(servicePath));
 ---
 <BaseLayout title={`${service.pageTitle} | SBCC Engineering`} description={`${service.sourceIntro} ติดต่อประเมินงานกับทีม SBCC`}>
   <section class="section">
@@ -20,11 +18,12 @@ const childServices = legacyPages.filter((page) => page.type === "service" && pa
         <p class="lead">{service.sourceIntro}</p>
         <div class="cluster"><a class="button" href="/quote/">ขอประเมินราคา</a><a class="button secondary" href={site.hotlineHref}>โทร {site.hotlineDisplay}</a></div>
       </div>
-      <img src={service.image} alt={service.title} width="720" height="600" />
+      {service.image
+        ? <SiteImage src={service.image} alt={"imageAlt" in service ? service.imageAlt : service.title} loading="eager" fetchpriority="high" />
+        : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลบริการ"><span>กำลังเตรียมข้อมูลบริการ</span></div>}
     </div>
   </section>
-  <CatalogDetail detail={service.detail} eyebrow="SERVICE DETAILS" />
-  {childServices.length > 0 && <section class="section"><div class="shell"><h2 class="section-title">บริการย่อยและระบบที่เกี่ยวข้อง</h2><div class="child-grid">{childServices.map((item)=><a href={item.path}><h3>{item.heading}</h3><p>{item.description}</p><b>ดูรายละเอียด →</b></a>)}</div></div></section>}
+  {service.detail && <CatalogDetail detail={service.detail} eyebrow="SERVICE DETAILS" />}
   <section class="section dark">
     <div class="shell service-process">
       <h2 class="section-title">ข้อมูลที่ช่วยให้ประเมินได้เร็วขึ้น</h2>
@@ -33,6 +32,6 @@ const childServices = legacyPages.filter((page) => page.type === "service" && pa
   </section>
 </BaseLayout>
 <style>
-  .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail img{width:100%;aspect-ratio:6/5;object-fit:cover}.child-grid{display:grid;grid-auto-flow:dense;gap:1px;margin-top:3rem;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:var(--line)}.child-grid a{min-height:260px;padding:2rem;background:var(--surface);text-decoration:none}.child-grid h3{font-size:1.5rem}.child-grid p{margin:1rem 0;color:var(--muted)}.child-grid b{font-family:"Noto Sans Thai",Arial,sans-serif}.service-process{display:grid;gap:4rem}ol{margin:0;padding:0;list-style:none}li{display:grid;gap:.5rem;border-top:1px solid #38413d;padding:1.2rem 0}li b{font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.2rem}li span{color:#bdc4bf}
-  @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.child-grid{grid-template-columns:repeat(2,1fr)}.service-process{grid-template-columns:1fr 1fr}}
+  .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail :global(img),.detail-placeholder{width:100%;aspect-ratio:6/5}.detail :global(img){height:auto;object-fit:cover}.detail-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}.service-process{display:grid;gap:4rem}ol{margin:0;padding:0;list-style:none}li{display:grid;gap:.5rem;border-top:1px solid rgba(255,255,255,.24);padding:1.2rem 0}li b{font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.2rem}li span{color:#c7dbe2}
+  @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.service-process{grid-template-columns:1fr 1fr}}
 </style>

@@ -1,205 +1,201 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import LineAppIcon from "../components/LineAppIcon.astro";
+import ArrowIcon from "../components/ArrowIcon.astro";
+import SiteImage from "../components/SiteImage.astro";
 import { products, services } from "../data/catalog";
 import { site } from "../config/site";
-import legacyPages from "../data/legacy-pages.json";
-const facebookPortfolioUrl = "https://www.facebook.com/profile.php?id=100063526152006";
-const projectGalleryImages = legacyPages
-  .filter((page) => page.type === "project" && page.images.length)
-  .slice(0, 5)
-  .map((page) => ({
-    src: page.images[0].src,
-    alt: page.images[0].alt || `ตัวอย่างผลงานวิศวกรรม ${page.heading}`,
-  }));
+
+const projectEvidence = [
+  { src: "/legacy-assets/4bcbd9a842-17457931_1220685707987305_9128082814653951827_n.jpg", alt: "หน้างานก่อสร้างบ้านพัก" },
+  { src: "/images/project-construction-site.webp", alt: "หน้างานก่อสร้างอาคาร" },
+  { src: "/legacy-assets/f50c93838f-20770198_1343721455683729_5890634755612042816_n.jpg", alt: "ผลงานหน้างานคอนโดมิเนียม" },
+  { src: "/legacy-assets/c49575136b-22687962_1398881913501016_5008216070809313268_n.jpg", alt: "งานเจาะคอริ่งแผ่นคอนกรีตสำเร็จรูป" },
+];
 ---
 <BaseLayout
   title="บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด"
-  description="จำหน่ายอุปกรณ์เกี่ยวกับงานวิศวกรรม พุกเคมี, น้ำยาเคมี, Bolt, Nut, เหล็กราง และอุปกรณ์สำหรับงานก่อสร้างทุกชนิด จัดส่งด่วนทั่วไทย พร้อมให้คำปรึกษาฟรี"
+  description="ส่งรูปหน้างาน แบบ หรือรายการสินค้าให้ทีม SBCC ช่วยประเมิน จำหน่ายอุปกรณ์วิศวกรรมและให้บริการติดตั้ง พร้อมจัดส่งทั่วไทย"
+  overlayHeader
 >
-  <section class="hero">
-    <div class="shell hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">ENGINEERING SUPPLY & FIELD SERVICE</p>
-        <h1 class="display"><span>งานด่วน งานไว<br />คิดถึง เอสบีซีซี</span></h1>
-        <p class="lead">SBCC เปิดให้บริการทุกวัน ตั้งแต่เวลา 8:30 – 17:30 น.</p>
-        <div class="cluster">
-          <a class="button" href={site.lineHref} target="_blank" rel="noopener noreferrer"><LineAppIcon />สอบถามทาง LINE</a>
-          <a class="button secondary" href="/quote/">ขอใบเสนอราคา</a>
+  <section class="hero" aria-labelledby="home-title">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="shell hero-content">
+      <h1 id="home-title">ส่งรูปหน้างาน<br />ให้เราช่วยประเมิน</h1>
+      <p>SBCC เปิดให้บริการทุกวัน ตั้งแต่เวลา 8:30 – 17:30 น.</p>
+      <div class="hero-actions">
+        <a class="button hero-line" href={site.lineHref} target="_blank" rel="noopener noreferrer">
+          <LineAppIcon />สอบถามเพิ่มเติมทาง LINE
+        </a>
+        <a class="text-link" href="/quote/">ขอใบเสนอราคา <span><ArrowIcon direction="up-right" /></span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="intake section">
+    <div class="shell intake-layout">
+      <h2 class="section-title">เริ่มจากข้อมูลที่คุณมี</h2>
+      <div class="intake-copy">
+        <p class="lead">ส่งรูปภาพ, Drawing, รายการสินค้า หรือแจ้งปัญหาเบื้องต้น ให้ทีมงานของเราช่วยประเมินปัญหาและสิ่งที่ต้องการ</p>
+        <ol>
+          <li><strong>ส่งข้อมูล</strong><span>รูปหน้างาน แบบ หรือรายการสินค้า</span></li>
+          <li><strong>ทีมงานประเมิน</strong><span>สเปก ปริมาณ เงื่อนไขหน้างาน และระยะเวลา</span></li>
+          <li><strong>รับคำแนะนำ</strong><span>แนวทางสินค้า บริการ และใบเสนอราคา</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="capabilities" id="capabilities">
+    <div class="capability product-capability">
+      <div class="capability-image">
+        <SiteImage src="/images/product-chemical.jpg" alt="พุกเคมีและอุปกรณ์วิศวกรรม" />
+      </div>
+      <div class="capability-copy">
+        <h2>สินค้าและอุปกรณ์<br />พร้อมคำแนะนำ</h2>
+        <p>เช็ครุ่น ขนาด ปริมาณ และเงื่อนไขใช้งานก่อนเสนอราคา</p>
+        <nav aria-label="หมวดสินค้า">
+          {products.map((item) => (
+            <a href={`/products/${item.slug}/`}><span>{item.title}</span><b><ArrowIcon direction="up-right" /></b></a>
+          ))}
+        </nav>
+        <a class="button secondary" href="/products/">ดูสินค้าทั้งหมด</a>
+      </div>
+    </div>
+
+    <div class="capability service-capability">
+      <div class="capability-image">
+        <SiteImage src="/images/services-hero-construction.webp" alt="ทีมบริการวิศวกรรมปฏิบัติงานในโครงการก่อสร้าง" />
+      </div>
+      <div class="capability-copy">
+        <h2>ประเมินหน้างาน พร้อมแนวทางแก้ปัญหา</h2>
+        <p>ตรวจพื้นที่ วางแผน เตรียมอุปกรณ์ และดำเนินงานตามขอบเขต</p>
+        <nav aria-label="หมวดบริการ">
+          {services.map((item) => (
+            <a href={`/services/${item.slug}/`}><span>{item.title}</span><b><ArrowIcon direction="up-right" /></b></a>
+          ))}
+        </nav>
+        <a class="button service-button" href="/services/">ดูบริการทั้งหมด</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="evidence section">
+    <div class="shell evidence-head">
+      <h2 class="section-title">ดูผลงานจริง<br />ก่อนตัดสินใจ</h2>
+      <p class="lead">ภาพจากคลังผลงานเดิมของ SBCC ครอบคลุมงานอาคาร โรงงาน สถาบันการศึกษา หน่วยงานรัฐ และโครงสร้างพื้นฐาน</p>
+    </div>
+    <div class="shell evidence-grid">
+      {projectEvidence.map((project) => (
+        <div class="evidence-item">
+          <SiteImage src={project.src} alt={project.alt} />
         </div>
-      </div>
-      <figure>
-        <img src="/images/hero-construction-crane.webp" alt="เครนก่อสร้างในโครงการวิศวกรรม" width="1080" height="675" />
-      </figure>
-    </div>
-  </section>
-
-  <section class="balance">
-    <div class="shell balance-head">
-      <p class="eyebrow">ONE TEAM, TWO CAPABILITIES</p>
-      <h2 class="section-title">จัดหาสินค้าและลงมือทำ<br />ด้วยมาตรฐานเดียวกัน</h2>
-      <p class="lead">ทีมเดียวช่วยตรวจสเปก ประเมินหน้างาน และดำเนินงานจนเสร็จสมบูรณ์</p>
-    </div>
-    <div class="shell split">
-      <a href="/products/" class="portal product">
-        <span>สินค้า</span>
-        <h3>อุปกรณ์สำหรับงานวิศวกรรม</h3>
-        <p>พุกเคมี น้ำยาเสียบเหล็ก Bolt Nut Washer และระบบแขวนรองรับ</p>
-        <b>ดูสินค้าทั้งหมด →</b>
-      </a>
-      <a href="/services/" class="portal service">
-        <span>บริการ</span>
-        <h3>ทีมงานพร้อมเข้าหน้างาน</h3>
-        <p>เจาะเสียบเหล็ก เจาะคอริ่ง ซ่อมพื้น และติดตั้งระบบ Hilti</p>
-        <b>ดูบริการทั้งหมด →</b>
-      </a>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell intro">
-      <div>
-        <p class="eyebrow">FIELD-PROVEN PRODUCTS</p>
-        <h2 class="section-title">เลือกตามประเภทงานและสเปก</h2>
-      </div>
-    </div>
-    <div class="shell grid four">
-      {products.map((item) => (
-        <a class="card" href={`/products/${item.slug}/`}>
-          <img src={item.image} alt={item.title} width="520" height="400" loading="lazy" />
-          <div class="card-body"><h3>{item.title}</h3><p>{item.summary}</p></div>
-        </a>
       ))}
     </div>
+    <div class="shell evidence-action"><a class="button evidence-button" href="https://www.facebook.com/profile.php?id=100063526152006" target="_blank" rel="noopener noreferrer">ดูผลงานที่ผ่านมา <span><ArrowIcon direction="up-right" /></span></a></div>
   </section>
 
-  <section class="section dark">
-    <div class="shell intro">
-      <div>
-        <p class="eyebrow orange">SBCC FIELD SERVICES</p>
-        <h2 class="section-title">ประเมินหน้างาน วางแผนงาน และส่งมอบอย่างเป็นระบบ</h2>
-      </div>
-    </div>
-    <div class="shell grid two service-grid">
-      {services.map((item) => (
-        <a class="card service-card" href={`/services/${item.slug}/`}>
-          <img src={item.image} alt={item.title} width="720" height="500" loading="lazy" />
-          <div class="card-body"><h3>{item.title}</h3><p>{item.summary}</p></div>
-        </a>
-      ))}
-    </div>
-  </section>
-
-  <section class="project-evidence section" id="project-evidence">
-    <div class="shell evidence-layout">
-      <div class="evidence-heading">
-        <p class="eyebrow">PROVEN ON-SITE RESULTS</p>
-        <h2 class="section-title">ผลงานที่บอกวิธีทำงานได้ชัดกว่าคำโฆษณา</h2>
-        <p class="lead">ครอบคลุมงานอาคาร โรงงาน สถาบันการศึกษา หน่วยงานรัฐ และโครงสร้างพื้นฐาน</p>
-      </div>
-      <div class="project-gallery">
-        {projectGalleryImages.map((image) => (
-          <a class="gallery-item" href={facebookPortfolioUrl} target="_blank" rel="noopener noreferrer" aria-label="ดูผลงานเพิ่มเติมบน Facebook">
-            <img class="gallery-image" src={image.src} alt={image.alt} loading="lazy" />
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <section class="section process">
-    <div class="shell process-grid">
-      <h2 class="section-title">เริ่มต้นง่าย<br />ไม่ต้องศัพท์เทคนิค</h2>
-      <ol>
-        <li><b>ส่งข้อมูล</b><span>บอกโจทย์ ส่งรูป แบบ หรือรายการสินค้าที่ต้องการ</span></li>
-        <li><b>ทีมงานประเมิน</b><span>ตรวจสเปก ปริมาณ เงื่อนไขหน้างาน และระยะเวลา</span></li>
-        <li><b>รับข้อเสนอ</b><span>รับคำแนะนำและใบเสนอราคาเพื่อประกอบการตัดสินใจ</span></li>
-      </ol>
-    </div>
-  </section>
 </BaseLayout>
+
 <script>
   import gsap from "gsap";
-  import ScrollTrigger from "gsap/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger);
 
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduceMotion) {
-    gsap.utils.toArray<HTMLElement>(".gallery-image").forEach((image) => {
-      gsap.fromTo(image, { scale: 0.9, opacity: 0.5 }, {
-        scale: 1,
-        opacity: 1,
-        ease: "none",
-        scrollTrigger: { trigger: image, start: "top 95%", end: "bottom 70%", scrub: true },
-      });
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.fromTo(".hero-content > *", { y: 42, opacity: 0 }, {
+      y: 0,
+      opacity: 1,
+      duration: 1.05,
+      stagger: .12,
+      ease: "power4.out",
+      delay: .12,
     });
-    if (window.matchMedia("(min-width: 900px)").matches) {
-      ScrollTrigger.create({
-        trigger: "#project-evidence",
-        start: "top 90px",
-        end: "bottom bottom",
-        pin: ".evidence-heading",
-        pinSpacing: false,
-      });
-    }
+    gsap.fromTo(".hero-photo", { scale: 1.07 }, { scale: 1, duration: 1.8, ease: "power3.out" });
   }
 </script>
+
 <style>
-  .hero { padding: clamp(3rem,7vw,6rem) 0 clamp(5rem,10vw,9rem); }
-  .hero-grid { display: grid; align-items: center; gap: clamp(2.5rem,6vw,7rem); }
-  .hero-copy { position: relative; z-index: 1; }
-  .hero .display { font-size: clamp(2.25rem,4.65vw,3.41rem); }
-  .hero .lead { margin: 1.6rem 0 2rem; }
-  figure { position: relative; margin: 0; }
-  figure::before { position: absolute; z-index: -1; width: 75%; height: 75%; right: -9%; bottom: -12%; background: #d74a2a; content: ""; }
-  figure img { width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center; filter: saturate(.72) contrast(1.05); }
-  .balance { padding: clamp(5rem,10vw,9rem) 0 0; border-top: 1px solid #d9d9d0; }
-  .balance-head { display: grid; gap: 1.5rem; margin-bottom: 3rem; }
-  .split { display: grid; gap: 1px; overflow: hidden; border-radius: 1.25rem; background: #d9d9d0; }
-  .portal { min-height: 500px; padding: clamp(2rem,5vw,4.5rem); text-decoration: none; }
-  .portal span { font: 700 .9rem "Noto Sans Thai",Arial,sans-serif; }
-  .portal h3 { margin: 5rem 0 1rem; font-size: clamp(2rem,3.8vw,3.6rem); }
-  .portal p { max-width: 490px; margin-bottom: 2rem; }
-  .portal b { font-family: "Noto Sans Thai",Arial,sans-serif; }
-  .product { background: #fffdf8; }
-  .service { background: #193b31; color: white; }
-  .service p { color: #c5d1cc; }
-  .intro { display: flex; align-items: flex-end; gap: 2rem; margin-bottom: 3rem; }
-  .orange { color: #ff856b; }
-  .service-grid { border-color: #39413e; background: #39413e; }
-  .service-card { background: #171d1a; color: white; }
-  .service-card p { color: #aeb7b2; }
-  .service-card img { height: 350px; filter: grayscale(.25) contrast(1.12); }
-  .project-evidence { background: #e7e4dc; }
-  .evidence-layout { display: grid; gap: 4rem; }
-  .evidence-heading { align-self: start; }
-  .evidence-heading .lead { margin: 1.5rem 0; }
-  .project-gallery { display: grid; grid-template-columns: repeat(6,1fr); grid-auto-rows: clamp(115px,11vw,175px); grid-auto-flow: dense; gap: 6px; overflow: hidden; border-radius: var(--radius); background: #c8cbc5; }
-  .gallery-item { position: relative; display: block; overflow: hidden; background: #c8cbc5; }
-  .gallery-item:nth-child(1) { grid-column: span 3; grid-row: span 2; }
-  .gallery-item:nth-child(2), .gallery-item:nth-child(3) { grid-column: span 3; grid-row: span 1; }
-  .gallery-item:nth-child(4) { grid-column: span 2; grid-row: span 2; }
-  .gallery-item:nth-child(5) { grid-column: span 4; grid-row: span 2; }
-  .gallery-image { width: 100%; height: 100%; object-fit: cover; filter: saturate(.82) contrast(1.06); transition: transform .7s ease, filter .7s ease; }
-  .gallery-item:hover .gallery-image { transform: scale(1.05) !important; filter: saturate(1) contrast(1.08); }
-  .process-grid { display: grid; gap: 4rem; }
-  ol { margin: 0; padding: 0; list-style: none; counter-reset: step; }
-  li { display: grid; grid-template-columns: 1fr 1.8fr; gap: 2rem; border-top: 1px solid #c8cbc5; padding: 1.5rem 0; counter-increment: step; }
-  li b { font-family: "Noto Sans Thai",Arial,sans-serif; font-size: 1.2rem; }
-  li b::before { margin-right: .8rem; color: #9e2f18; content: "0" counter(step); }
-  li span { color: #626963; }
-  @media (min-width: 860px) {
-    .hero-grid { grid-template-columns: minmax(0,1.2fr) minmax(340px,.8fr); }
-    .split { grid-template-columns: 1fr 1fr; }
-    .process-grid { grid-template-columns: 1fr 1.3fr; }
-    .evidence-layout { grid-template-columns: minmax(300px,.8fr) minmax(0,1.2fr); }
+  .hero { position: relative; isolation: isolate; display: grid; min-height: min(860px,100svh); align-items: end; overflow: hidden; background: var(--navy-deep); color: white; }
+  .hero-photo { position: absolute; inset: 0; z-index: -2; background: url("/images/hero-construction-crane.webp") center 53%/cover no-repeat; }
+  .hero::before { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,rgba(3,26,49,.93) 0%,rgba(3,38,70,.74) 42%,rgba(3,38,70,.16) 78%),linear-gradient(0deg,rgba(3,24,44,.74),transparent 52%); content:""; }
+  .hero::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: rgba(255,255,255,.35); content:""; }
+  .hero-content { padding-top: 10rem; padding-bottom: clamp(5rem,9vh,7.5rem); }
+  .hero h1 { max-width: 800px; font-size: clamp(3.4rem,7.25vw,5.5rem); font-weight: 700; letter-spacing: -.035em; }
+  .hero p { max-width: 640px; margin-top: 1.6rem; color: #d7e7ec; font-size: clamp(1.06rem,1.6vw,1.3rem); }
+  .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 2.2rem; }
+  .hero-line { min-width: 190px; }
+  .text-link { display: inline-flex; align-items: center; gap: .65rem; color: var(--navy); font-family:"Noto Sans Thai",Arial,sans-serif; font-weight:700; text-decoration:none; }
+  .hero .text-link { color:white; }
+  .text-link span { display:grid; width:34px; height:34px; place-items:center; border:1px solid currentColor; border-radius:50%; transition:transform .3s var(--ease-out); }
+  .text-link:hover span { transform:translate(2px,-2px); }
+
+  .intake { background:white; }
+  .intake-layout { display:grid; gap:3.5rem; }
+  .intake-copy .lead { margin-bottom:3rem; }
+  .intake ol { margin:0; padding:0; border-top:1px solid var(--line); list-style:none; counter-reset:steps; }
+  .intake li { display:grid; grid-template-columns:minmax(150px,.8fr) 1.4fr; gap:2rem; border-bottom:1px solid var(--line); padding:1.25rem 0; counter-increment:steps; }
+  .intake li strong { font-family:"Noto Sans Thai",Arial,sans-serif; }
+  .intake li strong::before { margin-right:.8rem; color:var(--brand); content:"0" counter(steps); }
+  .intake li span { color:var(--muted); }
+
+  .capabilities { border-top:1px solid var(--line); }
+  .capability { display:grid; min-height:720px; }
+  .capability-image { min-height:420px; overflow:hidden; }
+  .capability-image :global(img) { width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease-out); }
+  .capability:hover .capability-image :global(img) { transform:scale(1.025); }
+  .capability-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(3rem,6vw,6rem); }
+  .capability h2 { font-size:clamp(2.5rem,4.6vw,5rem); }
+  .service-capability h2 { font-size:clamp(2.4rem,4.3vw,4.75rem); }
+  .capability-copy > p { max-width:520px; margin:1.35rem 0 2.5rem; color:var(--muted); }
+  .capability nav { margin-bottom:2.5rem; border-top:1px solid var(--line); }
+  .capability nav a { display:flex; align-items:center; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--line); padding:1rem 0; font-family:"Noto Sans Thai",Arial,sans-serif; font-weight:700; text-decoration:none; }
+  .capability nav b { font-size:1.1rem; transition:transform .3s var(--ease-out); }
+  .capability nav a:hover b { transform:translate(3px,-3px); }
+  .capability .button { align-self:flex-start; }
+  .service-capability { background:var(--navy-deep); color:white; }
+  .service-capability .capability-copy > p { color:#c7dbe2; }
+  .service-capability nav { border-color:rgba(255,255,255,.22); }
+  .service-capability nav a { border-color:rgba(255,255,255,.22); }
+  .service-button { background:var(--brand); }
+
+  .evidence { background:#e9f1f4; }
+  .evidence-head { display:grid; gap:2rem; margin-bottom:3.5rem; }
+  .evidence-head .lead { font-size:1.093rem; }
+  .evidence-grid { display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:clamp(180px,18vw,300px); gap:8px; }
+  .evidence-item { overflow:hidden; background:var(--navy); }
+  .evidence-item:nth-child(1) { grid-column:span 7; grid-row:span 2; }
+  .evidence-item:nth-child(2) { grid-column:span 5; }
+  .evidence-item:nth-child(3),.evidence-item:nth-child(4) { grid-column:span 5; }
+  .evidence-item:nth-child(4) { grid-column:span 5; }
+  .evidence-item :global(img) { width:100%; height:100%; object-fit:cover; }
+  .evidence-action { display:flex; justify-content:center; margin-top:2.5rem; }
+  .evidence-button { min-height:58px; padding-inline:1.8rem; font-size:1.125rem; }
+  .evidence-button span { display:grid; place-items:center; }
+  .light { color:var(--navy-deep); }
+
+  @media(min-width:860px) {
+    .intake-layout,.evidence-head { grid-template-columns:1fr 1fr; }
+    .capability { grid-template-columns:1fr 1fr; }
+    .service-capability .capability-image { order:2; }
   }
-  @media (max-width: 700px) {
-    .hero .display { font-size: clamp(2.2rem,10.5vw,2.75rem); line-height: 1.08; }
-    .intro { display: block; }
-    li { grid-template-columns: 1fr; gap: .3rem; }
-    .project-gallery { grid-template-columns: repeat(2,1fr); grid-auto-rows: 145px; }
-    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
-    .gallery-item:nth-child(n+2) { grid-column: span 1; grid-row: span 1; }
+  @media(max-width:859px) {
+    .hero { min-height:780px; }
+    .capability { min-height:0; }
+    .capability-image { min-height:360px; }
+    .service-capability .capability-copy { order:2; }
+    .evidence-grid { grid-template-columns:1fr 1fr; grid-auto-rows:210px; }
+    .evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
+    .evidence-item:first-child { grid-column:span 2; grid-row:span 2; }
+  }
+  @media(max-width:560px) {
+    .hero { min-height:720px; }
+    .hero-content { padding-top:8rem; padding-bottom:4rem; }
+    .hero h1 { font-size:clamp(3rem,15vw,4.35rem); line-height:1.02; }
+    .hero p { max-width:31ch; }
+    .intake li { grid-template-columns:1fr; gap:.35rem; }
+    .capability-image { min-height:300px; }
+    .capability-copy { padding:3rem 1rem 4rem; }
+    .capability h2 { font-size:clamp(2.4rem,12vw,3.4rem); }
+    .evidence-grid { grid-template-columns:1fr; grid-auto-rows:250px; }
+    .evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
   }
 </style>
