@@ -15,17 +15,17 @@ const projectEvidence = [
 ---
 <BaseLayout
   title="บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด"
-  description="ส่งรูปหน้างาน แบบ หรือรายการสินค้าให้ทีม SBCC ช่วยประเมิน จำหน่ายอุปกรณ์วิศวกรรมและให้บริการติดตั้ง พร้อมจัดส่งทั่วไทย"
+  description="ส่งรูปหน้างาน แบบ หรือรายการสินค้าให้ทีม SBCC ช่วยตรวจสเปก ประเมินหน้างาน และเสนอสินค้า บริการ หรือใบเสนอราคา"
   overlayHeader
 >
   <section class="hero" aria-labelledby="home-title">
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="shell hero-content">
       <h1 id="home-title">ส่งรูปหน้างาน<br />ให้เราช่วยประเมิน</h1>
-      <p>SBCC เปิดให้บริการทุกวัน ตั้งแต่เวลา 8:30 – 17:30 น.</p>
+      <p>ยังไม่รู้รุ่นหรือสเปกก็ส่งมาได้ ทีมงานช่วยตรวจข้อมูลและแนะนำขั้นตอนต่อไป</p>
       <div class="hero-actions">
         <a class="button hero-line" href={site.lineHref} target="_blank" rel="noopener noreferrer">
-          <LineAppIcon />สอบถามเพิ่มเติมทาง LINE
+          <LineAppIcon />ส่งข้อมูลทาง LINE
         </a>
         <a class="text-link" href="/quote/">ขอใบเสนอราคา <span><ArrowIcon direction="up-right" /></span></a>
       </div>
@@ -36,11 +36,11 @@ const projectEvidence = [
     <div class="shell intake-layout">
       <h2 class="section-title">เริ่มจากข้อมูลที่คุณมี</h2>
       <div class="intake-copy">
-        <p class="lead">ส่งรูปภาพ, Drawing, รายการสินค้า หรือแจ้งปัญหาเบื้องต้น ให้ทีมงานของเราช่วยประเมินปัญหาและสิ่งที่ต้องการ</p>
+        <p class="lead">ส่งรูปหน้างาน แบบ รายการสินค้า หรือเล่าปัญหาเบื้องต้น ทีมงานจะช่วยดูว่าต้องใช้สินค้าอะไร หรือต้องเข้าประเมินหน้างาน</p>
         <ol>
           <li><strong>ส่งข้อมูล</strong><span>รูปหน้างาน แบบ หรือรายการสินค้า</span></li>
-          <li><strong>ทีมงานประเมิน</strong><span>สเปก ปริมาณ เงื่อนไขหน้างาน และระยะเวลา</span></li>
-          <li><strong>รับคำแนะนำ</strong><span>แนวทางสินค้า บริการ และใบเสนอราคา</span></li>
+          <li><strong>ทีมงานตรวจข้อมูล</strong><span>สเปก ปริมาณ เงื่อนไขหน้างาน และระยะเวลา</span></li>
+          <li><strong>รับแนวทางต่อ</strong><span>สินค้า บริการ หรือใบเสนอราคาที่ตรงกับงาน</span></li>
         </ol>
       </div>
     </div>
@@ -52,8 +52,8 @@ const projectEvidence = [
         <SiteImage src="/images/product-chemical.jpg" alt="พุกเคมีและอุปกรณ์วิศวกรรม" />
       </div>
       <div class="capability-copy">
-        <h2>สินค้าและอุปกรณ์<br />พร้อมคำแนะนำ</h2>
-        <p>เช็ครุ่น ขนาด ปริมาณ และเงื่อนไขใช้งานก่อนเสนอราคา</p>
+        <h2>เลือกสินค้า<br />ให้ตรงกับงาน</h2>
+        <p>ทีมงานตรวจรุ่น ขนาด ปริมาณ และเงื่อนไขใช้งานก่อนเสนอราคา</p>
         <nav aria-label="หมวดสินค้า">
           {products.map((item) => (
             <a href={`/products/${item.slug}/`}><span>{item.title}</span><b><ArrowIcon direction="up-right" /></b></a>
@@ -68,8 +68,8 @@ const projectEvidence = [
         <SiteImage src="/images/services-hero-construction.webp" alt="ทีมบริการวิศวกรรมปฏิบัติงานในโครงการก่อสร้าง" />
       </div>
       <div class="capability-copy">
-        <h2>ประเมินหน้างาน พร้อมแนวทางแก้ปัญหา</h2>
-        <p>ตรวจพื้นที่ วางแผน เตรียมอุปกรณ์ และดำเนินงานตามขอบเขต</p>
+        <h2>ประเมินหน้างาน<br />ก่อนเริ่มงานจริง</h2>
+        <p>ทีมงานตรวจพื้นที่ วางแผน เตรียมอุปกรณ์ และทำงานตามขอบเขตที่ตกลงกัน</p>
         <nav aria-label="หมวดบริการ">
           {services.map((item) => (
             <a href={`/services/${item.slug}/`}><span>{item.title}</span><b><ArrowIcon direction="up-right" /></b></a>
@@ -83,7 +83,7 @@ const projectEvidence = [
   <section class="evidence section">
     <div class="shell evidence-head">
       <h2 class="section-title">ดูผลงานจริง<br />ก่อนตัดสินใจ</h2>
-      <p class="lead">ภาพจากคลังผลงานเดิมของ SBCC ครอบคลุมงานอาคาร โรงงาน สถาบันการศึกษา หน่วยงานรัฐ และโครงสร้างพื้นฐาน</p>
+      <p class="lead">ชมภาพงานอาคาร โรงงาน สถาบันการศึกษา หน่วยงานรัฐ และงานโครงสร้างพื้นฐานของ SBCC</p>
     </div>
     <div class="shell evidence-grid">
       {projectEvidence.map((project) => (
