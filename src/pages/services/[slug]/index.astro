@@ -8,6 +8,12 @@ export function getStaticPaths() {
   return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
 const { service } = Astro.props;
+const coringReels = [
+  "https://www.facebook.com/reel/994538166451414",
+  "https://www.facebook.com/reel/728654309917797",
+  "https://www.facebook.com/reel/484941321058569",
+  "https://www.facebook.com/reel/711644300533514",
+];
 ---
 <BaseLayout title={`${service.pageTitle} | SBCC Engineering`} description={`${service.sourceIntro} ติดต่อประเมินงานกับทีม SBCC`}>
   <section class="section">
@@ -24,6 +30,36 @@ const { service } = Astro.props;
     </div>
   </section>
   {service.detail && <CatalogDetail detail={service.detail} eyebrow="SERVICE DETAILS" />}
+  {service.slug === "coring" && (
+    <section class="section reels-section" aria-labelledby="coring-reels-title">
+      <div class="shell">
+        <div class="reels-heading">
+          <div>
+            <p class="eyebrow">หน้างานจริง</p>
+            <h2 id="coring-reels-title" class="section-title">งานเจาะคอริ่งจากทีม SBCC</h2>
+          </div>
+          <a class="reels-more" href="https://www.facebook.com/profile.php?id=100063526152006" target="_blank" rel="noopener noreferrer">
+            ดูผลงานของเรา <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+        <div class="reels-track">
+          {coringReels.map((reel, index) => (
+            <article class="reel-card">
+              <iframe
+                src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(reel)}&show_text=false&width=500`}
+                title={`วิดีโองานเจาะคอริ่ง SBCC คลิปที่ ${index + 1}`}
+                width="500"
+                height="889"
+                loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
   <section class="section dark">
     <div class="shell service-process">
       <h2 class="section-title">ข้อมูลที่ช่วยให้ประเมินได้เร็วขึ้น</h2>
@@ -33,5 +69,8 @@ const { service } = Astro.props;
 </BaseLayout>
 <style>
   .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail :global(img),.detail-placeholder{width:100%;aspect-ratio:6/5}.detail :global(img){height:auto;object-fit:cover}.detail-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}.service-process{display:grid;gap:4rem}ol{margin:0;padding:0;list-style:none}li{display:grid;gap:.5rem;border-top:1px solid rgba(255,255,255,.24);padding:1.2rem 0}li b{font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.2rem}li span{color:#c7dbe2}
+  .reels-section{overflow:hidden;background:#fff}.reels-heading{display:grid;gap:1rem;margin-bottom:2rem}.reels-more{display:inline-flex;width:max-content;align-items:center;gap:.45rem;color:var(--navy-deep);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}.reels-more span{color:var(--brand)}.reels-track{display:flex;gap:1rem;overflow-x:auto;margin-inline:calc(var(--shell-gutter, 1.25rem) * -1);padding:0 var(--shell-gutter, 1.25rem) 1rem;scroll-padding-inline:var(--shell-gutter, 1.25rem);scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}.reel-card{flex:0 0 clamp(230px,62vw,290px);overflow:hidden;border:1px solid #c8d7dd;background:#f3f6f7;scroll-snap-align:start}.reel-card iframe{display:block;width:100%;height:auto;aspect-ratio:9/16;border:0}
+  @media(min-width:700px){.reels-heading{grid-template-columns:1fr auto;align-items:end}.reels-track{margin-inline:0;padding-inline:0;scroll-padding-inline:0}.reel-card{flex-basis:clamp(220px,28vw,290px)}}
   @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.service-process{grid-template-columns:1fr 1fr}}
+  @media(min-width:1100px){.reel-card{flex-basis:calc((100% - 3rem) / 4)}}
 </style>
