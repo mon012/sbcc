@@ -13,10 +13,15 @@ import SiteImage from "../../components/SiteImage.astro";
   </section>
   <section class="section">
     <div class="shell grid two listing">
-      {services.map((item) => (
+      {services.map((item, index) => (
         <a class="card" href={`/services/${item.slug}/`}>
           {item.image
-            ? <SiteImage src={item.image} alt={"imageAlt" in item ? item.imageAlt : item.title} />
+            ? <SiteImage
+                src={item.image}
+                alt={item.imageAlt}
+                loading={index < 2 ? "eager" : "lazy"}
+                fetchpriority={index === 0 ? "high" : "auto"}
+              />
             : <div class="service-placeholder" aria-label="กำลังเตรียมข้อมูลบริการ"><span>กำลังเตรียมข้อมูลบริการ</span></div>}
           <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
         </a>

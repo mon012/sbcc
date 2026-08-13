@@ -25,7 +25,7 @@ const coringReels = [
         <div class="cluster"><a class="button" href="/quote/">ขอประเมินราคา</a><a class="button secondary" href={site.hotlineHref}>โทร {site.hotlineDisplay}</a></div>
       </div>
       {service.image
-        ? <SiteImage src={service.image} alt={"imageAlt" in service ? service.imageAlt : service.title} loading="eager" fetchpriority="high" />
+        ? <SiteImage src={service.image} alt={service.imageAlt} loading="eager" fetchpriority="high" />
         : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลบริการ"><span>กำลังเตรียมข้อมูลบริการ</span></div>}
     </div>
   </section>

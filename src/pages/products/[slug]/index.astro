@@ -19,7 +19,7 @@ const { product } = Astro.props;
         <div class="cluster"><a class="button" href="/quote/">ขอใบเสนอราคา</a><a class="button secondary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a></div>
       </div>
       {product.image
-        ? <SiteImage src={product.image} alt={"imageAlt" in product ? product.imageAlt : product.title} loading="eager" fetchpriority="high" />
+        ? <SiteImage src={product.image} alt={product.imageAlt} loading="eager" fetchpriority="high" />
         : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
     </div>
   </section>

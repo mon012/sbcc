@@ -3,8 +3,8 @@ export const services = [
     slug: "anchor",
     title: "เจาะติดตั้งพุกเคมี",
     summary: "เจาะเสียบเหล็กและติดตั้งพุกเคมี พร้อมตรวจวัสดุฐาน ขนาด และระยะฝังก่อนเริ่มงาน",
-    image: "/images/service-anchor-installation.webp",
-    imageAlt: "ทีมช่าง SBCC เจาะติดตั้งพุกเคมีบริเวณฐานเสาในหน้างานก่อสร้าง",
+    image: "/images/service-anchor-installation-sbcc.webp",
+    imageAlt: "ช่าง SBCC ใช้สว่าน HILTI เจาะติดตั้งพุกเคมีและเหล็กเสริมบนโครงสร้างคอนกรีตในหน้างาน",
     pageTitle: "บริการเจาะติดตั้งพุกเคมี เจาะเสียบเหล็ก Stud",
     sourceIntro: "บริการเจาะติดตั้งพุกเคมีและเจาะเสียบเหล็ก สำหรับงานโครงสร้าง งานเสา งานคาน และงานต่อเติม",
     detail: {
@@ -25,8 +25,8 @@ export const services = [
     slug: "coring",
     title: "เจาะคอริ่งพื้นคอนกรีต",
     summary: "งาน Coring พื้น ผนัง และช่องระบบ ประเมินหน้างานและวางแผนก่อนดำเนินการ",
-    image: "/images/service-coring-site.webp",
-    imageAlt: "ทีมช่างกำลังใช้เครื่องเจาะคอริ่งบนพื้นคอนกรีตในหน้างานก่อสร้าง",
+    image: "/images/service-coring-sbcc.webp",
+    imageAlt: "ช่าง SBCC ใช้เครื่องเจาะคอริ่ง HILTI เจาะพื้นคอนกรีตในหน้างานก่อสร้าง",
     pageTitle: "บริการเจาะคอริ่งพื้นคอนกรีต",
     sourceIntro: "รับเจาะคอริ่งพื้น ผนัง และช่องสำหรับงานระบบ ทั้งงานขนาดเล็กและงานโครงการ",
     detail: {
@@ -73,7 +73,8 @@ export const services = [
     slug: "hilti-services",
     title: "บริการติดตั้งระบบ Hilti",
     summary: "ติดตั้งพุกเคมี Hilti ทั้งระบบ HVU และ RE 500 V3 / HY-200",
-    image: "/images/service-hilti-installation.webp",
+    image: "/images/service-hilti-installation-sbcc.webp",
+    imageAlt: "ช่างกำลังใช้ระบบน้ำยาเคมี HILTI เจาะเสียบเหล็กเข้ากับโครงสร้างคอนกรีตในหน้างานก่อสร้าง",
     pageTitle: "บริการเจาะติดตั้งพุกเคมี Hilti",
     sourceIntro: "บริการติดตั้งพุกเคมี Hilti โดยเลือกใช้ระบบให้เหมาะกับลักษณะโครงสร้างและเงื่อนไขของหน้างาน",
     detail: {
@@ -145,7 +146,8 @@ export const products = [
     slug: "chemical-anchors",
     title: "พุกเคมี",
     summary: "พุกเคมีแบบปั่น แบบตอก และอุปกรณ์ประกอบสำหรับงานยึดโครงสร้าง",
-    image: "/images/product-chemical.jpg",
+    image: "/images/product-chemical.webp",
+    imageAlt: "พุกเคมีหลอดแก้ว Stronghold รุ่น SH-VM พร้อมสตัดเกลียวสำหรับงานยึดโครงสร้าง",
     pageTitle: "พุกเคมี Chemical Anchors",
     sourceIntro: "พุกเคมีแบบปั่น แบบตอก และสตัดเกลียว สำหรับเลือกตามวัสดุฐาน ขนาด และเงื่อนไขหน้างาน",
     detail: {
@@ -198,7 +200,8 @@ export const products = [
     slug: "epoxy-adhesive",
     title: "น้ำยาเจาะเสียบเหล็ก",
     summary: "น้ำยา Epoxy และปืนยิง รองรับงานติดตั้งและซ่อมแซมหลายประเภท",
-    image: "/images/product-epoxy.jpg",
+    image: "/images/product-epoxy.webp",
+    imageAlt: "ช่างกำลังใช้น้ำยาเคมี HILTI HIT-RE 500 V3 เจาะเสียบเหล็กเข้ากับโครงสร้างคอนกรีต",
     pageTitle: "น้ำยาเคมีเจาะเสียบเหล็ก",
     sourceIntro: "น้ำยาเคมีหลายสูตรและหลายขนาด สำหรับเลือกตามวัสดุฐาน วิธีเจาะ ระยะฝัง และข้อกำหนดของโครงสร้าง",
     detail: {

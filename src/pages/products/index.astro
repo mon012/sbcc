@@ -2,8 +2,8 @@
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { products } from "../../data/catalog";
-import chemicalAnchorsImage from "../../assets/images/product-listing/chemical-anchors.jpg";
-import epoxyAdhesiveImage from "../../assets/images/product-listing/epoxy-adhesive.jpg";
+import chemicalAnchorsImage from "../../assets/images/product-listing/chemical-anchors.webp";
+import epoxyAdhesiveImage from "../../assets/images/product-listing/epoxy-adhesive.webp";
 import hiltiChemicalAnchorsImage from "../../assets/images/product-listing/hilti-chemical-anchors.webp";
 import castInAnchorsImage from "../../assets/images/product-listing/cast-in-anchors.webp";
 
@@ -23,10 +23,15 @@ const productImages = {
     </div>
   </section>
   <section class="shell grid two listing">
-    {products.map((item) => (
+    {products.map((item, index) => (
       <a class="card" href={`/products/${item.slug}/`}>
         {item.image
-          ? <Image src={productImages[item.slug]} alt={"imageAlt" in item ? item.imageAlt : item.title} loading="lazy" />
+          ? <Image
+              src={productImages[item.slug]}
+              alt={item.imageAlt}
+              loading={index < 2 ? "eager" : "lazy"}
+              fetchpriority={index === 0 ? "high" : "auto"}
+            />
           : <div class="product-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
         <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
       </a>
