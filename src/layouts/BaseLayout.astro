@@ -5,12 +5,19 @@ import MobileActions from "../components/MobileActions.astro";
 import { site } from "../config/site";
 import "../styles/global.css";
 
+interface Breadcrumb {
+  name: string;
+  url: string;
+}
+
 interface Props {
   title: string;
   description?: string;
   canonical?: string;
   image?: string;
   overlayHeader?: boolean;
+  preloadImage?: string;
+  breadcrumbs?: Breadcrumb[];
 }
 const {
   title,
@@ -18,16 +25,34 @@ const {
   canonical = Astro.url.pathname,
   image = "/images/og-default.jpg",
   overlayHeader = false,
+  preloadImage,
+  breadcrumbs,
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url);
 const imageUrl = new URL(image, site.url);
-const organization = {
+const localBusiness = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": "LocalBusiness",
   name: site.legalName,
   url: site.url,
   email: site.email,
   telephone: site.officeDisplay,
+  image: new URL("/images/og-default.jpg", site.url),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.addressStreet,
+    addressLocality: site.addressLocality,
+    addressRegion: site.addressRegion,
+    postalCode: site.postalCode,
+    addressCountry: "TH",
+  },
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    opens: site.openingHours.opens,
+    closes: site.openingHours.closes,
+  },
+  sameAs: [site.facebookHref],
   contactPoint: [{
     "@type": "ContactPoint",
     telephone: site.hotlineDisplay,
@@ -40,6 +65,18 @@ const organization = {
     availableLanguage: ["th", "en"],
   }],
 };
+const breadcrumbList = breadcrumbs && breadcrumbs.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((crumb, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: crumb.name,
+        item: new URL(crumb.url, site.url),
+      })),
+    }
+  : null;
 ---
 <!doctype html>
 <html lang="th">
@@ -49,7 +86,9 @@ const organization = {
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonicalUrl} />
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="th_TH" />
     <meta property="og:title" content={title} />
@@ -57,7 +96,8 @@ const organization = {
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={imageUrl} />
     <meta name="twitter:card" content="summary_large_image" />
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+    {breadcrumbList && <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbList)} />}
   </head>
   <body>
     <!--

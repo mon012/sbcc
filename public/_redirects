@@ -2,9 +2,9 @@
 /project/ https://www.facebook.com/profile.php?id=100063526152006 301
 /projects/ https://www.facebook.com/profile.php?id=100063526152006 301
 /project_tag/* https://www.facebook.com/profile.php?id=100063526152006 301
-/category/%E0%B8%99%E0%B8%B2%E0%B8%99%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B9%88%E0%B8%AD%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87/ https://sbcc-2ng.pages.dev/blog/ 301
-/author/mon012/ https://sbcc-2ng.pages.dev/blog/ 301
-/author/sbcc/ https://sbcc-2ng.pages.dev/blog/ 301
+/category/%E0%B8%99%E0%B8%B2%E0%B8%99%E0%B8%B2%E0%B8%AA%E0%B8%B2%E0%B8%A3%E0%B8%B0%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%81%E0%B9%88%E0%B8%AD%E0%B8%AA%E0%B8%A3%E0%B9%89%E0%B8%B2%E0%B8%87/ /blog/ 301
+/author/mon012/ /blog/ 301
+/author/sbcc/ /blog/ 301
 /tag/hilti/ /services/hilti-services/ 301
 /tag/%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5/ /products/chemical-anchors/ 301
 /tag/%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B8%95%E0%B8%B0%E0%B8%81%E0%B8%B1%E0%B9%88%E0%B8%A7/ /products/ 301
@@ -12,9 +12,9 @@
 /project_category/%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%88%E0%B8%B2%E0%B8%B0%E0%B8%95%E0%B8%B4%E0%B8%94%E0%B8%95%E0%B8%B1%E0%B9%89%E0%B8%87%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B9%80%E0%B8%84/ /services/anchor/ 301
 /project_category/%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A2%E0%B8%B4%E0%B8%87%E0%B9%82%E0%B8%9F%E0%B8%A1%E0%B9%81%E0%B8%A5%E0%B8%B0%E0%B8%89%E0%B8%B5%E0%B8%94-epoxy/ /services/floor-repair/ 301
 /products/constructions/* /products/ 301
-/%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5/ https://sbcc-2ng.pages.dev/blog/ 301
-/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5/ https://sbcc-2ng.pages.dev/blog/ 301
-/%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B8%95%E0%B8%B0%E0%B8%81%E0%B8%B1%E0%B9%88%E0%B8%A7/ https://sbcc-2ng.pages.dev/blog/ 301
+/%E0%B8%95%E0%B8%B2%E0%B8%A3%E0%B8%B2%E0%B8%87%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5/ /blog/chemical-anchor-size-chart/ 301
+/%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B9%83%E0%B8%8A%E0%B9%89%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B9%80%E0%B8%84%E0%B8%A1%E0%B8%B5/ /blog/how-to-use-chemical-anchors/ 301
+/%E0%B8%9E%E0%B8%B8%E0%B8%81%E0%B8%95%E0%B8%B0%E0%B8%81%E0%B8%B1%E0%B9%88%E0%B8%A7/ /blog/lead-anchor-guide/ 301
 /layout_type/* / 301
 /module_width/* / 301
 /scope/* / 301

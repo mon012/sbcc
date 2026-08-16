@@ -3,7 +3,11 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import QuoteForm from "../../components/QuoteForm.astro";
 import { site } from "../../config/site";
 ---
-<BaseLayout title="ขอใบเสนอราคา | SBCC Engineering" description="ส่งรุ่นสินค้า จำนวน รูปหน้างาน หรือแบบให้ทีม SBCC ตรวจข้อมูลและติดต่อกลับเพื่อจัดทำใบเสนอราคา">
+<BaseLayout
+  title="ขอใบเสนอราคา | SBCC Engineering"
+  description="ส่งรุ่นสินค้า จำนวน รูปหน้างาน หรือแบบให้ทีม SBCC ตรวจข้อมูลและติดต่อกลับเพื่อจัดทำใบเสนอราคา"
+  breadcrumbs={[{ name: "หน้าแรก", url: "/" }, { name: "ขอใบเสนอราคา", url: "/quote/" }]}
+>
   <section class="section">
     <div class="shell quote-grid">
       <div>

@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
 import { products } from "../../data/catalog";
 import chemicalAnchorsImage from "../../assets/images/product-listing/chemical-anchors.webp";
 import epoxyAdhesiveImage from "../../assets/images/product-listing/epoxy-adhesive.webp";
@@ -13,10 +14,16 @@ const productImages = {
   "hilti-chemical-anchors": hiltiChemicalAnchorsImage,
   "cast-in-anchors": castInAnchorsImage,
 } as const;
+const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "สินค้า", url: "/products/" }];
 ---
-<BaseLayout title="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต | SBCC" description="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต ส่งรายการให้ทีม SBCC ช่วยตรวจสเปกและเสนอราคา">
+<BaseLayout
+  title="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต | SBCC"
+  description="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต ส่งรายการให้ทีม SBCC ช่วยตรวจสเปกและเสนอราคา"
+  breadcrumbs={breadcrumbs}
+>
   <section class="section">
     <div class="shell">
+      <Breadcrumb items={breadcrumbs} />
       <p class="eyebrow">ENGINEERING SUPPLY</p>
       <h1 class="display">ส่งรายการมา<br />ให้ช่วยตรวจสเปก</h1>
       <p class="lead">แจ้งรุ่น ขนาด ปริมาณ และลักษณะการใช้งาน หากยังไม่ทราบรุ่น ส่งแบบหรือรูปหน้างานให้ทีมงานช่วยตรวจได้</p>

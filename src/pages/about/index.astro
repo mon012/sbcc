@@ -4,7 +4,11 @@ import { site } from "../../config/site";
 import LineAppIcon from "../../components/LineAppIcon.astro";
 import SiteImage from "../../components/SiteImage.astro";
 ---
-<BaseLayout title="เกี่ยวกับ SBCC Engineering & Supply" description="SBCC ช่วยตรวจสเปก จัดหาสินค้าวิศวกรรม ประเมินหน้างาน และให้บริการติดตั้ง">
+<BaseLayout
+  title="เกี่ยวกับ SBCC Engineering & Supply"
+  description="SBCC ช่วยตรวจสเปก จัดหาสินค้าวิศวกรรม ประเมินหน้างาน และให้บริการติดตั้ง"
+  breadcrumbs={[{ name: "หน้าแรก", url: "/" }, { name: "เกี่ยวกับเรา", url: "/about/" }]}
+>
   <section class="about-hero section">
     <div class="shell hero-layout">
       <h1 class="display">จัดหาสินค้า<br />ด้วยความเข้าใจหน้างาน</h1>

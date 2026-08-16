@@ -1,0 +1,103 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
+import SiteImage from "../../../components/SiteImage.astro";
+import { posts } from "../../../data/blog";
+import { site } from "../../../config/site";
+
+export function getStaticPaths() {
+  return posts.map((post) => ({ params: { slug: post.slug }, props: { post } }));
+}
+const { post } = Astro.props;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.title,
+  description: post.description,
+  datePublished: post.publishedDate,
+  author: { "@type": "Organization", name: site.legalName },
+  publisher: { "@type": "Organization", name: site.legalName },
+  mainEntityOfPage: new URL(`/blog/${post.slug}/`, site.url),
+};
+
+const displayDate = new Date(post.publishedDate).toLocaleDateString("th-TH", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บทความ", url: "/blog/" }, { name: post.title, url: `/blog/${post.slug}/` }];
+---
+<BaseLayout
+  title={`${post.title} | บทความ SBCC`}
+  description={post.description}
+  breadcrumbs={breadcrumbs}
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <article>
+    <header class="article-hero">
+      <div class="article-hero-media"><SiteImage src={post.image} alt={post.imageAlt} loading="eager" fetchpriority="high" /></div>
+      <div class="shell article-hero-content">
+        <Breadcrumb items={breadcrumbs} dark />
+        <p class="eyebrow">KNOWLEDGE</p>
+        <h1 class="display">{post.title}</h1>
+        <p class="lead">{post.description}</p>
+        <time datetime={post.publishedDate}>{displayDate}</time>
+      </div>
+    </header>
+    <section class="section">
+    <div class="shell article-body">
+      {post.content.map((block) => {
+        if (block.type === "p") return <p>{block.text}</p>;
+        if (block.type === "h2") return <h2>{block.text}</h2>;
+        if (block.type === "quote") return <blockquote>{block.text}</blockquote>;
+        if (block.type === "ul") return <ul>{block.items.map((item) => <li>{item}</li>)}</ul>;
+        if (block.type === "callout") return (
+          <div class="callout">
+            <p>{block.text}</p>
+            <a class="button" href={block.linkHref}>{block.linkLabel}</a>
+          </div>
+        );
+        if (block.type === "embed") return (
+          <div class={`embed embed-${block.kind}`}>
+            <iframe
+              src={block.src}
+              title={block.title}
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow={block.kind === "video" ? "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" : undefined}
+              allowfullscreen={block.kind === "video"}
+            ></iframe>
+          </div>
+        );
+        return null;
+      })}
+    </div>
+    </section>
+  </article>
+</BaseLayout>
+<style>
+  .article-hero{position:relative;isolation:isolate;display:flex;align-items:flex-end;min-height:min(560px,78svh);overflow:hidden;background:var(--navy-deep)}
+  .article-hero-media{position:absolute;inset:0;z-index:-2}
+  .article-hero-media :global(img){width:100%;height:100%;object-fit:cover}
+  .article-hero::after{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(3,24,44,.1) 0%,rgba(3,24,44,.32) 45%,rgba(3,24,44,.9) 100%);content:""}
+  .article-hero-content{position:relative;z-index:1;max-width:780px;padding-block:clamp(3rem,9vw,5.5rem) clamp(2.5rem,6vw,3.5rem);color:white}
+  .article-hero-content .display{font-size:clamp(2.5rem,4.6vw,3.75rem);text-shadow:0 3px 24px rgba(0,0,0,.32)}
+  .article-hero-content .lead{margin-top:1.25rem;color:rgba(255,255,255,.85)}
+  .article-hero-content time{display:block;margin-top:1rem;color:rgba(255,255,255,.65);font-size:.9rem}
+  .article-body{max-width:780px}
+  .article-body p{margin-bottom:1.35rem;color:#334654;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.85}
+  .article-body h2{margin:2.5rem 0 1.25rem;font-size:clamp(1.5rem,2.6vw,2rem)}
+  .article-body ul{display:grid;gap:0;margin:0 0 1.5rem;padding:0;border-top:1px solid #b8d1da;list-style:none}
+  .article-body li{position:relative;border-bottom:1px solid #b8d1da;padding:1rem 0 1rem 1.6rem;color:var(--navy-deep)}
+  .article-body li::before{position:absolute;left:0;color:var(--brand);content:"—"}
+  .article-body blockquote{margin:0 0 1.5rem;border-left:3px solid var(--brand);background:var(--blue-pale);padding:1.25rem 1.5rem;color:var(--navy-deep);font-style:normal;line-height:1.8}
+  .callout{margin:2.5rem 0;border-radius:var(--radius);background:var(--navy-deep);padding:clamp(1.75rem,4vw,2.5rem);color:white}
+  .callout p{margin-bottom:1.25rem;color:#c7dbe2;font-size:1rem}
+  .embed{margin:0 0 1.5rem;overflow:hidden;border-radius:var(--radius);background:var(--navy-deep)}
+  .embed iframe{display:block;width:100%;border:0}
+  .embed-video{position:relative;aspect-ratio:16/9}
+  .embed-video iframe{position:absolute;inset:0;height:100%}
+  .embed-document iframe{height:600px}
+  @media(max-width:560px){.article-hero{min-height:460px}}
+</style>

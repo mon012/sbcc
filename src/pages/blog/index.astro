@@ -1,0 +1,42 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../components/Breadcrumb.astro";
+import SiteImage from "../../components/SiteImage.astro";
+import { posts } from "../../data/blog";
+
+const sortedPosts = [...posts].sort((a, b) => b.publishedDate.localeCompare(a.publishedDate));
+const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บทความ", url: "/blog/" }];
+---
+<BaseLayout
+  title="บทความ | SBCC Engineering"
+  description="ความรู้และบทความเกี่ยวกับพุกเคมี พุกตะกั่ว และงานวิศวกรรมโครงสร้าง จากทีม SBCC"
+  breadcrumbs={breadcrumbs}
+>
+  <section class="section">
+    <div class="shell">
+      <Breadcrumb items={breadcrumbs} />
+      <p class="eyebrow">KNOWLEDGE</p>
+      <h1 class="display">บทความและความรู้<br />งานวิศวกรรม</h1>
+      <p class="lead">เกร็ดความรู้เกี่ยวกับพุกเคมี พุกตะกั่ว และงานยึดโครงสร้าง จากประสบการณ์ทีม SBCC</p>
+    </div>
+  </section>
+  <section class="shell grid two listing">
+    {sortedPosts.map((post, index) => (
+      <a class="card" href={`/blog/${post.slug}/`}>
+        <SiteImage src={post.image} alt={post.imageAlt} loading={index < 2 ? "eager" : "lazy"} />
+        <div class="card-body">
+          <h2>{post.title}</h2>
+          <p>{post.description}</p>
+        </div>
+      </a>
+    ))}
+  </section>
+  <div class="section"></div>
+</BaseLayout>
+<style>
+  .section .display{font-size:clamp(3rem,5.263vw,4.46375rem)}
+  .section .lead{margin-top:1.5rem}
+  .listing .card{min-height:480px}
+  .listing :global(img){height:330px}
+  .listing h2{font-size:1.8rem}
+</style>

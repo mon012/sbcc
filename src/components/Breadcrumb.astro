@@ -1,0 +1,40 @@
+---
+interface Crumb {
+  name: string;
+  url: string;
+}
+interface Props {
+  items: Crumb[];
+  dark?: boolean;
+}
+const { items, dark = false } = Astro.props;
+---
+<nav class:list={["breadcrumb", { "on-dark": dark }]} aria-label="breadcrumb">
+  {items.map((item, index) => (
+    <>
+      {index > 0 && <span class="sep" aria-hidden="true">/</span>}
+      {index === items.length - 1
+        ? <span aria-current="page">{item.name}</span>
+        : <a href={item.url}>{item.name}</a>}
+    </>
+  ))}
+</nav>
+<style>
+  .breadcrumb {
+    margin-bottom: .75rem;
+    color: var(--muted);
+    font-family: "Noto Sans Thai", Arial, sans-serif;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+  }
+  .breadcrumb a { color: var(--muted); text-decoration: none; }
+  .breadcrumb a:hover { color: var(--navy); text-decoration: underline; }
+  .breadcrumb .sep { margin: 0 .5rem; color: var(--line); }
+  .breadcrumb [aria-current] { color: var(--navy); }
+  .breadcrumb.on-dark { color: rgba(255, 255, 255, .68); }
+  .breadcrumb.on-dark a { color: rgba(255, 255, 255, .68); }
+  .breadcrumb.on-dark a:hover { color: white; }
+  .breadcrumb.on-dark .sep { color: rgba(255, 255, 255, .3); }
+  .breadcrumb.on-dark [aria-current] { color: white; }
+</style>

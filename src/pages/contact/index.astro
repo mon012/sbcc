@@ -2,7 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { site } from "../../config/site";
 ---
-<BaseLayout title="ติดต่อ SBCC Engineering" description="ติดต่อฝ่ายขายและทีมบริการ SBCC ทางโทรศัพท์ LINE อีเมล หรือส่งแบบฟอร์มขอใบเสนอราคา">
+<BaseLayout
+  title="ติดต่อ SBCC Engineering"
+  description="ติดต่อฝ่ายขายและทีมบริการ SBCC ทางโทรศัพท์ LINE อีเมล หรือส่งแบบฟอร์มขอใบเสนอราคา"
+  breadcrumbs={[{ name: "หน้าแรก", url: "/" }, { name: "ติดต่อเรา", url: "/contact/" }]}
+>
   <section class="section">
     <div class="shell">
       <p class="eyebrow">CONTACT SBCC</p>

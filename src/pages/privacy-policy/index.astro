@@ -2,7 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { site } from "../../config/site";
 ---
-<BaseLayout title="นโยบายความเป็นส่วนตัว | SBCC Engineering" description="นโยบายการเก็บ ใช้ เปิดเผย และคุ้มครองข้อมูลส่วนบุคคลของเว็บไซต์ SBCC Engineering">
+<BaseLayout
+  title="นโยบายความเป็นส่วนตัว | SBCC Engineering"
+  description="นโยบายการเก็บ ใช้ เปิดเผย และคุ้มครองข้อมูลส่วนบุคคลของเว็บไซต์ SBCC Engineering"
+  breadcrumbs={[{ name: "หน้าแรก", url: "/" }, { name: "นโยบายความเป็นส่วนตัว", url: "/privacy-policy/" }]}
+>
   <article class="section shell policy">
     <header class="policy-head">
       <h1 class="display">นโยบายความเป็นส่วนตัว</h1>

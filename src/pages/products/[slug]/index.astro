@@ -1,18 +1,28 @@
 ---
 import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Breadcrumb from "../../../components/Breadcrumb.astro";
 import CatalogDetail from "../../../components/CatalogDetail.astro";
-import { products } from "../../../data/catalog";
+import { products, services } from "../../../data/catalog";
 import { site } from "../../../config/site";
 import SiteImage from "../../../components/SiteImage.astro";
 export function getStaticPaths() {
   return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
 }
 const { product } = Astro.props;
+const relatedService = "relatedServiceSlug" in product
+  ? services.find((service) => service.slug === product.relatedServiceSlug)
+  : undefined;
+const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "สินค้า", url: "/products/" }, { name: product.title, url: `/products/${product.slug}/` }];
 ---
-<BaseLayout title={`${product.pageTitle} | SBCC Engineering`} description={`${product.sourceIntro} สอบถามราคาและสเปกกับทีม SBCC`}>
+<BaseLayout
+  title={`${product.pageTitle} | SBCC Engineering`}
+  description={`${product.sourceIntro} สอบถามราคาและสเปกกับทีม SBCC`}
+  breadcrumbs={breadcrumbs}
+>
   <section class="section">
     <div class="shell detail">
       <div>
+        <Breadcrumb items={breadcrumbs} />
         <p class="eyebrow">ENGINEERING SUPPLY</p>
         <h1 class="display">{product.pageTitle}</h1>
         <p class="lead">{product.sourceIntro}</p>
@@ -23,7 +33,13 @@ const { product } = Astro.props;
         : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
     </div>
   </section>
-  {product.detail && <CatalogDetail detail={product.detail} eyebrow="PRODUCT DETAILS" />}
+  {product.detail && (
+    <CatalogDetail
+      detail={product.detail}
+      eyebrow="PRODUCT DETAILS"
+      relatedLink={relatedService && { label: relatedService.pageTitle, href: `/services/${relatedService.slug}/` }}
+    />
+  )}
   {"video" in product && product.video && (
     <section class="section product-video">
       <div class="shell video-layout">

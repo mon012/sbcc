@@ -29,12 +29,18 @@ interface DetailContent {
   products?: readonly DetailProduct[];
 }
 
+interface RelatedLink {
+  label: string;
+  href: string;
+}
+
 interface Props {
   detail: DetailContent;
   eyebrow: string;
+  relatedLink?: RelatedLink;
 }
 
-const { detail, eyebrow } = Astro.props;
+const { detail, eyebrow, relatedLink } = Astro.props;
 ---
 <section class="section catalog-detail">
   <div class="shell catalog-detail-shell">
@@ -42,6 +48,7 @@ const { detail, eyebrow } = Astro.props;
       <div class="catalog-detail-heading">
         <p class="eyebrow">{eyebrow}</p>
         <h2 class="section-title">{detail.title}</h2>
+        {relatedLink && <p class="related-link">เกี่ยวข้องกับ <a href={relatedLink.href}>{relatedLink.label}</a></p>}
       </div>
       <div class="catalog-detail-copy">
         {detail.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
@@ -96,6 +103,8 @@ const { detail, eyebrow } = Astro.props;
   .catalog-detail-shell { display: grid; gap: clamp(3.5rem,7vw,6.5rem); }
   .catalog-detail-grid { display: grid; gap: clamp(3rem,7vw,7rem); }
   .catalog-detail-heading { align-self: start; }
+  .related-link { margin-top: 1rem; color: #405462; font-size: .92rem; }
+  .related-link a { color: var(--navy); font-weight: 700; text-decoration: underline; text-underline-offset: .2em; }
   .catalog-detail-copy { max-width: 780px; }
   .catalog-detail-copy > p { margin-bottom: 1.35rem; color: #334654; font-size: clamp(1.05rem,1.5vw,1.2rem); line-height: 1.85; }
   ul { display: grid; gap: 0; margin: 2.2rem 0 0; padding: 0; border-top: 1px solid #b8d1da; list-style: none; }

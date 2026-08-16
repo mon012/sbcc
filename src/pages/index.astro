@@ -17,6 +17,7 @@ const projectEvidence = [
   title="บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด"
   description="ส่งรูปหน้างาน แบบ หรือรายการสินค้าให้ทีม SBCC ช่วยตรวจสเปก ประเมินหน้างาน และเสนอสินค้า บริการ หรือใบเสนอราคา"
   overlayHeader
+  preloadImage="/images/hero-construction-crane.webp"
 >
   <section class="hero" aria-labelledby="home-title">
     <div class="hero-photo" aria-hidden="true"></div>
@@ -97,28 +98,18 @@ const projectEvidence = [
 
 </BaseLayout>
 
-<script>
-  import gsap from "gsap";
-
-  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    gsap.fromTo(".hero-content > *", { y: 42, opacity: 0 }, {
-      y: 0,
-      opacity: 1,
-      duration: 1.05,
-      stagger: .12,
-      ease: "power4.out",
-      delay: .12,
-    });
-    gsap.fromTo(".hero-photo", { scale: 1.07 }, { scale: 1, duration: 1.8, ease: "power3.out" });
-  }
-</script>
-
 <style>
+  @keyframes hero-rise { from { opacity: 0; transform: translateY(42px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes hero-photo-settle { from { transform: scale(1.07); } to { transform: scale(1); } }
   .hero { position: relative; isolation: isolate; display: grid; min-height: min(860px,100svh); align-items: end; overflow: hidden; background: var(--navy-deep); color: white; }
-  .hero-photo { position: absolute; inset: 0; z-index: -2; background: url("/images/hero-construction-crane.webp") center 53%/cover no-repeat; }
+  .hero-photo { position: absolute; inset: 0; z-index: -2; background: url("/images/hero-construction-crane.webp") center 53%/cover no-repeat; animation: hero-photo-settle 1.8s var(--ease-out) both; }
   .hero::before { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg,rgba(3,26,49,.93) 0%,rgba(3,38,70,.74) 42%,rgba(3,38,70,.16) 78%),linear-gradient(0deg,rgba(3,24,44,.74),transparent 52%); content:""; }
   .hero::after { position: absolute; right: 0; bottom: 0; left: 0; height: 1px; background: rgba(255,255,255,.35); content:""; }
   .hero-content { padding-top: 10rem; padding-bottom: clamp(5rem,9vh,7.5rem); }
+  .hero-content > * { opacity: 0; animation: hero-rise 1.05s var(--ease-out) both; }
+  .hero-content > *:nth-child(1) { animation-delay: .12s; }
+  .hero-content > *:nth-child(2) { animation-delay: .24s; }
+  .hero-content > *:nth-child(3) { animation-delay: .36s; }
   .hero h1 { max-width: 800px; font-size: clamp(3.4rem,7.25vw,5.5rem); font-weight: 700; letter-spacing: -.035em; }
   .hero p { max-width: 640px; margin-top: 1.6rem; color: #d7e7ec; font-size: clamp(1.06rem,1.6vw,1.3rem); }
   .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem; margin-top: 2.2rem; }

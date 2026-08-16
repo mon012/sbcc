@@ -15,6 +15,12 @@ export const site = {
   email: "sbccengineeringsupply@gmail.com",
   addressDisplay:
     "บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด 183/41 หมู่ 7 ซอยเลี่ยงเมืองปากเกร็ด37 ตำบลบางตลาด อำเภอปากเกร็ด จังหวัดนนทบุรี 11120",
+  addressStreet: "183/41 หมู่ 7 ซอยเลี่ยงเมืองปากเกร็ด37 ตำบลบางตลาด อำเภอปากเกร็ด",
+  addressLocality: "ปากเกร็ด",
+  addressRegion: "นนทบุรี",
+  postalCode: "11120",
   mapsHref: "https://maps.app.goo.gl/mazukUTFNZZK1LjA9",
+  facebookHref: "https://www.facebook.com/profile.php?id=100063526152006",
+  openingHours: { opens: "08:30", closes: "17:30" },
   quoteFormId: "f85f767f-083d-40e6-bbea-de9840271e78",
 } as const;
