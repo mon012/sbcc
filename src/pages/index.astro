@@ -7,10 +7,17 @@ import { products, services } from "../data/catalog";
 import { site } from "../config/site";
 
 const projectEvidence = [
-  { src: "/legacy-assets/4bcbd9a842-17457931_1220685707987305_9128082814653951827_n.jpg", alt: "หน้างานก่อสร้างบ้านพัก" },
+  { src: "/images/0949.webp", alt: "งานเจาะคอริ่งผนังถังคอนกรีตขนาดใหญ่" },
+  { src: "/images/05342.webp", alt: "ทีมงานตัดพื้นคอนกรีตกลางแจ้งในพื้นที่ก่อสร้าง" },
+  { src: "/images/09494.webp", alt: "ทีมช่างเจาะคอริ่งพื้นคอนกรีตสำเร็จรูปในโครงการก่อสร้าง" },
   { src: "/images/project-construction-site.webp", alt: "หน้างานก่อสร้างอาคาร" },
-  { src: "/legacy-assets/f50c93838f-20770198_1343721455683729_5890634755612042816_n.jpg", alt: "ผลงานหน้างานคอนโดมิเนียม" },
   { src: "/legacy-assets/c49575136b-22687962_1398881913501016_5008216070809313268_n.jpg", alt: "งานเจาะคอริ่งแผ่นคอนกรีตสำเร็จรูป" },
+  { src: "/images/5_0.webp", alt: "ช่างเจาะคอริ่งพื้นในห้องเครื่องปรับอากาศ" },
+  { src: "/images/0239.webp", alt: "ช่างผูกเหล็กเสริมโครงสร้างเสาก่อนเทคอนกรีต" },
+  { src: "/images/01333.webp", alt: "งานตัดพื้นคอนกรีตโรงงานเผยเหล็กเสริม" },
+  { src: "/images/02233.webp", alt: "งานตัดพื้นคอนกรีตใต้รถเทรลเลอร์ขนส่ง" },
+  { src: "/legacy-assets/4bcbd9a842-17457931_1220685707987305_9128082814653951827_n.jpg", alt: "หน้างานก่อสร้างบ้านพัก" },
+  { src: "/legacy-assets/f50c93838f-20770198_1343721455683729_5890634755612042816_n.jpg", alt: "ผลงานหน้างานคอนโดมิเนียม" },
 ];
 ---
 <BaseLayout
@@ -50,7 +57,7 @@ const projectEvidence = [
   <section class="capabilities" id="capabilities">
     <div class="capability product-capability">
       <div class="capability-image">
-        <SiteImage src="/images/product-chemical.jpg" alt="พุกเคมีและอุปกรณ์วิศวกรรม" />
+        <SiteImage src="/images/S__6103236.webp" alt="พุกเคมีและอุปกรณ์วิศวกรรม" />
       </div>
       <div class="capability-copy">
         <h2>เลือกสินค้า<br />ให้ตรงกับงาน</h2>
@@ -133,6 +140,9 @@ const projectEvidence = [
   .capability-image { min-height:420px; overflow:hidden; }
   .capability-image :global(img) { width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease-out); }
   .capability:hover .capability-image :global(img) { transform:scale(1.025); }
+  .product-capability .capability-image { background:white; }
+  .product-capability .capability-image :global(img) { transform:scale(.83); }
+  .product-capability.capability:hover .capability-image :global(img) { transform:scale(.83) scale(1.025); }
   .capability-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(3rem,6vw,6rem); }
   .capability h2 { font-size:clamp(2.5rem,4.6vw,5rem); }
   .service-capability h2 { font-size:clamp(2.4rem,4.3vw,4.75rem); }
@@ -151,13 +161,9 @@ const projectEvidence = [
   .evidence { background:#e9f1f4; }
   .evidence-head { display:grid; gap:2rem; margin-bottom:3.5rem; }
   .evidence-head .lead { font-size:1.093rem; }
-  .evidence-grid { display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:clamp(180px,18vw,300px); gap:8px; }
-  .evidence-item { overflow:hidden; background:var(--navy); }
-  .evidence-item:nth-child(1) { grid-column:span 7; grid-row:span 2; }
-  .evidence-item:nth-child(2) { grid-column:span 5; }
-  .evidence-item:nth-child(3),.evidence-item:nth-child(4) { grid-column:span 5; }
-  .evidence-item:nth-child(4) { grid-column:span 5; }
-  .evidence-item :global(img) { width:100%; height:100%; object-fit:cover; }
+  .evidence-grid { column-count:3; column-gap:8px; }
+  .evidence-item { overflow:hidden; background:var(--navy); break-inside:avoid; margin-bottom:8px; }
+  .evidence-item :global(img) { display:block; width:100%; height:auto; }
   .evidence-action { display:flex; justify-content:center; margin-top:2.5rem; }
   .evidence-button { min-height:58px; padding-inline:1.8rem; font-size:1.125rem; }
   .evidence-button span { display:grid; place-items:center; }
@@ -173,9 +179,7 @@ const projectEvidence = [
     .capability { min-height:0; }
     .capability-image { min-height:360px; }
     .service-capability .capability-copy { order:2; }
-    .evidence-grid { grid-template-columns:1fr 1fr; grid-auto-rows:210px; }
-    .evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
-    .evidence-item:first-child { grid-column:span 2; grid-row:span 2; }
+    .evidence-grid { column-count:2; }
   }
   @media(max-width:560px) {
     .hero { min-height:720px; }
@@ -186,7 +190,6 @@ const projectEvidence = [
     .capability-image { min-height:300px; }
     .capability-copy { padding:3rem 1rem 4rem; }
     .capability h2 { font-size:clamp(2.4rem,12vw,3.4rem); }
-    .evidence-grid { grid-template-columns:1fr; grid-auto-rows:250px; }
-    .evidence-item:nth-child(n) { grid-column:auto; grid-row:auto; }
+    .evidence-grid { column-count:1; }
   }
 </style>
