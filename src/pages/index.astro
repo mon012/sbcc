@@ -140,9 +140,9 @@ const projectEvidence = [
   .capability-image { min-height:420px; overflow:hidden; }
   .capability-image :global(img) { width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease-out); }
   .capability:hover .capability-image :global(img) { transform:scale(1.025); }
-  .product-capability .capability-image { background:white; }
-  .product-capability .capability-image :global(img) { transform:scale(.83); }
-  .product-capability.capability:hover .capability-image :global(img) { transform:scale(.83) scale(1.025); }
+  .product-capability .capability-image { display:flex; align-items:center; justify-content:center; background:white; }
+  .product-capability .capability-image :global(img) { width:auto; max-width:400px; height:auto; max-height:90%; object-fit:contain; }
+  .product-capability.capability:hover .capability-image :global(img) { transform:scale(1.025); }
   .capability-copy { display:flex; flex-direction:column; justify-content:center; padding:clamp(3rem,6vw,6rem); }
   .capability h2 { font-size:clamp(2.5rem,4.6vw,5rem); }
   .service-capability h2 { font-size:clamp(2.4rem,4.3vw,4.75rem); }
