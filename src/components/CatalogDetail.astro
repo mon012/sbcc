@@ -14,6 +14,7 @@ interface DetailGroup {
 
 interface DetailProduct {
   title: string;
+  brand?: string;
   image: string;
   imageAlt: string;
   description: string;
@@ -36,17 +37,15 @@ interface RelatedLink {
 
 interface Props {
   detail: DetailContent;
-  eyebrow: string;
   relatedLink?: RelatedLink;
 }
 
-const { detail, eyebrow, relatedLink } = Astro.props;
+const { detail, relatedLink } = Astro.props;
 ---
 <section class="section catalog-detail">
   <div class="shell catalog-detail-shell">
     <div class="catalog-detail-grid">
       <div class="catalog-detail-heading">
-        <p class="eyebrow">{eyebrow}</p>
         <h2 class="section-title">{detail.title}</h2>
         {relatedLink && <p class="related-link">เกี่ยวข้องกับ <a href={relatedLink.href}>{relatedLink.label}</a></p>}
       </div>
@@ -81,7 +80,12 @@ const { detail, eyebrow, relatedLink } = Astro.props;
         {detail.products.map((product) => (
           <article class="catalog-product-card">
             <div class="catalog-product-image">
-              <SiteImage src={product.image} alt={product.imageAlt} />
+              <SiteImage
+                src={product.image}
+                alt={product.imageAlt}
+                widths={[300, 400, 600, 760]}
+                sizes="(min-width: 1150px) 380px, (min-width: 700px) 50vw, 100vw"
+              />
             </div>
             <div class="catalog-product-content">
               <h3>{product.title}</h3>

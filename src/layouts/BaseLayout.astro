@@ -1,4 +1,17 @@
 ---
+/*
+ * THESIS: SBCC turns one site photo into a practical next step; reject the generic card-first contractor homepage.
+ * OWN-WORLD: deep navy jobsite photography, oversized white Thai type, clean white fields, pale industrial blue, and one decisive orange action.
+ * STORY: visitors recognize the work, send a photo through LINE, then understand products, services, process, and evidence.
+ * FIRST VIEWPORT: full-bleed crane image, compact overlay navigation, dominant Thai headline at left, and the LINE action directly beneath it.
+ * FORM: photo-led construction standard, user-approved comp .impeccable/mocks/sbcc-home-approved.png, seed 7ab34994.
+ * FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+ *
+ * Kept in frontmatter so the brief stays with the layout without shipping in every page's HTML.
+ */
+import { getImage } from "astro:assets";
+import { getSiteImage } from "../utils/siteImages";
+import logoImage from "../assets/images/site/images/sbcc-logo.png";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import MobileActions from "../components/MobileActions.astro";
@@ -15,8 +28,10 @@ interface Props {
   description?: string;
   canonical?: string;
   image?: string;
+  ogImage?: string;
   overlayHeader?: boolean;
   preloadImage?: string;
+  preloadImageMobile?: string;
   breadcrumbs?: Breadcrumb[];
 }
 const {
@@ -24,20 +39,32 @@ const {
   description = site.description,
   canonical = Astro.url.pathname,
   image = "/images/og-default.jpg",
+  ogImage,
   overlayHeader = false,
   preloadImage,
+  preloadImageMobile,
   breadcrumbs,
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url);
-const imageUrl = new URL(image, site.url);
+// A page can nominate one of its own photos for sharing; render it at the 1.91:1
+// ratio Facebook, LINE, and X all crop to, otherwise fall back to the site card.
+const ogRendition = ogImage
+  ? await getImage({ src: getSiteImage(ogImage), width: 1200, height: 630, fit: "cover", format: "jpeg", quality: 78 })
+  : undefined;
+const imageUrl = new URL(ogRendition?.src ?? image, site.url);
 const localBusiness = {
   "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  // One @id shared by every page so Google folds the 22 copies into a single entity.
+  "@id": `${site.url}/#business`,
+  "@type": "HomeAndConstructionBusiness",
   name: site.legalName,
+  alternateName: site.name,
   url: site.url,
   email: site.email,
   telephone: site.officeDisplay,
+  priceRange: "$$",
   image: new URL("/images/og-default.jpg", site.url),
+  logo: new URL(logoImage.src, site.url),
   address: {
     "@type": "PostalAddress",
     streetAddress: site.addressStreet,
@@ -52,6 +79,13 @@ const localBusiness = {
     opens: site.openingHours.opens,
     closes: site.openingHours.closes,
   },
+  geo: {
+    "@type": "GeoCoordinates",
+    latitude: site.geo.latitude,
+    longitude: site.geo.longitude,
+  },
+  areaServed: site.serviceAreas.map((area) => ({ "@type": "AdministrativeArea", name: area })),
+  hasMap: site.mapsHref,
   sameAs: [site.facebookHref],
   contactPoint: [{
     "@type": "ContactPoint",
@@ -87,8 +121,17 @@ const breadcrumbList = breadcrumbs && breadcrumbs.length > 0
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-thai-700.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-thai-800.woff2" crossorigin />
     <link rel="canonical" href={canonicalUrl} />
-    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    {preloadImage && (
+      preloadImageMobile
+        ? <Fragment>
+            <link rel="preload" as="image" href={preloadImageMobile} media="(max-width: 860px)" fetchpriority="high" />
+            <link rel="preload" as="image" href={preloadImage} media="(min-width: 861px)" fetchpriority="high" />
+          </Fragment>
+        : <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />
+    )}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="th_TH" />
     <meta property="og:title" content={title} />
@@ -98,16 +141,9 @@ const breadcrumbList = breadcrumbs && breadcrumbs.length > 0
     <meta name="twitter:card" content="summary_large_image" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
     {breadcrumbList && <script is:inline type="application/ld+json" set:html={JSON.stringify(breadcrumbList)} />}
+    <slot name="head" />
   </head>
   <body>
-    <!--
-      THESIS: SBCC turns one site photo into a practical next step; reject the generic card-first contractor homepage.
-      OWN-WORLD: deep navy jobsite photography, oversized white Thai type, clean white fields, pale industrial blue, and one decisive orange action.
-      STORY: visitors recognize the work, send a photo through LINE, then understand products, services, process, and evidence.
-      FIRST VIEWPORT: full-bleed crane image, compact overlay navigation, dominant Thai headline at left, and the LINE action directly beneath it.
-      FORM: photo-led construction standard, user-approved comp .impeccable/mocks/sbcc-home-approved.png, seed 7ab34994.
-      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
-    -->
     <Header overlay={overlayHeader} />
     <main class="overflow">
       <slot />

@@ -8,14 +8,14 @@ const sortedPosts = [...posts].sort((a, b) => b.publishedDate.localeCompare(a.pu
 const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บทความ", url: "/blog/" }];
 ---
 <BaseLayout
-  title="บทความ | SBCC Engineering"
-  description="ความรู้และบทความเกี่ยวกับพุกเคมี พุกตะกั่ว และงานวิศวกรรมโครงสร้าง จากทีม SBCC"
+  title="บทความความรู้ พุกเคมี เจาะเสียบเหล็ก งานโครงสร้าง | SBCC Engineering"
+  description="ตารางขนาดพุกเคมี วิธีใช้พุกเคมี กำลังรับแรงดึงที่ทดสอบจริง และการเลือกพุกให้เหมาะกับงาน รวบรวมโดยทีมวิศวกร SBCC"
+  ogImage="/images/blog-chemical-anchor-size-chart.jpg"
   breadcrumbs={breadcrumbs}
 >
   <section class="section">
     <div class="shell">
       <Breadcrumb items={breadcrumbs} />
-      <p class="eyebrow">KNOWLEDGE</p>
       <h1 class="display">บทความและความรู้<br />งานวิศวกรรม</h1>
       <p class="lead">เกร็ดความรู้เกี่ยวกับพุกเคมี พุกตะกั่ว และงานยึดโครงสร้าง จากประสบการณ์ทีม SBCC</p>
     </div>
@@ -23,7 +23,13 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
   <section class="shell grid two listing">
     {sortedPosts.map((post, index) => (
       <a class="card" href={`/blog/${post.slug}/`}>
-        <SiteImage src={post.image} alt={post.imageAlt} loading={index < 2 ? "eager" : "lazy"} />
+        <SiteImage
+          src={post.image}
+          alt={post.imageAlt}
+          loading={index < 2 ? "eager" : "lazy"}
+          widths={[480, 760, 1100]}
+          sizes="(min-width: 640px) 50vw, 100vw"
+        />
         <div class="card-body">
           <h2>{post.title}</h2>
           <p>{post.description}</p>

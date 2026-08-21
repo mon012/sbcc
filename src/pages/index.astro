@@ -3,29 +3,28 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import LineAppIcon from "../components/LineAppIcon.astro";
 import ArrowIcon from "../components/ArrowIcon.astro";
 import SiteImage from "../components/SiteImage.astro";
+import ProjectEvidence from "../components/ProjectEvidence.astro";
 import { products, services } from "../data/catalog";
 import { site } from "../config/site";
 
-const projectEvidence = [
-  { src: "/images/0949.webp", alt: "งานเจาะคอริ่งผนังถังคอนกรีตขนาดใหญ่" },
-  { src: "/images/05342.webp", alt: "ทีมงานตัดพื้นคอนกรีตกลางแจ้งในพื้นที่ก่อสร้าง" },
-  { src: "/images/09494.webp", alt: "ทีมช่างเจาะคอริ่งพื้นคอนกรีตสำเร็จรูปในโครงการก่อสร้าง" },
-  { src: "/images/project-construction-site.webp", alt: "หน้างานก่อสร้างอาคาร" },
-  { src: "/legacy-assets/c49575136b-22687962_1398881913501016_5008216070809313268_n.jpg", alt: "งานเจาะคอริ่งแผ่นคอนกรีตสำเร็จรูป" },
-  { src: "/images/5_0.webp", alt: "ช่างเจาะคอริ่งพื้นในห้องเครื่องปรับอากาศ" },
-  { src: "/images/0239.webp", alt: "ช่างผูกเหล็กเสริมโครงสร้างเสาก่อนเทคอนกรีต" },
-  { src: "/images/01333.webp", alt: "งานตัดพื้นคอนกรีตโรงงานเผยเหล็กเสริม" },
-  { src: "/images/02233.webp", alt: "งานตัดพื้นคอนกรีตใต้รถเทรลเลอร์ขนส่ง" },
-  { src: "/legacy-assets/4bcbd9a842-17457931_1220685707987305_9128082814653951827_n.jpg", alt: "หน้างานก่อสร้างบ้านพัก" },
-  { src: "/legacy-assets/f50c93838f-20770198_1343721455683729_5890634755612042816_n.jpg", alt: "ผลงานหน้างานคอนโดมิเนียม" },
-];
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  inLanguage: "th-TH",
+  publisher: { "@id": `${site.url}/#business` },
+};
 ---
 <BaseLayout
-  title="บริษัท เอสบีซีซี เอ็นจิเนียริ่ง แอนด์ ซัพพลาย จำกัด"
-  description="ส่งรูปหน้างาน แบบ หรือรายการสินค้าให้ทีม SBCC ช่วยตรวจสเปก ประเมินหน้างาน และเสนอสินค้า บริการ หรือใบเสนอราคา"
+  title="พุกเคมี น้ำยาเจาะเสียบเหล็ก รับเจาะคอริ่ง ตัดคอนกรีต | SBCC Engineering"
+  description="จำหน่ายพุกเคมี น้ำยาเจาะเสียบเหล็ก HILTI Fischer Ramset และรับเจาะคอริ่ง ตัดคอนกรีต สแกนหาเหล็ก ทั่วกรุงเทพฯ และปริมณฑล"
   overlayHeader
   preloadImage="/images/hero-construction-crane.webp"
+  preloadImageMobile="/images/hero-construction-crane-640.webp"
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   <section class="hero" aria-labelledby="home-title">
     <div class="hero-photo" aria-hidden="true"></div>
     <div class="shell hero-content">
@@ -57,10 +56,10 @@ const projectEvidence = [
   <section class="capabilities" id="capabilities">
     <div class="capability product-capability">
       <div class="capability-image">
-        <SiteImage src="/images/S__6103236.webp" alt="พุกเคมีและอุปกรณ์วิศวกรรม" />
+        <SiteImage src="/images/S__6103236.webp" alt="พุกเคมีหลอดแก้ว น้ำยาเจาะเสียบเหล็ก และสตัดเกลียวที่ SBCC จำหน่าย" widths={[400, 800]} sizes="400px" />
       </div>
       <div class="capability-copy">
-        <h2>เลือกสินค้า<br />ให้ตรงกับงาน</h2>
+        <h2>เลือกพุกเคมีและน้ำยา<br />ให้ตรงกับงาน</h2>
         <p>ทีมงานตรวจรุ่น ขนาด ปริมาณ และเงื่อนไขใช้งานก่อนเสนอราคา</p>
         <nav aria-label="หมวดสินค้า">
           {products.map((item) => (
@@ -73,10 +72,15 @@ const projectEvidence = [
 
     <div class="capability service-capability">
       <div class="capability-image">
-        <SiteImage src="/images/services-hero-construction.webp" alt="ทีมบริการวิศวกรรมปฏิบัติงานในโครงการก่อสร้าง" />
+        <SiteImage
+          src="/images/services-hero-construction.webp"
+          alt="ทีมช่าง SBCC เตรียมเครื่องเจาะคอริ่งก่อนเริ่มงานในโครงการก่อสร้าง"
+          widths={[640, 960, 1400]}
+          sizes="(min-width: 860px) 50vw, 100vw"
+        />
       </div>
       <div class="capability-copy">
-        <h2>ประเมินหน้างาน<br />ก่อนเริ่มงานจริง</h2>
+        <h2>ประเมินหน้างานเจาะคอริ่ง<br />ตัดคอนกรีต ก่อนเริ่มงาน</h2>
         <p>ทีมงานตรวจพื้นที่ วางแผน เตรียมอุปกรณ์ และทำงานตามขอบเขตที่ตกลง</p>
         <nav aria-label="หมวดบริการ">
           {services.map((item) => (
@@ -88,20 +92,10 @@ const projectEvidence = [
     </div>
   </section>
 
-  <section class="evidence section">
-    <div class="shell evidence-head">
-      <h2 class="section-title">ดูผลงานจริง<br />ก่อนตัดสินใจ</h2>
-      <p class="lead">ภาพงานอาคาร โรงงาน สถาบันการศึกษา หน่วยงานรัฐ และงานโครงสร้างพื้นฐาน โดยทีมงาน SBCC</p>
-    </div>
-    <div class="shell evidence-grid">
-      {projectEvidence.map((project) => (
-        <div class="evidence-item">
-          <SiteImage src={project.src} alt={project.alt} />
-        </div>
-      ))}
-    </div>
-    <div class="shell evidence-action"><a class="button evidence-button" href="https://www.facebook.com/profile.php?id=100063526152006" target="_blank" rel="noopener noreferrer">ดูผลงานที่ผ่านมา <span><ArrowIcon direction="up-right" /></span></a></div>
-  </section>
+  <ProjectEvidence
+    title="ดูผลงานจริง<br />ก่อนตัดสินใจ"
+    lead="ภาพงานอาคาร โรงงาน สถาบันการศึกษา หน่วยงานรัฐ และงานโครงสร้างพื้นฐาน โดยทีมงาน SBCC"
+  />
 
 </BaseLayout>
 
@@ -158,28 +152,21 @@ const projectEvidence = [
   .service-capability nav a { border-color:rgba(255,255,255,.22); }
   .service-button { background:var(--brand); }
 
-  .evidence { background:#e9f1f4; }
-  .evidence-head { display:grid; gap:2rem; margin-bottom:3.5rem; }
-  .evidence-head .lead { font-size:1.093rem; }
-  .evidence-grid { column-count:3; column-gap:8px; }
-  .evidence-item { overflow:hidden; background:var(--navy); break-inside:avoid; margin-bottom:8px; }
-  .evidence-item :global(img) { display:block; width:100%; height:auto; }
-  .evidence-action { display:flex; justify-content:center; margin-top:2.5rem; }
-  .evidence-button { min-height:58px; padding-inline:1.8rem; font-size:1.125rem; }
-  .evidence-button span { display:grid; place-items:center; }
   .light { color:var(--navy-deep); }
 
   @media(min-width:860px) {
-    .intake-layout,.evidence-head { grid-template-columns:1fr 1fr; }
+    .intake-layout { grid-template-columns:1fr 1fr; }
     .capability { grid-template-columns:1fr 1fr; }
     .service-capability .capability-image { order:2; }
+  }
+  @media(max-width:860px) {
+    .hero-photo { background-image:url("/images/hero-construction-crane-640.webp"); }
   }
   @media(max-width:859px) {
     .hero { min-height:780px; }
     .capability { min-height:0; }
     .capability-image { min-height:360px; }
     .service-capability .capability-copy { order:2; }
-    .evidence-grid { column-count:2; }
   }
   @media(max-width:560px) {
     .hero { min-height:720px; }
@@ -190,6 +177,5 @@ const projectEvidence = [
     .capability-image { min-height:300px; }
     .capability-copy { padding:3rem 1rem 4rem; }
     .capability h2 { font-size:clamp(2.4rem,12vw,3.4rem); }
-    .evidence-grid { column-count:1; }
   }
 </style>

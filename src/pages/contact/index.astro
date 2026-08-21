@@ -3,13 +3,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { site } from "../../config/site";
 ---
 <BaseLayout
-  title="ติดต่อ SBCC Engineering"
-  description="ติดต่อฝ่ายขายและทีมบริการ SBCC ทางโทรศัพท์ LINE อีเมล หรือส่งแบบฟอร์มขอใบเสนอราคา"
+  title="ติดต่อ SBCC Engineering ปากเกร็ด นนทบุรี | โทร 02-006-9488"
+  description="ติดต่อฝ่ายขายและทีมบริการ SBCC ทางโทรศัพท์ LINE อีเมล เปิดทุกวัน 8:30-17:30 น. ให้บริการกรุงเทพฯ นนทบุรี ปทุมธานี และสมุทรปราการ"
   breadcrumbs={[{ name: "หน้าแรก", url: "/" }, { name: "ติดต่อเรา", url: "/contact/" }]}
 >
   <section class="section">
     <div class="shell">
-      <p class="eyebrow">CONTACT SBCC</p>
       <h1 class="display">ติดต่อทีมงาน</h1>
       <p class="lead">สอบถามสินค้า นัดประเมินหน้างาน หรือติดตามใบเสนอราคาได้ตามช่องทางด้านล่าง</p>
       <div class="contact-grid">
@@ -20,10 +19,21 @@ import { site } from "../../config/site";
         <a href={`mailto:${site.email}`}><small>Email</small><strong>{site.email}</strong></a>
         <a class="address" href={site.mapsHref} target="_blank" rel="noopener noreferrer"><small>Address</small><strong>{site.addressDisplay}</strong></a>
       </div>
+      <div class="local">
+        <div>
+          <h2>เวลาทำการ</h2>
+          <p>เปิดทุกวัน {site.openingHours.opens} – {site.openingHours.closes} น.</p>
+        </div>
+        <div>
+          <h2>พื้นที่ให้บริการ</h2>
+          <p>{site.serviceAreas.join(" · ")}</p>
+          <p class="note">งานนอกพื้นที่ข้างต้นสอบถามทีมงานได้ พิจารณาเป็นรายโครงการ</p>
+        </div>
+      </div>
       <a class="button" href="/quote/">ขอใบเสนอราคา</a>
     </div>
   </section>
 </BaseLayout>
 <style>
-  .lead{margin:1.5rem 0 3rem}.contact-grid{display:grid;gap:1px;margin-bottom:3rem;border-block:1px solid var(--line);overflow:hidden;background:var(--line)}.contact-grid a{padding:2rem;background:var(--surface);text-decoration:none;transition:background .3s ease,color .3s ease}.contact-grid a:hover{background:var(--navy);color:white}.contact-grid small{display:block;color:var(--muted)}.contact-grid a:hover small{color:var(--blue-pale)}.contact-grid strong{display:block;margin-top:.3rem;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:clamp(1.1rem,2vw,1.55rem);overflow-wrap:anywhere}.contact-grid .address strong{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.5}@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr}}
+  .lead{margin:1.5rem 0 3rem}.local{display:grid;gap:2.5rem;margin-bottom:3rem}.local h2{margin-bottom:.6rem;font-size:clamp(1.3rem,2.2vw,1.7rem)}.local p{color:var(--muted);font-size:1.05rem;line-height:1.8}.local .note{margin-top:.5rem;font-size:.95rem}@media(min-width:700px){.local{grid-template-columns:1fr 1fr}}.contact-grid{display:grid;gap:1px;margin-bottom:3rem;border-block:1px solid var(--line);overflow:hidden;background:var(--line)}.contact-grid a{padding:2rem;background:var(--surface);text-decoration:none;transition:background .3s ease,color .3s ease}.contact-grid a:hover{background:var(--navy);color:white}.contact-grid small{display:block;color:var(--muted)}.contact-grid a:hover small{color:var(--blue-pale)}.contact-grid strong{display:block;margin-top:.3rem;font-family:"Noto Sans Thai",Arial,sans-serif;font-size:clamp(1.1rem,2vw,1.55rem);overflow-wrap:anywhere}.contact-grid .address strong{font-size:clamp(1rem,1.45vw,1.25rem);line-height:1.5}@media(min-width:700px){.contact-grid{grid-template-columns:1fr 1fr}}
 </style>

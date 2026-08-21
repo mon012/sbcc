@@ -7,6 +7,8 @@ export const services = [
     relatedProductSlug: "chemical-anchors",
     imageAlt: "ช่าง SBCC ใช้สว่าน HILTI เจาะติดตั้งพุกเคมีและเหล็กเสริมบนโครงสร้างคอนกรีตในหน้างาน",
     pageTitle: "บริการเจาะติดตั้งพุกเคมี เจาะเสียบเหล็ก Stud",
+    seoTitle: "รับเจาะเสียบเหล็ก ติดตั้งพุกเคมี งานเสา คาน ต่อเติม",
+    seoDescription: "รับเจาะเสียบเหล็กและติดตั้งพุกเคมี งานโครงสร้าง เสา คาน และงานต่อเติม ตรวจวัสดุฐานและระยะฝังก่อนเริ่มงาน กรุงเทพฯ-ปริมณฑล",
     sourceIntro: "บริการเจาะติดตั้งพุกเคมีและเจาะเสียบเหล็ก สำหรับงานโครงสร้าง งานเสา งานคาน และงานต่อเติม",
     detail: {
       title: "เลือกน้ำยาและวิธีติดตั้งให้เหมาะกับสภาพงานจริง",
@@ -19,16 +21,24 @@ export const services = [
         "เลือกชนิดน้ำยาเคมีและเหล็กหรือสตัดให้เหมาะกับเงื่อนไขหน้างาน",
         "ควบคุมขั้นตอนการเจาะ ทำความสะอาดรู และติดตั้งตามระบบของผลิตภัณฑ์",
       ],
-      links: [],
+      links: [
+        { label: "น้ำยาเจาะเสียบเหล็กที่ใช้ในงานนี้", href: "/products/epoxy-adhesive/" },
+        { label: "พุกเคมีและสตัดเกลียว", href: "/products/chemical-anchors/" },
+        { label: "สแกนหาเหล็กก่อนเจาะ", href: "/services/concrete-rebar-scanning/" },
+        { label: "บทความ: ตารางขนาดพุกเคมี", href: "/blog/chemical-anchor-size-chart/" },
+      ],
     },
   },
   {
     slug: "coring",
     title: "เจาะคอริ่งพื้นคอนกรีต",
+    relatedProductSlug: "chemical-anchors",
     summary: "งาน Coring พื้น ผนัง และช่องระบบ ประเมินหน้างานและวางแผนก่อนดำเนินการ",
     image: "/images/service-coring-sbcc.webp",
     imageAlt: "ช่าง SBCC ใช้เครื่องเจาะคอริ่ง HILTI เจาะพื้นคอนกรีตในหน้างานก่อสร้าง",
     pageTitle: "บริการเจาะคอริ่งพื้นคอนกรีต",
+    seoTitle: "รับเจาะคอริ่ง พื้น ผนัง ช่องงานระบบ กรุงเทพ-ปริมณฑล",
+    seoDescription: "รับเจาะคอริ่งพื้น ผนัง และช่องสำหรับงานระบบ ทั้งงานขนาดเล็กและงานโครงการ ประเมินหน้างานก่อนเริ่ม ติดต่อทีม SBCC",
     sourceIntro: "รับเจาะคอริ่งพื้น ผนัง และช่องสำหรับงานระบบ ทั้งงานขนาดเล็กและงานโครงการ",
     detail: {
       title: "รองรับงานเจาะคอริ่งหลายรูปแบบ",
@@ -44,7 +54,10 @@ export const services = [
         "เจาะเสียบเหล็กข้ออ้อยเพื่อเสริมโครงสร้าง",
         "เจาะแก้ไขทางระบายน้ำหรือเปิดผิวคอนกรีต",
       ],
-      links: [],
+      links: [
+        { label: "สแกนหาเหล็กก่อนเจาะคอริ่ง", href: "/services/concrete-rebar-scanning/" },
+        { label: "พุกเคมีสำหรับงานยึด", href: "/products/chemical-anchors/" },
+      ],
     },
   },
   {
@@ -55,6 +68,8 @@ export const services = [
     relatedProductSlug: "hilti-chemical-anchors",
     imageAlt: "ช่างกำลังใช้ระบบน้ำยาเคมี HILTI เจาะเสียบเหล็กเข้ากับโครงสร้างคอนกรีตในหน้างานก่อสร้าง",
     pageTitle: "บริการเจาะติดตั้งพุกเคมี Hilti",
+    seoTitle: "รับติดตั้งพุกเคมี HILTI ระบบ HVU2, RE 500 V3, HY-200",
+    seoDescription: "รับติดตั้งพุกเคมี HILTI ครบระบบ ทั้งแคปซูล HVU2 และน้ำยาแบบฉีด HIT-RE 500 V3, HY-200 เลือกระบบให้เหมาะกับโครงสร้างและหน้างานจริง",
     sourceIntro: "บริการติดตั้งพุกเคมี Hilti โดยเลือกใช้ระบบให้เหมาะกับลักษณะโครงสร้างและเงื่อนไขของหน้างาน",
     detail: {
       title: "ระบบติดตั้งพุกเคมี Hilti ที่ให้บริการ",
@@ -67,16 +82,22 @@ export const services = [
         "ระบบพุกเคมีแบบหลอดแก้วปั่น HVU",
         "งานติดตั้งสตัดเกลียวและเหล็กข้ออ้อยตามเงื่อนไขของโครงสร้าง",
       ],
-      links: [],
+      links: [
+        { label: "สินค้าพุกเคมี HILTI", href: "/products/hilti-chemical-anchors/" },
+        { label: "บริการเจาะเสียบเหล็ก", href: "/services/anchor/" },
+      ],
     },
   },
   {
     slug: "concrete-rebar-scanning",
     title: "บริการสแกนหาแนวเหล็กในคอนกรีต",
+    relatedProductSlug: "chemical-anchors",
     summary: "ตรวจหาเหล็กเสริม ลวดอัดแรง และวัตถุฝังในคอนกรีตก่อนเจาะ ตัด หรือคอริ่ง",
     image: "/images/service-concrete-scanning-site.webp",
     imageAlt: "ทีมช่าง SBCC ใช้เครื่อง HILTI PS 1000 สแกนพื้นคอนกรีตในหน้างานก่อสร้าง",
     pageTitle: "บริการสแกนหาแนวเหล็กและวัตถุฝังในคอนกรีต",
+    seoTitle: "รับสแกนหาเหล็กในคอนกรีต ก่อนเจาะ-ตัด ด้วย HILTI PS 1000",
+    seoDescription: "สแกนหาแนวเหล็กเสริมและวัตถุฝังในคอนกรีตด้วย HILTI PS 1000 ก่อนเจาะคอริ่ง ตัดพื้น หรือติดตั้งงานระบบ ลดความเสี่ยงเจาะโดนเหล็ก",
     sourceIntro: "ตรวจสอบตำแหน่งวัตถุที่ซ่อนอยู่ภายในคอนกรีต เพื่อช่วยวางแผนก่อนเจาะคอริ่ง ตัดพื้น หรือติดตั้งงานระบบ",
     detail: {
       title: "วิเคราะห์ภายในคอนกรีตด้วย HILTI PS 1000",
@@ -90,16 +111,22 @@ export const services = [
         "ประเมินผลหลังสแกนได้ที่หน้างาน เพื่อช่วยกำหนดตำแหน่งทำงาน",
         "ช่วยลดความเสี่ยงจากการเจาะ ตัด หรือคอริ่งโดนวัตถุที่ซ่อนอยู่",
       ],
-      links: [],
+      links: [
+        { label: "บริการเจาะคอริ่ง", href: "/services/coring/" },
+        { label: "บริการเจาะเสียบเหล็ก", href: "/services/anchor/" },
+      ],
     },
   },
   {
     slug: "concrete-cutting",
     title: "บริการตัดคอนกรีต ตัดพื้น ตัดผนัง",
+    relatedProductSlug: "cast-in-anchors",
     summary: "ตัดพื้น ผนัง แร๊มพ์ และช่องเปิดคอนกรีตด้วยเครื่องมือเฉพาะทาง พร้อมวางแผนก่อนดำเนินงาน",
     image: "/images/service-concrete-cutting-site.webp",
     imageAlt: "ทีมช่างใช้เครื่องตัดคอนกรีตขนาดใหญ่ตัดผนังในหน้างานก่อสร้าง",
     pageTitle: "บริการตัดคอนกรีต ตัดพื้น ตัดผนัง",
+    seoTitle: "รับตัดคอนกรีต ตัดพื้น ตัดผนัง เปิดช่อง กรุงเทพ-ปริมณฑล",
+    seoDescription: "รับตัดคอนกรีตแบบควบคุมแนวตัด งานเปิดช่อง ปรับปรุงอาคาร และเตรียมพื้นที่ติดตั้งงานระบบ ลดผลกระทบจากการรื้อทุบ",
     sourceIntro: "บริการตัดคอนกรีตแบบควบคุมแนวตัด สำหรับงานเปิดช่อง ปรับปรุงอาคาร และเตรียมพื้นที่ติดตั้งงานระบบ",
     detail: {
       title: "ตัดเป็นแนวควบคุม ลดผลกระทบจากการรื้อทุบ",
@@ -115,16 +142,22 @@ export const services = [
         "ใช้เครื่องมือเฉพาะทางให้เหมาะกับความหนาและลักษณะโครงสร้าง",
         "ขนย้ายเศษคอนกรีตตามขอบเขตงานที่ตกลง",
       ],
-      links: [],
+      links: [
+        { label: "สแกนหาเหล็กก่อนตัด", href: "/services/concrete-rebar-scanning/" },
+        { label: "บริการเจาะคอริ่ง", href: "/services/coring/" },
+      ],
     },
   },
   {
     slug: "floor-repair",
     title: "ซ่อมพื้นด้วยโฟมและ Epoxy",
+    relatedProductSlug: "epoxy-adhesive",
     summary: "แก้ปัญหาพื้นทรุด ช่องว่างใต้พื้น และรอยแตกร้าวด้วยวิธีที่เหมาะกับสภาพงาน",
     image: "/images/service-floor-foam-epoxy-site.webp",
     imageAlt: "ช่างกำลังฉีดวัสดุซ่อมบริเวณใต้พื้นคอนกรีตท่ามกลางงานระบบภายในอาคาร",
     pageTitle: "บริการซ่อมพื้นด้วยการยิงโฟมและฉีด Epoxy",
+    seoTitle: "รับซ่อมพื้นทรุด ยิงโฟม ฉีด Epoxy อุดรอยรั่วคอนกรีต",
+    seoDescription: "ซ่อมรอยต่อโครงสร้างคอนกรีต น้ำรั่ว งานกันซึมและกันรั่ว ด้วยการยิงโฟมและฉีด Epoxy รองรับทั้งงานเล็กและงานโครงการ",
     sourceIntro: "ซ่อมรอยต่อโครงสร้างคอนกรีต น้ำรั่ว งานกันซึมและกันรั่ว รองรับทั้งงานขนาดเล็กและงานโครงการ",
     detail: {
       title: "การยิงโฟมเพื่อซ่อมแซมน้ำรั่ว",
@@ -138,7 +171,11 @@ export const services = [
         "ยึดเกาะกับพื้นผิวได้ดี",
         "สามารถปรับอัตราการเกิดปฏิกิริยาให้เหมาะกับงาน",
       ],
-      links: [],
+      links: [
+        { label: "น้ำยา Epoxy ที่ใช้ในงานซ่อม", href: "/products/epoxy-adhesive/" },
+        { label: "บริการเจาะคอริ่ง", href: "/services/coring/" },
+        { label: "บริการตัดคอนกรีต", href: "/services/concrete-cutting/" },
+      ],
     },
   },
 ] as const;
@@ -152,6 +189,8 @@ export const products = [
     relatedServiceSlug: "anchor",
     imageAlt: "พุกเคมีหลอดแก้ว Stronghold รุ่น SH-VM พร้อมสตัดเกลียวสำหรับงานยึดโครงสร้าง",
     pageTitle: "พุกเคมี Chemical Anchors",
+    seoTitle: "พุกเคมี แบบปั่น แบบตอก พร้อมสตัดเกลียว M10-M30",
+    seoDescription: "พุกเคมีหลอดแก้วแบบปั่นและแบบตอก พร้อมสตัดเกลียว M10 ถึง M30 เลือกตามวัสดุฐาน ขนาด และเงื่อนไขหน้างาน สอบถามราคากับทีม SBCC",
     sourceIntro: "พุกเคมีแบบปั่น แบบตอก และสตัดเกลียว สำหรับเลือกตามวัสดุฐาน ขนาด และเงื่อนไขหน้างาน",
     detail: {
       title: "พุกเคมีสำหรับงานยึดโครงสร้าง",
@@ -196,7 +235,13 @@ export const products = [
           ],
         },
       ],
-      links: [],
+      links: [
+        { label: "บริการเจาะติดตั้งพุกเคมี", href: "/services/anchor/" },
+        { label: "น้ำยาเจาะเสียบเหล็ก Epoxy", href: "/products/epoxy-adhesive/" },
+        { label: "พุกเคมี HILTI", href: "/products/hilti-chemical-anchors/" },
+        { label: "บทความ: ตารางขนาดพุกเคมี", href: "/blog/chemical-anchor-size-chart/" },
+        { label: "บทความ: วิธีใช้พุกเคมีและกำลังรับแรงดึง", href: "/blog/how-to-use-chemical-anchors/" },
+      ],
     },
   },
   {
@@ -207,6 +252,8 @@ export const products = [
     relatedServiceSlug: "anchor",
     imageAlt: "ช่างกำลังใช้น้ำยาเคมี HILTI HIT-RE 500 V3 เจาะเสียบเหล็กเข้ากับโครงสร้างคอนกรีต",
     pageTitle: "น้ำยาเคมีเจาะเสียบเหล็ก",
+    seoTitle: "น้ำยาเจาะเสียบเหล็ก Epoxy HILTI Fischer Ramset พร้อมปืนยิง",
+    seoDescription: "น้ำยาเคมีเจาะเสียบเหล็ก 11 รุ่นจาก HILTI, Fischer, Ramset, Mason, Stronghold และอื่น ๆ หลายสูตรหลายขนาด สอบถามราคาและสเปกกับทีม SBCC",
     sourceIntro: "น้ำยาเคมีหลายสูตรและหลายขนาด สำหรับเลือกตามวัสดุฐาน วิธีเจาะ ระยะฝัง และข้อกำหนดของโครงสร้าง",
     detail: {
       title: "น้ำยา Epoxy สำหรับงานเจาะเสียบเหล็ก",
@@ -218,6 +265,7 @@ export const products = [
       products: [
         {
           title: "RAMSET Reo502 - 600 ml.",
+          brand: "RAMSET",
           image: "/images/catalog/epoxy-ramset-reo502.jpg",
           imageAlt: "หลอดน้ำยาเคมีเจาะเสียบเหล็ก RAMSET Reo502 ขนาด 600 มิลลิลิตร",
           description: "น้ำยาเคมีประสิทธิภาพสูงสำหรับงานเจาะเสียบเหล็ก รองรับการติดตั้งในสภาพรูเจาะที่มีความชื้น น้ำขัง หรือใต้น้ำตามเงื่อนไขของผลิตภัณฑ์",
@@ -225,6 +273,7 @@ export const products = [
         },
         {
           title: "FIS EM Plus - 585 ml.",
+          brand: "Fischer",
           image: "/images/catalog/epoxy-fischer-fis-em-plus.jpg",
           imageAlt: "หลอดน้ำยาเคมี Fischer FIS EM Plus ขนาด 585 มิลลิลิตร",
           description: "น้ำยาอีพ็อกซี่สำหรับงานต่อเหล็กเสริมและงานยึดในคอนกรีตแตกร้าวหรือไม่แตกร้าว รวมถึงรูเจาะเพชรและรูเจาะที่มีน้ำ",
@@ -232,6 +281,7 @@ export const products = [
         },
         {
           title: "FIS EB II - 585 ml.",
+          brand: "Fischer",
           image: "/images/catalog/epoxy-fischer-fis-eb-ii.jpg",
           imageAlt: "หลอดน้ำยาเคมี Fischer FIS EB II ขนาด 585 มิลลิลิตร",
           description: "น้ำยาเคมีสำหรับติดตั้งพุกและเจาะเสียบเหล็กในคอนกรีตแตกร้าวและไม่แตกร้าว เหมาะกับงานที่ต้องการกำลังรับแรงสูง",
@@ -239,6 +289,7 @@ export const products = [
         },
         {
           title: "FIS EP - 390 ml.",
+          brand: "Fischer",
           image: "/images/catalog/epoxy-fischer-fis-ep.png",
           imageAlt: "หลอดน้ำยาเคมี Fischer FIS EP ขนาด 390 มิลลิลิตร",
           description: "น้ำยาเคมีสำหรับติดตั้งแท่งเกลียวและเจาะเสียบเหล็กในคอนกรีต ใช้ได้ทั้งการวางตำแหน่งล่วงหน้าและการติดตั้งแบบสอดผ่าน",
@@ -246,6 +297,7 @@ export const products = [
         },
         {
           title: "MASON C-RE 585 - 585 ml.",
+          brand: "MASON",
           image: "/images/catalog/epoxy-mason-c-re.png",
           imageAlt: "หลอดน้ำยาเคมี MASON C-RE 585",
           description: "น้ำยาอีพ็อกซี่บริสุทธิ์ความหนืดสูง สำหรับคอนกรีตแตกร้าวและไม่แตกร้าว รวมถึงงานในสภาพชื้นหรือเปียกน้ำ",
@@ -253,6 +305,7 @@ export const products = [
         },
         {
           title: "STRONGHOLD SH-EP1 - 585/600 ml.",
+          brand: "STRONGHOLD",
           image: "/images/catalog/epoxy-stronghold-sh-ep1.png",
           imageAlt: "หลอดน้ำยาเคมี STRONGHOLD SH-EP1",
           description: "น้ำยาอีพ็อกซี่บริสุทธิ์อัตราส่วน 1:1 สำหรับงานยึดในคอนกรีตแตกร้าวและไม่แตกร้าว",
@@ -260,6 +313,7 @@ export const products = [
         },
         {
           title: "STRONGHOLD SH-EP3 - 600 ml.",
+          brand: "STRONGHOLD",
           image: "/images/catalog/epoxy-stronghold-sh-ep3.jpg",
           imageAlt: "หลอดน้ำยาเคมี STRONGHOLD SH-EP3 ขนาด 600 มิลลิลิตร",
           description: "น้ำยาอีพ็อกซี่ที่มีระยะเวลาทำงานนาน เหมาะกับอุปกรณ์ขนาดใหญ่ งานฝังลึก และสภาพแวดล้อมที่มีการกัดกร่อนสูง",
@@ -267,6 +321,7 @@ export const products = [
         },
         {
           title: "STRONGHOLD SH-EP5 - 300 ml.",
+          brand: "STRONGHOLD",
           image: "/images/catalog/epoxy-stronghold-sh-ep5.jpg",
           imageAlt: "หลอดน้ำยาเคมี STRONGHOLD SH-EP5 ขนาด 300 มิลลิลิตร",
           description: "น้ำยาเคมีที่แข็งตัวเร็วสำหรับงานที่ต้องการลดเวลารอ ใช้ได้กับคอนกรีตแห้งหรือเปียกและงานซ่อมช่องว่างบางประเภท",
@@ -274,6 +329,7 @@ export const products = [
         },
         {
           title: "STAHL SVM-VSF-H-S 300 - 300 ml.",
+          brand: "STAHL",
           image: "/images/catalog/epoxy-stahl-svm-vsf-h-s-300.jpg",
           imageAlt: "หลอดน้ำยาเคมี STAHL SVM-VSF-H-S 300",
           description: "น้ำยาเคมีสำหรับงานเหล็กข้ออ้อยและสตัดพุกเคมี รองรับคอนกรีตแตกร้าวและไม่แตกร้าวตามเงื่อนไขผลิตภัณฑ์",
@@ -281,6 +337,7 @@ export const products = [
         },
         {
           title: "WELBOND PLUS - 300/410 ml.",
+          brand: "WELBOND",
           image: "/images/catalog/epoxy-welbond-plus.png",
           imageAlt: "หลอดน้ำยาเคมี WELBOND PLUS",
           description: "น้ำยาเคมีสำหรับงานที่ต้องการแรงยึดเกาะสูง รองรับการติดตั้งแนวตั้ง แนวนอน และเหนือศีรษะ",
@@ -288,13 +345,19 @@ export const products = [
         },
         {
           title: "ICCONS PURE-EPOXY - 585 ml.",
+          brand: "ICCONS",
           image: "/images/catalog/epoxy-iccons-pure-epoxy.jpg",
           imageAlt: "หลอดน้ำยาเคมี ICCONS PURE-EPOXY ขนาด 585 มิลลิลิตร",
           description: "น้ำยาอีพ็อกซี่สำหรับสตัดและเหล็กข้ออ้อย รองรับรูเจาะด้วยดอกสว่านหรือการคอริ่ง รวมถึงรูเจาะเปียกน้ำ",
           highlights: ["รองรับ Stud M8-M30 และเหล็กข้ออ้อยประมาณ 8-32 มม.", "ใช้กับคอนกรีตแตกร้าวและไม่แตกร้าว", "มีข้อมูลทดสอบไฟ แผ่นดินไหว และ NSF ตามเอกสารผลิตภัณฑ์"],
         },
       ],
-      links: [],
+      links: [
+        { label: "บริการเจาะเสียบเหล็ก", href: "/services/anchor/" },
+        { label: "พุกเคมีหลอดแก้ว", href: "/products/chemical-anchors/" },
+        { label: "น้ำยา HILTI ทั้งหมด", href: "/products/hilti-chemical-anchors/" },
+        { label: "บริการซ่อมพื้นด้วยโฟมและ Epoxy", href: "/services/floor-repair/" },
+      ],
     },
   },
   {
@@ -305,6 +368,8 @@ export const products = [
     relatedServiceSlug: "hilti-services",
     imageAlt: "ช่างสวมถุงมือกำลังติดตั้งพุกเคมี HILTI ลงในรูเจาะบนพื้นคอนกรีต",
     pageTitle: "พุกเคมี HILTI",
+    seoTitle: "พุกเคมี HILTI HIT-RE 500 V3, HY-200, HVU2, แท่งเกลียว HAS",
+    seoDescription: "พุกเคมี HILTI ครบระบบ ทั้ง HIT-RE 500 V3, HIT-HY 200-R V3, แคปซูล HVU2, แท่งเกลียว HAS และปืนฉีด HDM สอบถามราคากับทีม SBCC",
     sourceIntro: "กลุ่มผลิตภัณฑ์ HILTI สำหรับงานเจาะเสียบเหล็กและงานยึดด้วยพุกเคมี ครอบคลุมน้ำยาแบบฉีด แคปซูล แท่งเกลียว และอุปกรณ์จ่ายน้ำยา",
     detail: {
       title: "กลุ่มสินค้าพุกเคมี HILTI ที่มีบริการ",
@@ -316,6 +381,7 @@ export const products = [
       products: [
         {
           title: "HIT-RE 500 V3 - 500 ml.",
+          brand: "HILTI",
           image: "/images/catalog/hilti-hit-re500-v3.jpg",
           imageAlt: "หลอดน้ำยาเคมี HILTI HIT-RE 500 V3 ขนาด 500 มิลลิลิตร",
           description: "น้ำยาอีพ็อกซี่แบบฉีดสำหรับงานเจาะเสียบเหล็กและงานยึดที่ต้องการเวลาในการปรับตำแหน่งแท่งเกลียวหรือเหล็กข้ออ้อย",
@@ -327,6 +393,7 @@ export const products = [
         },
         {
           title: "HIT-HY 200-R V3 - 500 ml.",
+          brand: "HILTI",
           image: "/images/catalog/hilti-hit-hy200-r-v3.jpg",
           imageAlt: "หลอดน้ำยาเคมี HILTI HIT-HY 200-R V3 ขนาด 500 มิลลิลิตร",
           description: "น้ำยาเคมีสำหรับงานต่อเหล็กเสริมและงานยึดในคอนกรีต รองรับวิธีเจาะและสภาพรูเจาะหลายรูปแบบตามระบบติดตั้ง",
@@ -338,6 +405,7 @@ export const products = [
         },
         {
           title: "น้ำยาเคมีแบบแคปซูล HVU2",
+          brand: "HILTI",
           image: "/images/catalog/hilti-hvu2.jpg",
           imageAlt: "น้ำยาเคมีแบบแคปซูล HILTI HVU2 พร้อมแท่งเกลียว",
           description: "แคปซูลฟอยล์สำหรับงานยึดในคอนกรีต ใช้งานสะดวกและลดความเสี่ยงต่อการแตกหักระหว่างขนส่งเมื่อเทียบกับหลอดแก้ว",
@@ -349,6 +417,7 @@ export const products = [
         },
         {
           title: "แท่งเกลียว HAS-U",
+          brand: "HILTI",
           image: "/images/catalog/hilti-has-u.png",
           imageAlt: "แท่งเกลียว HILTI HAS-U พร้อมน็อตและแหวนรอง",
           description: "แกนยึดสำหรับใช้ร่วมกับน้ำยาแบบแคปซูล ไฮบริด หรืออีพ็อกซี่แบบฉีดในคอนกรีตและงานก่ออิฐ",
@@ -360,6 +429,7 @@ export const products = [
         },
         {
           title: "แท่งเกลียว HAS 8.8 หัวตัดตรง",
+          brand: "HILTI",
           image: "/images/catalog/hilti-has-88.jpg",
           imageAlt: "แท่งเกลียว HILTI HAS เกรด 8.8 หัวตัดตรง",
           description: "แท่งเกลียวตัดแต่งพร้อมใช้ สำหรับงานยึดด้วยน้ำยาไฮบริดหรืออีพ็อกซี่แบบฉีดในคอนกรีตและงานก่ออิฐ",
@@ -371,6 +441,7 @@ export const products = [
         },
         {
           title: "ปืนฉีดน้ำยาเจาะเสียบเหล็ก HDM",
+          brand: "HILTI",
           image: "/images/catalog/hilti-hdm.jpg",
           imageAlt: "ปืนฉีดน้ำยาเจาะเสียบเหล็ก HILTI HDM",
           description: "อุปกรณ์จ่ายน้ำยาสำหรับแพ็กฟอยล์ HILTI ออกแบบให้ใช้งานคล่องตัวและทนต่อสภาพหน้างาน",
@@ -381,7 +452,11 @@ export const products = [
           ],
         },
       ],
-      links: [],
+      links: [
+        { label: "บริการติดตั้งระบบ HILTI", href: "/services/hilti-services/" },
+        { label: "น้ำยาเจาะเสียบเหล็กยี่ห้ออื่น", href: "/products/epoxy-adhesive/" },
+        { label: "บทความ: วิธีใช้พุกเคมีและกำลังรับแรงดึง", href: "/blog/how-to-use-chemical-anchors/" },
+      ],
     },
     video: {
       embedUrl: "https://www.youtube-nocookie.com/embed/ffxegHSLhto",
@@ -391,10 +466,13 @@ export const products = [
   {
     slug: "cast-in-anchors",
     title: "พุกฝังคอนกรีต",
+    relatedServiceSlug: "anchor",
     summary: "พุกเหล็ก พุกดร็อบอิน พุกเว็ดจ์ แองคอร์โบลท์ และอุปกรณ์ยึดประกอบ",
     image: "/images/product-cast-in-anchor.webp",
     imageAlt: "ชุดพุกฝังคอนกรีต พร้อมสลักเกลียว นอต แหวนรอง และปลอกพุกบนพื้นหลังสีขาว",
     pageTitle: "พุกฝังคอนกรีต",
+    seoTitle: "พุกฝังคอนกรีต แองคอร์โบลท์ พุกดร็อบอิน พุกเว็ดจ์",
+    seoDescription: "พุกเหล็ก พุกดร็อบอิน พุกเว็ดจ์ แองคอร์โบลท์ J Bolt L Bolt I Bolt พร้อมสกรู น็อต แหวนอีแปะ สอบถามราคาและสเปกกับทีม SBCC",
     sourceIntro: "กลุ่มพุกและอุปกรณ์ยึดสำหรับงานติดตั้งกับคอนกรีต ครอบคลุมพุกเหล็ก แองคอร์โบลท์ และอุปกรณ์ประกอบ",
     detail: {
       title: "กลุ่มพุกฝังคอนกรีตและอุปกรณ์ที่มีจำหน่าย",
@@ -460,7 +538,11 @@ export const products = [
           ],
         },
       ],
-      links: [],
+      links: [
+        { label: "พุกเคมีสำหรับงานเจาะเสียบ", href: "/products/chemical-anchors/" },
+        { label: "บริการเจาะติดตั้งพุก", href: "/services/anchor/" },
+        { label: "บทความ: พุกตะกั่วรับน้ำหนักได้เท่าไหร่", href: "/blog/lead-anchor-guide/" },
+      ],
     },
   },
 ] as const;

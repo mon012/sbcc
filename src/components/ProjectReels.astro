@@ -1,0 +1,60 @@
+---
+import { site } from "../config/site";
+
+interface Props {
+  title: string;
+  titleId: string;
+  clipLabel: string;
+  showMoreLink?: boolean;
+}
+
+const { title, titleId, clipLabel, showMoreLink = true } = Astro.props;
+
+// Facebook reels shot on SBCC job sites.
+const reels = [
+  "https://www.facebook.com/reel/994538166451414",
+  "https://www.facebook.com/reel/728654309917797",
+  "https://www.facebook.com/reel/484941321058569",
+  "https://www.facebook.com/reel/711644300533514",
+];
+---
+<section class="section reels-section" aria-labelledby={titleId}>
+  <div class="shell">
+    <div class="reels-heading">
+      <div>
+        <h2 id={titleId} class="section-title">{title}</h2>
+      </div>
+      {showMoreLink && (
+        <a class="reels-more" href={site.facebookHref} target="_blank" rel="noopener noreferrer">
+          ดูผลงานของเรา <span aria-hidden="true">↗</span>
+        </a>
+      )}
+    </div>
+    <div class="reels-track">
+      {reels.map((reel, index) => (
+        <article class="reel-card">
+          <iframe
+            src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(reel)}&show_text=false&width=500`}
+            title={`${clipLabel} คลิปที่ ${index + 1}`}
+            width="500"
+            height="889"
+            loading="lazy"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+<style>
+  .reels-section{overflow:hidden;background:#fff}
+  .reels-heading{display:grid;gap:1rem;margin-bottom:2rem}
+  .reels-more{display:inline-flex;width:max-content;align-items:center;gap:.45rem;color:var(--navy-deep);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}
+  .reels-more span{color:var(--brand)}
+  .reels-track{display:flex;gap:1rem;overflow-x:auto;margin-inline:calc(var(--shell-gutter, 1.25rem) * -1);padding:0 var(--shell-gutter, 1.25rem) 1rem;scroll-padding-inline:var(--shell-gutter, 1.25rem);scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  .reel-card{flex:0 0 clamp(230px,62vw,290px);overflow:hidden;border:1px solid #c8d7dd;background:#f3f6f7;scroll-snap-align:start}
+  .reel-card iframe{display:block;width:100%;height:auto;aspect-ratio:9/16;border:0}
+  @media(min-width:700px){.reels-heading{grid-template-columns:1fr auto;align-items:end}.reels-track{margin-inline:0;padding-inline:0;scroll-padding-inline:0}.reel-card{flex-basis:clamp(220px,28vw,290px)}}
+  @media(min-width:1100px){.reel-card{flex-basis:calc((100% - 3rem) / 4)}}
+</style>

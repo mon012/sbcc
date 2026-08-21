@@ -5,6 +5,8 @@ import CatalogDetail from "../../../components/CatalogDetail.astro";
 import { services, products } from "../../../data/catalog";
 import { site } from "../../../config/site";
 import SiteImage from "../../../components/SiteImage.astro";
+import { getSiteImage } from "../../../utils/siteImages";
+import ProjectReels from "../../../components/ProjectReels.astro";
 export function getStaticPaths() {
   return services.map((service) => ({ params: { slug: service.slug }, props: { service } }));
 }
@@ -12,27 +14,34 @@ const { service } = Astro.props;
 const relatedProduct = "relatedProductSlug" in service
   ? products.find((product) => product.slug === service.relatedProductSlug)
   : undefined;
-const coringReels = [
-  "https://www.facebook.com/reel/994538166451414",
-  "https://www.facebook.com/reel/728654309917797",
-  "https://www.facebook.com/reel/484941321058569",
-  "https://www.facebook.com/reel/711644300533514",
-];
+const scopeItems = service.detail?.bullets ?? [];
 const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   serviceType: service.title,
   name: service.pageTitle,
   description: service.sourceIntro,
-  provider: { "@type": "LocalBusiness", name: site.legalName },
-  areaServed: "TH",
+  image: new URL(getSiteImage(service.image).src, site.url),
+  provider: { "@id": `${site.url}/#business` },
+  areaServed: site.serviceAreas.map((area) => ({ "@type": "AdministrativeArea", name: area })),
   url: new URL(`/services/${service.slug}/`, site.url),
+  ...(scopeItems.length > 0 && {
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `ขอบเขตงาน${service.title}`,
+      itemListElement: scopeItems.map((item) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: item },
+      })),
+    },
+  }),
 };
 const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บริการ", url: "/services/" }, { name: service.title, url: `/services/${service.slug}/` }];
 ---
 <BaseLayout
-  title={`${service.pageTitle} | SBCC Engineering`}
-  description={`${service.sourceIntro} ติดต่อประเมินงานกับทีม SBCC`}
+  title={`${service.seoTitle} | SBCC Engineering`}
+  description={service.seoDescription}
+  ogImage={service.image}
   breadcrumbs={breadcrumbs}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
@@ -40,52 +49,27 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
     <div class="shell detail">
       <div>
         <Breadcrumb items={breadcrumbs} />
-        <p class="eyebrow">FIELD SERVICE</p>
         <h1 class="display">{service.pageTitle}</h1>
         <p class="lead">{service.sourceIntro}</p>
         <div class="cluster"><a class="button" href="/quote/">ขอประเมินราคา</a><a class="button secondary" href={site.hotlineHref}>โทร {site.hotlineDisplay}</a></div>
       </div>
       {service.image
-        ? <SiteImage src={service.image} alt={service.imageAlt} loading="eager" fetchpriority="high" />
+        ? <SiteImage src={service.image} alt={service.imageAlt} loading="eager" fetchpriority="high" widths={[760, 1200, 1800]} sizes="100vw" />
         : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลบริการ"><span>กำลังเตรียมข้อมูลบริการ</span></div>}
     </div>
   </section>
   {service.detail && (
     <CatalogDetail
       detail={service.detail}
-      eyebrow="SERVICE DETAILS"
       relatedLink={relatedProduct && { label: relatedProduct.title, href: `/products/${relatedProduct.slug}/` }}
     />
   )}
   {service.slug === "coring" && (
-    <section class="section reels-section" aria-labelledby="coring-reels-title">
-      <div class="shell">
-        <div class="reels-heading">
-          <div>
-            <p class="eyebrow">หน้างานจริง</p>
-            <h2 id="coring-reels-title" class="section-title">งานเจาะคอริ่งจากทีม SBCC</h2>
-          </div>
-          <a class="reels-more" href="https://www.facebook.com/profile.php?id=100063526152006" target="_blank" rel="noopener noreferrer">
-            ดูผลงานของเรา <span aria-hidden="true">↗</span>
-          </a>
-        </div>
-        <div class="reels-track">
-          {coringReels.map((reel, index) => (
-            <article class="reel-card">
-              <iframe
-                src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(reel)}&show_text=false&width=500`}
-                title={`วิดีโองานเจาะคอริ่ง SBCC คลิปที่ ${index + 1}`}
-                width="500"
-                height="889"
-                loading="lazy"
-                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
+    <ProjectReels
+      title="งานเจาะคอริ่งจากทีม SBCC"
+      titleId="coring-reels-title"
+      clipLabel="วิดีโองานเจาะคอริ่ง SBCC"
+    />
   )}
   <section class="section dark">
     <div class="shell service-process">
@@ -97,8 +81,5 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
 <style>
   .detail{display:grid;gap:4rem;align-items:center}.detail .lead{margin:1.5rem 0 2rem}.detail :global(img),.detail-placeholder{width:100%;aspect-ratio:6/5}.detail :global(img){height:auto;object-fit:cover}.detail-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}
   .service-process{display:grid;gap:4rem}ol{margin:0;padding:0;list-style:none}li{display:grid;gap:.5rem;border-top:1px solid rgba(255,255,255,.24);padding:1.2rem 0}li b{font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.2rem}li span{color:#c7dbe2}
-  .reels-section{overflow:hidden;background:#fff}.reels-heading{display:grid;gap:1rem;margin-bottom:2rem}.reels-more{display:inline-flex;width:max-content;align-items:center;gap:.45rem;color:var(--navy-deep);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700;text-decoration:none;border-bottom:1px solid currentColor}.reels-more span{color:var(--brand)}.reels-track{display:flex;gap:1rem;overflow-x:auto;margin-inline:calc(var(--shell-gutter, 1.25rem) * -1);padding:0 var(--shell-gutter, 1.25rem) 1rem;scroll-padding-inline:var(--shell-gutter, 1.25rem);scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:thin}.reel-card{flex:0 0 clamp(230px,62vw,290px);overflow:hidden;border:1px solid #c8d7dd;background:#f3f6f7;scroll-snap-align:start}.reel-card iframe{display:block;width:100%;height:auto;aspect-ratio:9/16;border:0}
-  @media(min-width:700px){.reels-heading{grid-template-columns:1fr auto;align-items:end}.reels-track{margin-inline:0;padding-inline:0;scroll-padding-inline:0}.reel-card{flex-basis:clamp(220px,28vw,290px)}}
   @media(min-width:800px){.detail{grid-template-columns:1fr 1fr}.service-process{grid-template-columns:1fr 1fr}}
-  @media(min-width:1100px){.reel-card{flex-basis:calc((100% - 3rem) / 4)}}
 </style>

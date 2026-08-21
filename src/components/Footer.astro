@@ -35,6 +35,8 @@ const currentYear = new Date().getFullYear();
   <div class="shell legal">
     <span>© <span data-current-year>{currentYear}</span> {site.legalName}</span>
     <nav aria-label="ลิงก์ท้ายเว็บไซต์">
+      <a href="/about/">เกี่ยวกับเรา</a>
+      <span aria-hidden="true">&nbsp;/&nbsp;</span>
       <a href="/blog/">บทความ</a>
       <span aria-hidden="true">&nbsp;/&nbsp;</span>
       <a href="/contact/">ติดต่อเรา</a>
@@ -66,7 +68,7 @@ const currentYear = new Date().getFullYear();
   .qr :global(img) { width:144px; height:auto; border-radius:.6rem; }
   .legal { display:flex; justify-content:space-between; gap:1rem; margin-top:5rem; border-top:1px solid rgba(255,255,255,.18); padding-top:1.5rem; color:#8fa9b5; font-size:.78rem; }
   .legal a { color:inherit; text-decoration:none; }
-  .legal nav { display:flex; flex-wrap:nowrap; justify-content:flex-end; white-space:nowrap; }
+  .legal nav { display:flex; flex-wrap:wrap; justify-content:flex-end; row-gap:.25rem; }
   .legal nav > span { color:#5f7f8d; }
   .legal a:hover { color:white; }
   @media(min-width:900px) {

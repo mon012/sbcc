@@ -1,30 +1,34 @@
 ---
-import { Image } from "astro:assets";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
+import SiteImage from "../../components/SiteImage.astro";
 import { products } from "../../data/catalog";
-import chemicalAnchorsImage from "../../assets/images/product-listing/chemical-anchors.webp";
-import epoxyAdhesiveImage from "../../assets/images/product-listing/epoxy-adhesive.webp";
-import hiltiChemicalAnchorsImage from "../../assets/images/product-listing/hilti-chemical-anchors.webp";
-import castInAnchorsImage from "../../assets/images/product-listing/cast-in-anchors.webp";
+import { site } from "../../config/site";
 
-const productImages = {
-  "chemical-anchors": chemicalAnchorsImage,
-  "epoxy-adhesive": epoxyAdhesiveImage,
-  "hilti-chemical-anchors": hiltiChemicalAnchorsImage,
-  "cast-in-anchors": castInAnchorsImage,
-} as const;
+const productListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "หมวดสินค้าของ SBCC Engineering",
+  numberOfItems: products.length,
+  itemListElement: products.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.pageTitle,
+    url: new URL(`/products/${item.slug}/`, site.url),
+  })),
+};
 const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "สินค้า", url: "/products/" }];
 ---
 <BaseLayout
-  title="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต | SBCC"
-  description="พุกเคมี น้ำยาเจาะเสียบเหล็ก และพุกฝังคอนกรีต ส่งรายการให้ทีม SBCC ช่วยตรวจสเปกและเสนอราคา"
+  title="พุกเคมี น้ำยาเจาะเสียบเหล็ก พุกฝังคอนกรีต ราคา | SBCC Engineering"
+  description="พุกเคมีแบบปั่นและแบบตอก น้ำยาเจาะเสียบเหล็ก Epoxy จาก HILTI Fischer Ramset และพุกฝังคอนกรีต แองคอร์โบลท์ ส่งรายการให้ทีมช่วยตรวจสเปก"
+  ogImage="/images/product-chemical.webp"
   breadcrumbs={breadcrumbs}
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(productListSchema)} />
   <section class="section">
     <div class="shell">
       <Breadcrumb items={breadcrumbs} />
-      <p class="eyebrow">ENGINEERING SUPPLY</p>
       <h1 class="display">ส่งรายการมา<br />ให้ช่วยตรวจสเปก</h1>
       <p class="lead">แจ้งรุ่น ขนาด ปริมาณ และลักษณะการใช้งาน หากยังไม่ทราบรุ่น ส่งแบบหรือรูปหน้างานให้ทีมงานช่วยตรวจได้</p>
     </div>
@@ -33,17 +37,59 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "ส�
     {products.map((item, index) => (
       <a class="card" href={`/products/${item.slug}/`}>
         {item.image
-          ? <Image
-              src={productImages[item.slug]}
+          ? <SiteImage
+              src={item.image}
               alt={item.imageAlt}
               loading={index < 2 ? "eager" : "lazy"}
               fetchpriority={index === 0 ? "high" : "auto"}
+              widths={[480, 760, 1100]}
+              sizes="(min-width: 640px) 50vw, 100vw"
             />
           : <div class="product-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
         <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
       </a>
     ))}
   </section>
-  <div class="section"></div>
+  <section class="section guide">
+    <div class="shell guide-layout">
+      <div class="guide-head">
+        <h2 class="section-title">เลือกหมวดไหน<br />ให้ตรงกับงาน</h2>
+        <p class="lead">ทั้งสี่หมวดใช้ยึดชิ้นงานเข้ากับคอนกรีตเหมือนกัน แต่ต่างกันที่วิธีถ่ายแรงและวิธีติดตั้ง ถ้ายังไม่แน่ใจ ส่งรูปหน้างานหรือแบบมาให้ทีมงานช่วยตรวจได้</p>
+      </div>
+      <div class="guide-items">
+        <article>
+          <h3>พุกเคมี</h3>
+          <p>หลอดแก้วบรรจุน้ำยา ใช้คู่กับสตัดเกลียวขนาด M10 ถึง M30 มีทั้งแบบปั่นและแบบตอก เหมาะกับงานที่ต้องการแรงยึดสูงและทนแรงสั่นสะเทือน เช่น ฐานเครื่องจักรและจุดยึดโครงสร้าง</p>
+          <a href="/products/chemical-anchors/">ดูพุกเคมีทั้งหมด</a>
+        </article>
+        <article>
+          <h3>น้ำยาเจาะเสียบเหล็ก</h3>
+          <p>น้ำยา Epoxy แบบหลอดฉีด ขนาด 300–600 มล. ใช้ร่วมกับปืนยิง เหมาะกับงานเสียบเหล็กข้ออ้อยจำนวนมาก งานต่อเติมเสาและคาน เลือกสูตรตามวัสดุฐานและระยะฝัง</p>
+          <a href="/products/epoxy-adhesive/">ดูน้ำยาทุกรุ่น</a>
+        </article>
+        <article>
+          <h3>พุกฝังคอนกรีต</h3>
+          <p>พุกเชิงกลที่ยึดด้วยการขยายตัว ไม่ใช้เคมี ติดตั้งเร็วกว่าและถอดเปลี่ยนได้ ครอบคลุมพุกเหล็ก พุกดร็อบอิน พุกเว็ดจ์ และแองคอร์โบลท์ J Bolt L Bolt I Bolt</p>
+          <a href="/products/cast-in-anchors/">ดูพุกฝังคอนกรีต</a>
+        </article>
+        <article>
+          <h3>ผลิตภัณฑ์ HILTI</h3>
+          <p>สำหรับงานที่ต้องอ้างอิงเอกสารรับรองของผู้ผลิตทั้งระบบ ตั้งแต่น้ำยา HIT-RE 500 V3 และ HY-200 แคปซูล HVU2 แท่งเกลียว HAS ไปจนถึงปืนฉีด HDM</p>
+          <a href="/products/hilti-chemical-anchors/">ดูสินค้า HILTI</a>
+        </article>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
-<style>.section .display{font-size:clamp(3rem,5.263vw,4.46375rem)}.section .lead{margin-top:1.5rem}.listing .card{min-height:480px}.listing :global(img),.product-placeholder{height:330px}.product-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}.listing h2{font-size:1.8rem}</style>
+<style>
+  .guide{border-top:1px solid var(--line);background:var(--paper)}
+  .guide-layout{display:grid;gap:3.5rem;align-items:start}
+  .guide-head .lead{margin-top:1.5rem}
+  .guide-items{display:grid;gap:0;border-top:1px solid var(--line)}
+  .guide-items article{border-bottom:1px solid var(--line);padding:1.5rem 0}
+  .guide-items h3{font-size:1.4rem}
+  .guide-items p{max-width:640px;margin:.65rem 0 .9rem;color:var(--muted)}
+  .guide-items a{color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700;text-decoration:underline;text-underline-offset:.25em}
+  .guide-items a:hover{color:var(--brand)}
+  @media(min-width:900px){.guide-layout{grid-template-columns:.85fr 1.15fr}}
+  .section .display{font-size:clamp(3rem,5.263vw,4.46375rem)}.section .lead{margin-top:1.5rem}.listing .card{min-height:480px}.listing :global(img),.product-placeholder{height:330px}.product-placeholder{display:grid;place-items:center;background:var(--blue-pale);color:var(--navy);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}.listing h2{font-size:1.8rem}</style>

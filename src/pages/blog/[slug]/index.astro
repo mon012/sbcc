@@ -3,6 +3,8 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import Breadcrumb from "../../../components/Breadcrumb.astro";
 import SiteImage from "../../../components/SiteImage.astro";
 import { posts } from "../../../data/blog";
+import { getSiteImage } from "../../../utils/siteImages";
+import logoImage from "../../../assets/images/site/images/sbcc-logo.png";
 import { site } from "../../../config/site";
 
 export function getStaticPaths() {
@@ -10,18 +12,43 @@ export function getStaticPaths() {
 }
 const { post } = Astro.props;
 
+const heroImage = getSiteImage(post.image);
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
   headline: post.title,
   description: post.description,
+  image: new URL(heroImage.src, site.url),
   datePublished: post.publishedDate,
-  author: { "@type": "Organization", name: site.legalName },
-  publisher: { "@type": "Organization", name: site.legalName },
+  dateModified: post.updatedDate,
+  author: { "@type": "Organization", name: site.legalName, "@id": `${site.url}/#business` },
+  publisher: {
+    "@type": "Organization",
+    name: site.legalName,
+    "@id": `${site.url}/#business`,
+    logo: { "@type": "ImageObject", url: new URL(logoImage.src, site.url) },
+  },
   mainEntityOfPage: new URL(`/blog/${post.slug}/`, site.url),
 };
+const faqBlocks = post.content.filter((block) => block.type === "faq");
+const faqSchema = faqBlocks.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqBlocks.flatMap((block) => block.items).map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    }
+  : null;
 
 const displayDate = new Date(post.publishedDate).toLocaleDateString("th-TH", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+const updatedDisplayDate = new Date(post.updatedDate).toLocaleDateString("th-TH", {
   year: "numeric",
   month: "long",
   day: "numeric",
@@ -29,20 +56,24 @@ const displayDate = new Date(post.publishedDate).toLocaleDateString("th-TH", {
 const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บทความ", url: "/blog/" }, { name: post.title, url: `/blog/${post.slug}/` }];
 ---
 <BaseLayout
-  title={`${post.title} | บทความ SBCC`}
+  title={`${post.seoTitle} | SBCC Engineering`}
   description={post.description}
+  ogImage={post.image}
   breadcrumbs={breadcrumbs}
 >
   <script is:inline type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  {faqSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
   <article>
     <header class="article-hero">
-      <div class="article-hero-media"><SiteImage src={post.image} alt={post.imageAlt} loading="eager" fetchpriority="high" /></div>
+      <div class="article-hero-media"><SiteImage src={post.image} alt={post.imageAlt} loading="eager" fetchpriority="high" widths={[760, 1200, 1800]} sizes="100vw" /></div>
       <div class="shell article-hero-content">
         <Breadcrumb items={breadcrumbs} dark />
-        <p class="eyebrow">KNOWLEDGE</p>
         <h1 class="display">{post.title}</h1>
         <p class="lead">{post.description}</p>
-        <time datetime={post.publishedDate}>{displayDate}</time>
+        <p class="article-dates">
+          <time datetime={post.publishedDate}>{displayDate}</time>
+          {post.updatedDate !== post.publishedDate && <span>· ทบทวนเนื้อหาล่าสุด {updatedDisplayDate}</span>}
+        </p>
       </div>
     </header>
     <section class="section">
@@ -56,6 +87,31 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
           <div class="callout">
             <p>{block.text}</p>
             <a class="button" href={block.linkHref}>{block.linkLabel}</a>
+          </div>
+        );
+        if (block.type === "table") return (
+          <figure class="data-table">
+            <figcaption>{block.caption}</figcaption>
+            <div class="data-table-scroll">
+              <table>
+                <thead><tr>{block.head.map((cell) => <th scope="col">{cell}</th>)}</tr></thead>
+                <tbody>
+                  {block.rows.map((row) => (
+                    <tr>{row.map((cell, i) => i === 0 ? <th scope="row">{cell}</th> : <td>{cell}</td>)}</tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </figure>
+        );
+        if (block.type === "faq") return (
+          <div class="faq">
+            {block.items.map((item) => (
+              <details>
+                <summary>{item.q}</summary>
+                <p>{item.a}</p>
+              </details>
+            ))}
           </div>
         );
         if (block.type === "embed") return (
@@ -84,7 +140,8 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
   .article-hero-content{position:relative;z-index:1;max-width:780px;padding-block:clamp(3rem,9vw,5.5rem) clamp(2.5rem,6vw,3.5rem);color:white}
   .article-hero-content .display{font-size:clamp(2.5rem,4.6vw,3.75rem);text-shadow:0 3px 24px rgba(0,0,0,.32)}
   .article-hero-content .lead{margin-top:1.25rem;color:rgba(255,255,255,.85)}
-  .article-hero-content time{display:block;margin-top:1rem;color:rgba(255,255,255,.65);font-size:.9rem}
+  .article-dates{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem;color:rgba(255,255,255,.65);font-size:.9rem}
+  .article-dates time{display:inline}
   .article-body{max-width:780px}
   .article-body p{margin-bottom:1.35rem;color:#334654;font-size:clamp(1.05rem,1.5vw,1.2rem);line-height:1.85}
   .article-body h2{margin:2.5rem 0 1.25rem;font-size:clamp(1.5rem,2.6vw,2rem)}
@@ -99,5 +156,23 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
   .embed-video{position:relative;aspect-ratio:16/9}
   .embed-video iframe{position:absolute;inset:0;height:100%}
   .embed-document iframe{height:600px}
-  @media(max-width:560px){.article-hero{min-height:460px}}
+  .data-table{margin:0 0 1.75rem}
+  .data-table figcaption{margin-bottom:.7rem;color:var(--muted);font-size:.92rem}
+  .data-table-scroll{overflow-x:auto;border:1px solid #b8d1da;border-radius:var(--radius)}
+  .data-table table{width:100%;min-width:520px;border-collapse:collapse;background:white;font-size:.98rem}
+  .data-table th,.data-table td{padding:.9rem 1.1rem;border-bottom:1px solid #dde8ed;text-align:left;vertical-align:top;line-height:1.6}
+  .data-table thead th{background:var(--blue-pale);color:var(--navy-deep);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700;font-size:.9rem}
+  .data-table tbody th{width:26%;color:var(--navy-deep);font-family:"Noto Sans Thai",Arial,sans-serif;font-weight:700}
+  .data-table tbody td{color:#334654}
+  .data-table tbody tr:last-child th,.data-table tbody tr:last-child td{border-bottom:0}
+
+  .faq{display:grid;gap:0;margin:0 0 1.75rem;border-top:1px solid #b8d1da}
+  .faq details{border-bottom:1px solid #b8d1da}
+  .faq summary{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;padding:1.1rem 0;color:var(--navy-deep);font-family:"Noto Sans Thai",Arial,sans-serif;font-size:1.06rem;font-weight:700;line-height:1.5;cursor:pointer;list-style:none}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{flex:0 0 auto;margin-top:.15rem;color:var(--brand);font-size:1.25rem;line-height:1;content:"+"}
+  .faq details[open] summary::after{content:"−"}
+  .faq details p{margin:0;padding:0 0 1.25rem;color:#334654;font-size:1.02rem;line-height:1.8}
+
+  @media(max-width:560px){.article-hero{min-height:460px}.data-table tbody th{width:34%}}
 </style>

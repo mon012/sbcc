@@ -9,6 +9,9 @@ interface Props {
   loading?: "eager" | "lazy";
   decoding?: "sync" | "async" | "auto";
   fetchpriority?: "high" | "low" | "auto";
+  widths?: number[];
+  sizes?: string;
+  quality?: number;
 }
 
 const {
@@ -18,14 +21,24 @@ const {
   loading = "lazy",
   decoding = "async",
   fetchpriority,
+  widths,
+  sizes,
+  quality = 75,
 } = Astro.props;
+
+const image = getSiteImage(src);
+// Never ask for a rendition larger than the source; upscaling only inflates bytes.
+const candidateWidths = widths?.filter((width) => width <= image.width);
 ---
 
 <Image
-  src={getSiteImage(src)}
+  src={image}
   alt={alt}
   class={className}
   loading={loading}
   decoding={decoding}
   fetchpriority={fetchpriority}
+  quality={quality}
+  widths={candidateWidths?.length ? candidateWidths : undefined}
+  sizes={candidateWidths?.length ? sizes : undefined}
 />

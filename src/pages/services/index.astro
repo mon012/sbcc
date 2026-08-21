@@ -2,20 +2,35 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumb from "../../components/Breadcrumb.astro";
 import { services } from "../../data/catalog";
+import { site } from "../../config/site";
 import SiteImage from "../../components/SiteImage.astro";
 
+const serviceListSchema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "บริการของ SBCC Engineering",
+  numberOfItems: services.length,
+  itemListElement: services.map((item, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: item.pageTitle,
+    url: new URL(`/services/${item.slug}/`, site.url),
+  })),
+};
 const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บริการ", url: "/services/" }];
 ---
 <BaseLayout
-  title="บริการวิศวกรรม งานคอนกรีตและติดตั้งพุกเคมี | SBCC"
-  description="บริการเจาะ ตัด และสแกนคอนกรีต ติดตั้งพุกเคมี และซ่อมพื้น ส่งรูปหรือแบบให้ทีม SBCC ช่วยประเมินหน้างาน"
+  title="รับเจาะคอริ่ง ตัดคอนกรีต เจาะเสียบเหล็ก กรุงเทพ-ปริมณฑล | SBCC Engineering"
+  description="รับเจาะคอริ่ง ตัดคอนกรีต เจาะเสียบเหล็ก ติดตั้งพุกเคมี สแกนหาเหล็ก และซ่อมพื้นด้วยโฟมและ Epoxy ส่งรูปให้ทีมช่วยประเมินหน้างาน"
   preloadImage="/images/services-hero-construction.webp"
+  preloadImageMobile="/images/services-hero-construction-640.webp"
+  ogImage="/images/services-hero-construction.webp"
   breadcrumbs={breadcrumbs}
 >
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(serviceListSchema)} />
   <section class="section dark service-hero">
     <div class="shell">
       <Breadcrumb items={breadcrumbs} dark />
-      <p class="eyebrow">FIELD SERVICE</p>
       <h1 class="display">ประเมินให้ชัด<br />ก่อนทีมงานลงมือ</h1>
       <p class="lead">ทีมงานตรวจพื้นที่ วางแผน และเตรียมอุปกรณ์ก่อนเริ่มงานตามขอบเขตที่ตกลงกัน</p>
     </div>
@@ -30,6 +45,8 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
                 alt={item.imageAlt}
                 loading={index < 2 ? "eager" : "lazy"}
                 fetchpriority={index === 0 ? "high" : "auto"}
+                widths={[480, 760, 1100]}
+                sizes="(min-width: 640px) 50vw, 100vw"
               />
             : <div class="service-placeholder" aria-label="กำลังเตรียมข้อมูลบริการ"><span>กำลังเตรียมข้อมูลบริการ</span></div>}
           <div class="card-body"><h2>{item.title}</h2><p>{item.summary}</p></div>
@@ -89,6 +106,9 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
     font-weight: 700;
   }
   .listing h2 { font-size: 1.8rem; }
+  @media (max-width: 860px) {
+    .service-hero::before { background-image: url("/images/services-hero-construction-640.webp"); }
+  }
   @media (max-width: 700px) {
     .service-hero { min-height: 640px; }
     .service-hero::before { background-position: 63% center; }

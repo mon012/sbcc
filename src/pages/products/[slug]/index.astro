@@ -5,6 +5,7 @@ import CatalogDetail from "../../../components/CatalogDetail.astro";
 import { products, services } from "../../../data/catalog";
 import { site } from "../../../config/site";
 import SiteImage from "../../../components/SiteImage.astro";
+import { getSiteImage } from "../../../utils/siteImages";
 export function getStaticPaths() {
   return products.map((product) => ({ params: { slug: product.slug }, props: { product } }));
 }
@@ -12,31 +13,60 @@ const { product } = Astro.props;
 const relatedService = "relatedServiceSlug" in product
   ? services.find((service) => service.slug === product.relatedServiceSlug)
   : undefined;
+const pageUrl = new URL(`/products/${product.slug}/`, site.url);
+// Every model listed on the page is a real product; expose them so Google can read
+// the catalogue instead of guessing from prose.
+const listedProducts = product.detail?.products ?? [];
+const productSchema = listedProducts.length > 0
+  ? {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: product.pageTitle,
+      description: product.sourceIntro,
+      numberOfItems: listedProducts.length,
+      itemListElement: listedProducts.map((item, index) => {
+        const brand = "brand" in item ? item.brand : undefined;
+        return {
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "Product",
+            name: item.title,
+            description: item.description,
+            image: new URL(getSiteImage(item.image).src, site.url),
+            category: product.title,
+            url: pageUrl,
+            ...(brand && { brand: { "@type": "Brand", name: brand } }),
+          },
+        };
+      }),
+    }
+  : null;
 const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "สินค้า", url: "/products/" }, { name: product.title, url: `/products/${product.slug}/` }];
 ---
 <BaseLayout
-  title={`${product.pageTitle} | SBCC Engineering`}
-  description={`${product.sourceIntro} สอบถามราคาและสเปกกับทีม SBCC`}
+  title={`${product.seoTitle} | SBCC Engineering`}
+  description={product.seoDescription}
+  ogImage={product.image}
   breadcrumbs={breadcrumbs}
 >
+  {productSchema && <script is:inline type="application/ld+json" set:html={JSON.stringify(productSchema)} />}
   <section class="section">
     <div class="shell detail">
       <div>
         <Breadcrumb items={breadcrumbs} />
-        <p class="eyebrow">ENGINEERING SUPPLY</p>
         <h1 class="display">{product.pageTitle}</h1>
         <p class="lead">{product.sourceIntro}</p>
         <div class="cluster"><a class="button" href="/quote/">ขอใบเสนอราคา</a><a class="button secondary" href={site.lineHref} target="_blank" rel="noopener noreferrer">สอบถามทาง LINE</a></div>
       </div>
       {product.image
-        ? <SiteImage src={product.image} alt={product.imageAlt} loading="eager" fetchpriority="high" />
+        ? <SiteImage src={product.image} alt={product.imageAlt} loading="eager" fetchpriority="high" widths={[760, 1200, 1800]} sizes="100vw" />
         : <div class="detail-placeholder" aria-label="กำลังเตรียมข้อมูลสินค้า"><span>กำลังเตรียมข้อมูลสินค้า</span></div>}
     </div>
   </section>
   {product.detail && (
     <CatalogDetail
       detail={product.detail}
-      eyebrow="PRODUCT DETAILS"
       relatedLink={relatedService && { label: relatedService.pageTitle, href: `/services/${relatedService.slug}/` }}
     />
   )}

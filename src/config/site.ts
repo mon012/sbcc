@@ -22,5 +22,7 @@ export const site = {
   mapsHref: "https://maps.app.goo.gl/mazukUTFNZZK1LjA9",
   facebookHref: "https://www.facebook.com/profile.php?id=100063526152006",
   openingHours: { opens: "08:30", closes: "17:30" },
+  geo: { latitude: 13.8993648, longitude: 100.5158083 },
+  serviceAreas: ["กรุงเทพมหานคร", "นนทบุรี", "ปทุมธานี", "สมุทรปราการ", "สมุทรสาคร", "นครปฐม"],
   quoteFormId: "f85f767f-083d-40e6-bbea-de9840271e78",
 } as const;
