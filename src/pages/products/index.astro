@@ -40,7 +40,7 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "ส�
           ? <SiteImage
               src={item.image}
               alt={item.imageAlt}
-              loading={index < 2 ? "eager" : "lazy"}
+              loading={index === 0 ? "eager" : "lazy"}
               fetchpriority={index === 0 ? "high" : "auto"}
               widths={[480, 760, 1100]}
               sizes="(min-width: 640px) 50vw, 100vw"

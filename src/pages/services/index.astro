@@ -23,7 +23,7 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
   title="รับเจาะคอริ่ง ตัดคอนกรีต เจาะเสียบเหล็ก กรุงเทพ-ปริมณฑล | SBCC Engineering"
   description="รับเจาะคอริ่ง ตัดคอนกรีต เจาะเสียบเหล็ก ติดตั้งพุกเคมี สแกนหาเหล็ก และซ่อมพื้นด้วยโฟมและ Epoxy ส่งรูปให้ทีมช่วยประเมินหน้างาน"
   preloadImage="/images/services-hero-construction.webp"
-  preloadImageMobile="/images/services-hero-construction-640.webp"
+  preloadImageMobile="/images/services-hero-construction-1080.webp"
   ogImage="/images/services-hero-construction.webp"
   breadcrumbs={breadcrumbs}
 >
@@ -37,14 +37,12 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
   </section>
   <section class="section">
     <div class="shell grid two listing">
-      {services.map((item, index) => (
+      {services.map((item) => (
         <a class="card" href={`/services/${item.slug}/`}>
           {item.image
             ? <SiteImage
                 src={item.image}
                 alt={item.imageAlt}
-                loading={index < 2 ? "eager" : "lazy"}
-                fetchpriority={index === 0 ? "high" : "auto"}
                 widths={[480, 760, 1100]}
                 sizes="(min-width: 640px) 50vw, 100vw"
               />
@@ -107,7 +105,7 @@ const breadcrumbs = [{ name: "หน้าแรก", url: "/" }, { name: "บ�
   }
   .listing h2 { font-size: 1.8rem; }
   @media (max-width: 860px) {
-    .service-hero::before { background-image: url("/images/services-hero-construction-640.webp"); }
+    .service-hero::before { background-image: url("/images/services-hero-construction-1080.webp"); }
   }
   @media (max-width: 700px) {
     .service-hero { min-height: 640px; }
